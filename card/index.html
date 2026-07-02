@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nanco AI Live Voice Translator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Manjari:wght@400;700&family=Hind:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'lime-spark': '#d2e823',
+                        'lavender-mist': '#e9c0e9',
+                        'cobalt-band': '#2665d6',
+                        'maroon-plate': '#780016',
+                        'cobalt-deep': '#061492',
+                        'forest-ink': '#254f1a',
+                        'mustard-pop': '#d6a337',
+                        'linen-canvas': '#f3f3f1',
+                        'white-plate': '#ffffff',
+                        'ink-black': '#000000',
+                        'midnight-ink': '#1e2330',
+                        'sage-mute': '#676b5f',
+                        'silver-border': '#c7c8cb',
+                        'charcoal-pill': '#222222',
+                        'concrete-tile': '#adadad',
+                        'leaf-wash': '#ebffc5',
+                        'moss-tint': '#e8efd6'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Bento Outlines & Borders (Removed/Softened for modern clean layout) */
+        .bento-border {
+            border: none !important;
+        }
+        .bento-card {
+            background-color: #ffffff;
+            border: none !important;
+            border-radius: 32px;
+            box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+            transition: transform 0.15s ease;
+        }
+        .bento-btn {
+            border: none !important;
+            border-radius: 99px;
+            box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03) !important;
+            transition: transform 0.15s ease, background-color 0.15s ease;
+        }
+        .bento-btn:hover {
+            transform: translateY(-2px);
+        }
+        .bento-btn:active {
+            transform: translateY(2px);
+        }
+        .bento-input {
+            border: none !important;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.02) !important;
+            transition: all 0.15s ease;
+        }
+        .bento-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(210, 232, 35, 0.5) !important;
+        }
+
+        /* Pulse animation for the recording button */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(210, 232, 35, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(210, 232, 35, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(210, 232, 35, 0); }
+        }
+        .recording-pulse-lime {
+            animation: pulse-ring 1.5s infinite;
+        }
+
+        @keyframes pulse-ring-red {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .recording-pulse-red {
+            animation: pulse-ring-red 1.5s infinite;
+        }
+
+        /* Custom scrollbar for text areas */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f3f3f1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #adadad; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #676b5f; 
+        }
+
+        /* Custom Bento Dropdown Styling */
+        .bento-dropdown-container {
+            position: relative;
+            width: 100%;
+        }
+        .bento-dropdown-trigger {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1.25rem;
+            background-color: #ffffff;
+            border: none !important;
+            border-radius: 99px;
+            font-size: 0.875rem;
+            font-weight: 800;
+            cursor: pointer;
+            user-select: none;
+            box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03) !important;
+            transition: all 0.15s ease;
+        }
+        .bento-dropdown-trigger:hover {
+            background-color: #f3f3f1;
+            transform: translateY(-1px);
+        }
+        .bento-dropdown-trigger:focus {
+            outline: none;
+        }
+        .bento-dropdown-menu {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: calc(100% + 8px);
+            background-color: #ffffff;
+            border: none !important;
+            border-radius: 20px;
+            z-index: 100;
+            max-h: 260px;
+            overflow-y: auto;
+            display: none;
+            flex-direction: column;
+            padding: 8px 4px;
+            box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1), 0 8px 16px -8px rgba(0,0,0,0.06) !important;
+        }
+        .bento-dropdown-menu.show {
+            display: flex;
+        }
+        .bento-dropdown-item {
+            padding: 10px 16px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 99px;
+            margin: 2px 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.1s ease;
+        }
+        .bento-dropdown-item:hover {
+            background-color: #f3f3f1;
+        }
+        .bento-dropdown-item.selected {
+            background-color: #d2e823;
+            color: #000000;
+            border: none !important;
+        }
+
+        /* Global black border & offset shadow strip utility */
+        [class*="border-black"],
+        [class*="border-2"],
+        [class*="border-3"],
+        [class*="border-4"],
+        [class*="border-b-"],
+        [class*="border-t-"],
+        [class*="border-r-"],
+        [class*="border-l-"] {
+            border: none !important;
+            border-width: 0px !important;
+            border-color: transparent !important;
+        }
+        
+        /* Floating Nav Bar Shadow */
+        /* Mic Button & Badge Borders removal override */
+        #micBtn, #statusIndicator, #transcriptionBadge, #activeModelBadge, #toast, #toastIconContainer {
+            border: none !important;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 16px -8px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        /* Font overrides for localized text */
+        body.lang-en {
+            font-family: 'Outfit', 'Inter', sans-serif !important;
+        }
+        body.lang-ml {
+            font-family: 'Manjari', sans-serif !important;
+        }
+        body.lang-hi {
+            font-family: 'Hind', sans-serif !important;
+        }
+        
+        /* Make sure all inputs, buttons, textareas inherit body font */
+        input, select, textarea, button, .bento-dropdown-trigger, .bento-dropdown-item {
+            font-family: inherit !important;
+        }
+
+        /* Style override to keep the UI language dropdown compact */
+        #uiLangSelect + .bento-dropdown-container {
+            width: auto !important;
+            min-width: 64px !important;
+        }
+        #uiLangSelect + .bento-dropdown-container .bento-dropdown-trigger {
+            padding: 0.35rem 0.65rem !important;
+            border-radius: 99px !important;
+            font-size: 0.7rem !important;
+            font-weight: 800 !important;
+            background-color: #ebffc5 !important;
+            color: #000000 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+            border: none !important;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05) !important;
+        }
+        #uiLangSelect + .bento-dropdown-container .bento-dropdown-menu {
+            border-radius: 12px !important;
+            padding: 2px !important;
+            min-width: 64px !important;
+            width: 100% !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
+        }
+        #uiLangSelect + .bento-dropdown-container .bento-dropdown-item {
+            padding: 4px 8px !important;
+            font-size: 0.7rem !important;
+            margin: 1px !important;
+            border-radius: 99px !important;
+            text-align: center !important;
+            justify-content: center !important;
+        }
+        #uiLangSelect + .bento-dropdown-container .bento-dropdown-item.selected {
+            background-color: #d2e823 !important;
+            font-weight: 800 !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-linen-canvas text-black flex flex-col items-center pb-16 font-sans">
+
+
+
+    <!-- Floating Navigation Bar -->
+    <div class="w-full max-w-6xl px-4 mt-4 md:mt-6">
+        <div class="bg-white rounded-full px-5 py-3 md:px-8 md:py-4 flex flex-row justify-between items-center shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+            <div class="flex items-center">
+                <img src="light-logo.png" alt="Nanco Logo" class="h-7 md:h-10 object-contain">
+            </div>
+            <div class="flex items-center gap-2 md:gap-3">
+                <select id="uiLangSelect" class="w-16 p-2 text-xs font-extrabold bg-transparent text-black">
+                    <option value="en" selected>EN</option>
+                    <option value="ml">ML</option>
+                    <option value="hi">HI</option>
+                </select>
+                <button id="toggleSettingsBtn" class="bento-btn bg-white hover:bg-linen-canvas w-8 h-8 md:w-9 md:h-9 flex items-center justify-center p-0 font-bold text-sm" title="Configuration">
+                    <i class="fa-solid fa-gear text-black"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Header Text -->
+    <div class="text-center my-10 max-w-3xl px-4">
+        <h2 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-[-2px] md:tracking-[-3px] leading-[0.95] text-black" data-i18n="heroTitle">
+            Speak Natively.<br>
+            <span class="bg-lime-spark px-2 inline-block mt-2 transform -rotate-1 rounded-lg">Translate Globally.</span>
+        </h2>
+        <p class="text-base md:text-lg font-medium text-sage-mute mt-6 max-w-xl mx-auto" data-i18n="heroDesc">
+            Experience ultra-low latency voice translation using Web Speech APIs with automated high-precision Groq Whisper failover and translation fallbacks.
+        </p>
+    </div>
+
+    <!-- Main Content Bento Grid -->
+    <main class="w-full max-w-6xl px-4 space-y-8">
+
+        <!-- Settings Panel Card (Collapsible) -->
+        <div id="settingsPanel" class="hidden bento-card p-6 bg-lavender-mist">
+            <h3 class="text-lg font-bold text-black uppercase tracking-wider mb-4 border-b border-black/10 pb-2 flex items-center gap-2" data-i18n="settingsTitle">
+                <i class="fa-solid fa-sliders"></i> Engine Configuration
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Left Column: API Keys -->
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-black uppercase mb-1" data-i18n="groqKeyLabel">Groq API Key</label>
+                        <input type="password" id="groqApiKey" placeholder="gsk_..." class="w-full p-3 bento-input text-sm">
+                        <p class="text-[11px] text-sage-mute mt-1 font-semibold" data-i18n="groqKeyHelp">Uses backend key if empty. Get it free at console.groq.com</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-black uppercase mb-1" data-i18n="transFlowLabel">Translation Flow</label>
+                        <select id="translationFlow" class="w-full p-3 bento-input text-sm font-bold bg-white">
+                            <option value="backend" data-i18n="transFlowBackend">Backend (Secure API Translation)</option>
+                            <option value="browser" data-i18n="transFlowBrowser">Browser Direct (Frontend Fetch)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-black uppercase mb-1" data-i18n="readAloudModeLabel">Read Aloud Mode</label>
+                        <select id="readAloudMode" class="w-full p-3 bento-input text-sm font-bold bg-white">
+                            <option value="enabled" selected data-i18n="readAloudModeEnabled">Auto-Read Enabled</option>
+                            <option value="disabled" data-i18n="readAloudModeDisabled">Auto-Read Disabled</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Right Column: Model Selection -->
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-black uppercase mb-1" data-i18n="primaryModelLabel">Primary Model</label>
+                        <select id="primaryModel" class="w-full p-3 bento-input text-sm font-bold bg-white">
+                            <option value="groq-8b">Groq Llama 3.1 8B</option>
+                            <option value="groq-70b" selected>Groq Llama 3.3 70B</option>
+                            <option value="groq-mixtral">Groq Mixtral 8x7B</option>
+                            <option value="groq-gemma2">Groq Gemma 2 9B</option>
+                            <option value="gemini">Gemini 3.5 Flash</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-black uppercase mb-1" data-i18n="backupModelLabel">Backup Model (Fallback)</label>
+                        <select id="backupModel" class="w-full p-3 bento-input text-sm font-bold bg-white">
+                            <option value="gemini" selected>Gemini 3.5 Flash</option>
+                            <option value="groq-8b">Groq Llama 3.1 8B</option>
+                            <option value="groq-70b">Groq Llama 3.3 70B</option>
+                            <option value="none">None (Fail immediately)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-black uppercase mb-1" data-i18n="readAloudEngineLabel">Read Aloud Engine</label>
+                        <select id="readAloudEngine" class="w-full p-3 bento-input text-sm font-bold bg-white">
+                            <option value="web" selected>Web Speech (Browser API)</option>
+                            <option value="google">Google TTS (Cloud Free)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 flex justify-end">
+                <button id="saveSettingsBtn" class="bento-btn bg-lime-spark hover:bg-white text-black px-6 py-2.5 font-extrabold text-sm uppercase" data-i18n="saveConfigBtn">
+                    Save Configuration
+                </button>
+            </div>
+        </div>
+
+        <!-- Top Row: Central Recorder Card -->
+        <div class="bento-card p-6 md:p-8 bg-white flex flex-col items-center">
+            <!-- Controls Row -->
+            <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div class="flex flex-col">
+                    <label class="text-xs font-bold text-black uppercase mb-1" data-i18n="inputEngineLabel">Input Engine</label>
+                    <select id="inputEngine" class="bento-input p-3 text-sm font-bold bg-white">
+                        <option value="speech-api" selected>Web Speech API (Realtime)</option>
+                        <option value="whisper-backend">Groq Whisper (File Upload)</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col">
+                    <label class="text-xs font-bold text-black uppercase mb-1" data-i18n="speakingLangLabel">I am speaking</label>
+                    <select id="sourceLang" class="bento-input p-3 text-sm font-bold bg-white">
+                        <option value="ml-IN" selected>Malayalam</option>
+                        <option value="hi-IN">Hindi</option>
+                        <option value="auto">Auto-detect Language</option>
+                        <option value="en-US">English</option>
+                        <option value="es-ES">Spanish</option>
+                        <option value="fr-FR">French</option>
+                        <option value="de-DE">German</option>
+                        <option value="zh-CN">Chinese (Mandarin)</option>
+                        <option value="ja-JP">Japanese</option>
+                        <option value="ar-SA">Arabic</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col">
+                    <label class="text-xs font-bold text-black uppercase mb-1" data-i18n="targetLangLabel">Translate to</label>
+                    <select id="targetLang" class="bento-input p-3 text-sm font-bold bg-white">
+                        <option value="en-US" selected>English</option>
+                        <option value="hi-IN">Hindi</option>
+                        <option value="ml-IN">Malayalam</option>
+                        <option value="es-ES">Spanish</option>
+                        <option value="fr-FR">French</option>
+                        <option value="de-DE">German</option>
+                        <option value="ja-JP">Japanese</option>
+                        <option value="zh-CN">Chinese (Simplified)</option>
+                        <option value="it-IT">Italian</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Big Circular Pulse Microphone Button -->
+            <div class="relative my-6 flex justify-center items-center">
+                <button id="micBtn" class="bg-lime-spark w-24 h-24 rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-transform duration-100 z-10">
+                    <i id="micIcon" class="fa-solid fa-microphone text-black text-3xl"></i>
+                </button>
+            </div>
+
+            <!-- Status Status Indicator -->
+            <div id="statusIndicator" class="text-center font-bold text-sm tracking-tight text-black mt-2 bg-linen-canvas px-6 py-2 rounded-full" data-i18n="statusReady">
+                Ready. Click the microphone to start translating.
+            </div>
+        </div>
+
+        <!-- Bottom Row: Side-by-side text areas and info stats -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left 2 Columns: Transcribed & Translated Text Boxes -->
+            <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Left: Original Box -->
+                <div class="bento-card p-6 bg-lavender-mist flex flex-col">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs font-bold text-black uppercase tracking-wider bg-white px-2 py-0.5 rounded-md" data-i18n="originalTextLabel">Original Text</span>
+                        <span id="transcriptionBadge" class="text-[10px] font-bold text-black opacity-0">Transcribed</span>
+                    </div>
+                    <textarea id="sourceText" readonly class="w-full h-48 p-4 bento-border rounded-xl resize-none outline-none text-black font-semibold text-base leading-relaxed bg-white" placeholder="Original speech text will appear here..." data-i18n-placeholder="originalPlaceholder"></textarea>
+                </div>
+
+                <!-- Right: Translation Box -->
+                <div class="bento-card p-6 bg-leaf-wash flex flex-col relative">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs font-bold text-black uppercase tracking-wider bg-white px-2 py-0.5 rounded-md" data-i18n="translationLabel">Translation</span>
+                        <span id="activeModelBadge" class="text-[10px] font-bold text-black bg-white px-2 py-0.5 rounded-md hidden">Model</span>
+                    </div>
+                    <textarea id="targetText" readonly class="w-full h-48 p-4 bento-border rounded-xl resize-none outline-none text-black font-bold text-lg leading-relaxed bg-white" placeholder="Translated text will appear here..." data-i18n-placeholder="translationPlaceholder"></textarea>
+                    
+                    <div class="flex justify-end gap-3 mt-4">
+                        <button id="ttsBtn" class="bento-btn bg-lime-spark hover:bg-white p-3 text-black text-sm flex items-center justify-center w-11 h-11" title="Listen to translation">
+                            <i class="fa-solid fa-volume-high text-lg"></i>
+                        </button>
+                        <button id="copyBtn" class="bento-btn bg-white hover:bg-linen-canvas p-3 text-black text-sm flex items-center justify-center w-11 h-11" title="Copy translation">
+                            <i class="fa-regular fa-copy text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right 1 Column: Bento Info and Stats Grid -->
+            <div class="space-y-8">
+                <!-- Card 2: Interactive Guide -->
+                <div class="bento-card p-6 bg-mustard-pop text-black">
+                    <span class="text-xs font-extrabold text-black uppercase tracking-widest block mb-1" data-i18n="guideTitle">PRO-TIPS</span>
+                    <h4 class="text-xl font-extrabold tracking-tight mb-3" data-i18n="guideTitle">PRO-TIPS</h4>
+                    <ul class="space-y-2.5 text-xs font-bold">
+                        <li class="flex items-start gap-2">
+                            <span class="bg-black text-white rounded-full w-5 h-5 flex items-center justify-center shrink-0">1</span>
+                            <span data-i18n="guideTip1">Use Whisper mode (file upload) for highly accurate multilingual translation.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="bg-black text-white rounded-full w-5 h-5 flex items-center justify-center shrink-0">2</span>
+                            <span data-i18n="guideTip2">Click the speaker icon to play high-quality natural TTS audio.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="bg-black text-white rounded-full w-5 h-5 flex items-center justify-center shrink-0">3</span>
+                            <span data-i18n="guideTip3">Configure model overrides in the top gear configuration panel.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Counter Box -->
+                <div class="bento-card p-6 bg-maroon-plate text-white flex flex-col items-center justify-center text-center">
+                    <span class="text-xs font-extrabold text-lavender-mist uppercase tracking-widest block mb-1" data-i18n="sessionVolumeLabel">Session Volume</span>
+                    <div id="counterVal" class="text-5xl font-black text-lime-spark my-1">0</div>
+                    <span class="text-xs font-extrabold uppercase text-white/90" data-i18n="sessionVolumeLabel">Translations Completed</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Custom Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 transform translate-y-20 opacity-0 transition-all duration-300 bg-white text-black px-5 py-4 rounded-xl flex items-center gap-3 z-50">
+        <div id="toastIconContainer" class="w-8 h-8 rounded-full bg-lime-spark flex items-center justify-center shrink-0">
+            <i id="toastIcon" class="fa-solid fa-info-circle text-black text-sm"></i>
+        </div>
+        <span id="toastMessage" class="text-sm font-bold">Notification</span>
+    </div>
+
+    <!-- Script Logic -->
+    <script>
+        // --- Helper to resolve Backend API URL ---
+        function getBackendUrl(endpoint) {
+            if (window.location.protocol === 'file:' || !window.location.port || window.location.port !== '5001') {
+                return 'http://localhost:5001' + endpoint;
+            }
+            return endpoint;
+        }
+
+        // --- State Management ---
+        const state = {
+            isRecording: false,
+            recognition: null,
+            mediaRecorder: null,
+            audioChunks: [],
+            groqKey: localStorage.getItem('groqApiKey') || '',
+            translationFlow: localStorage.getItem('translationFlow') || 'browser',
+            primaryModel: localStorage.getItem('primaryModel') || 'groq-70b',
+            backupModel: localStorage.getItem('backupModel') || 'gemini',
+            readAloudMode: localStorage.getItem('readAloudMode') || 'enabled',
+            readAloudEngine: localStorage.getItem('readAloudEngine') || 'web',
+            sessionCount: parseInt(localStorage.getItem('translationCount') || '0', 10),
+            uiLang: localStorage.getItem('uiLang') || 'en'
+        };
+
+        // --- DOM Elements ---
+        const ui = {
+            micBtn: document.getElementById('micBtn'),
+            micIcon: document.getElementById('micIcon'),
+            sourceLang: document.getElementById('sourceLang'),
+            targetLang: document.getElementById('targetLang'),
+            sourceText: document.getElementById('sourceText'),
+            targetText: document.getElementById('targetText'),
+            statusIndicator: document.getElementById('statusIndicator'),
+            toggleSettingsBtn: document.getElementById('toggleSettingsBtn'),
+            settingsPanel: document.getElementById('settingsPanel'),
+            saveSettingsBtn: document.getElementById('saveSettingsBtn'),
+            groqApiKeyInput: document.getElementById('groqApiKey'),
+            translationFlowSelect: document.getElementById('translationFlow'),
+            readAloudModeSelect: document.getElementById('readAloudMode'),
+            readAloudEngineSelect: document.getElementById('readAloudEngine'),
+            primaryModelSelect: document.getElementById('primaryModel'),
+            backupModelSelect: document.getElementById('backupModel'),
+            copyBtn: document.getElementById('copyBtn'),
+            ttsBtn: document.getElementById('ttsBtn'),
+            activeModelBadge: document.getElementById('activeModelBadge'),
+            transcriptionBadge: document.getElementById('transcriptionBadge'),
+            counterVal: document.getElementById('counterVal'),
+            inputEngine: document.getElementById('inputEngine'),
+            toast: document.getElementById('toast'),
+            toastMessage: document.getElementById('toastMessage'),
+            toastIcon: document.getElementById('toastIcon'),
+            toastIconContainer: document.getElementById('toastIconContainer'),
+            uiLangSelect: document.getElementById('uiLangSelect')
+        };
+
+        // Load saved settings into UI
+        ui.groqApiKeyInput.value = state.groqKey;
+        ui.translationFlowSelect.value = state.translationFlow;
+        ui.readAloudModeSelect.value = state.readAloudMode;
+        ui.readAloudEngineSelect.value = state.readAloudEngine;
+        ui.primaryModelSelect.value = state.primaryModel;
+        ui.backupModelSelect.value = state.backupModel;
+        ui.counterVal.textContent = state.sessionCount;
+        ui.uiLangSelect.value = state.uiLang;
+
+        // --- UI Event Listeners ---
+        ui.toggleSettingsBtn.addEventListener('click', () => {
+            ui.settingsPanel.classList.toggle('hidden');
+        });
+
+        ui.saveSettingsBtn.addEventListener('click', () => {
+            state.groqKey = ui.groqApiKeyInput.value.trim();
+            state.translationFlow = ui.translationFlowSelect.value;
+            state.readAloudMode = ui.readAloudModeSelect.value;
+            state.readAloudEngine = ui.readAloudEngineSelect.value;
+            state.primaryModel = ui.primaryModelSelect.value;
+            state.backupModel = ui.backupModelSelect.value;
+            
+            localStorage.setItem('groqApiKey', state.groqKey);
+            localStorage.setItem('translationFlow', state.translationFlow);
+            localStorage.setItem('readAloudMode', state.readAloudMode);
+            localStorage.setItem('readAloudEngine', state.readAloudEngine);
+            localStorage.setItem('primaryModel', state.primaryModel);
+            localStorage.setItem('backupModel', state.backupModel);
+
+            // Sync visual custom dropdowns
+            document.querySelectorAll('select').forEach(sel => sel.dispatchEvent(new Event('update-custom-dropdown')));
+            
+            ui.settingsPanel.classList.add('hidden');
+            showToast('Configuration Saved!', 'success');
+        });
+
+        let activeAudio = null;
+
+        function playWebTTS(text, langCode) {
+            window.speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = langCode;
+            
+            const voices = window.speechSynthesis.getVoices();
+            const voice = voices.find(v => v.lang.startsWith(langCode.split('-')[0]));
+            if (voice) utterance.voice = voice;
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function playGoogleTTS(text, langCode) {
+            if (activeAudio) {
+                activeAudio.pause();
+                activeAudio = null;
+            }
+            
+            try {
+                ui.statusIndicator.innerHTML = "<span>🔊 Playing Google TTS...</span>";
+                const shortLang = langCode.split('-')[0];
+                const encodedText = encodeURIComponent(text);
+                const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${shortLang}&q=${encodedText}`;
+                
+                activeAudio = new Audio(audioUrl);
+                
+                activeAudio.onerror = (e) => {
+                    console.error("Google TTS failed, falling back to Web Speech:", e);
+                    showToast("Google TTS blocked. Using Web Speech fallback.", "warning");
+                    playWebTTS(text, langCode);
+                };
+                
+                activeAudio.play().then(() => {
+                    ui.statusIndicator.innerHTML = "<span>✅ Playing Google TTS audio.</span>";
+                }).catch(err => {
+                    console.error("Google TTS playback error:", err);
+                    playWebTTS(text, langCode);
+                });
+            } catch (err) {
+                console.error("Google TTS failed, falling back to Web Speech:", err);
+                showToast("Google TTS failed. Using Web Speech fallback.", "warning");
+                playWebTTS(text, langCode);
+            }
+        }
+
+        function playTranslationTTS() {
+            const text = ui.targetText.value;
+            const langCode = ui.targetLang.value;
+            if (!text) return;
+            
+            if (state.readAloudEngine === 'web') {
+                playWebTTS(text, langCode);
+            } else {
+                playGoogleTTS(text, langCode);
+            }
+        }
+
+        function autoPlayTranslationTTS(text, langCode) {
+            if (state.readAloudMode !== 'enabled') return;
+            
+            if (state.readAloudEngine === 'web') {
+                playWebTTS(text, langCode);
+            } else {
+                playGoogleTTS(text, langCode);
+            }
+        }
+
+        ui.ttsBtn.addEventListener('click', () => {
+            playTranslationTTS();
+        });
+
+        ui.copyBtn.addEventListener('click', () => {
+            if (!ui.targetText.value) return;
+            navigator.clipboard.writeText(ui.targetText.value).then(() => {
+                showToast('Copied to Clipboard!', 'success');
+            }).catch(() => {
+                ui.targetText.select();
+                document.execCommand('copy');
+                showToast('Copied to Clipboard!', 'success');
+            });
+        });
+
+        // --- Web Speech API Speech Recognition ---
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+            state.recognition = new SpeechRecognition();
+            state.recognition.continuous = false;
+            state.recognition.interimResults = true;
+
+            state.recognition.onstart = () => {
+                state.isRecording = true;
+                updateMicUI(true);
+                ui.statusIndicator.innerHTML = "<span>🎙️ Listening via Browser... speak now.</span>";
+                ui.sourceText.value = '';
+                ui.targetText.value = '';
+                ui.activeModelBadge.classList.add('hidden');
+                ui.transcriptionBadge.classList.add('opacity-0');
+            };
+
+            state.recognition.onresult = (event) => {
+                let interimTranscript = '';
+                let finalTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                    } else {
+                        interimTranscript += event.results[i][0].transcript;
+                    }
+                }
+                ui.sourceText.value = finalTranscript || interimTranscript;
+            };
+
+            state.recognition.onend = () => {
+                state.isRecording = false;
+                updateMicUI(false);
+                
+                const finalStr = ui.sourceText.value.trim();
+                if (finalStr) {
+                    ui.transcriptionBadge.textContent = "Web Speech API";
+                    ui.transcriptionBadge.classList.remove('opacity-0');
+                    ui.statusIndicator.innerHTML = "<span>🤖 Translating...</span>";
+                    
+                    const targetLangName = ui.targetLang.options[ui.targetLang.selectedIndex].text;
+                    executeTranslationFlow(finalStr, targetLangName);
+                } else {
+                    ui.statusIndicator.innerHTML = "Ready. Click the microphone to start translating.";
+                }
+            };
+
+            state.recognition.onerror = (event) => {
+                console.error("Browser speech error:", event.error);
+                state.isRecording = false;
+                updateMicUI(false);
+                
+                if (event.error === 'not-allowed') {
+                    ui.statusIndicator.innerHTML = `<span class="text-red-500">🔒 Mic permission blocked! Allow in address bar.</span>`;
+                    showToast('Mic permission blocked', 'warning');
+                } else {
+                    ui.statusIndicator.innerHTML = `<span class="text-red-500">❌ Error: ${event.error}</span>`;
+                }
+            };
+        }
+
+        // --- Whisper Backend Audio Recording ---
+        async function startWhisperRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                state.audioChunks = [];
+                state.mediaRecorder = new MediaRecorder(stream);
+                
+                state.mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        state.audioChunks.push(event.data);
+                    }
+                };
+
+                state.mediaRecorder.onstop = async () => {
+                    const audioBlob = new Blob(state.audioChunks, { type: 'audio/webm' });
+                    updateMicUI(false);
+                    ui.statusIndicator.innerHTML = "<span>🚀 Transcribing audio via Whisper API...</span>";
+                    
+                    // Upload to Whisper transcribe endpoint
+                    await uploadAudioForTranscription(audioBlob);
+                };
+
+                state.mediaRecorder.start();
+                state.isRecording = true;
+                updateMicUI(true);
+                ui.statusIndicator.innerHTML = "<span>🎙️ Recording... Click STOP when done.</span>";
+                ui.sourceText.value = '';
+                ui.targetText.value = '';
+                ui.activeModelBadge.classList.add('hidden');
+                ui.transcriptionBadge.classList.add('opacity-0');
+            } catch (err) {
+                console.error("Whisper recording initiation error:", err);
+                ui.statusIndicator.innerHTML = `<span class="text-red-500">🔒 Mic permission denied or unavailable.</span>`;
+                showToast('Failed to start recording', 'warning');
+            }
+        }
+
+        function stopWhisperRecording() {
+            if (state.mediaRecorder && state.mediaRecorder.state !== 'inactive') {
+                state.mediaRecorder.stop();
+                state.mediaRecorder.stream.getTracks().forEach(track => track.stop());
+            }
+            state.isRecording = false;
+        }
+
+        async function uploadAudioForTranscription(audioBlob) {
+            const formData = new FormData();
+            formData.append('audio', audioBlob, 'speech.webm');
+            formData.append('source_lang', ui.sourceLang.value);
+            formData.append('api_key', state.groqKey);
+
+            try {
+                const response = await fetch(getBackendUrl('/api/transcribe-raw'), {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.error || 'Failed to transcribe audio.');
+                }
+
+                const data = await response.json();
+                const text = data.text ? data.text.trim() : '';
+                
+                if (text) {
+                    ui.sourceText.value = text;
+                    ui.transcriptionBadge.textContent = "Groq Whisper V3";
+                    ui.transcriptionBadge.classList.remove('opacity-0');
+                    
+                    // Proceed to translate
+                    ui.statusIndicator.innerHTML = "<span>🤖 Translating...</span>";
+                    const targetLangName = ui.targetLang.options[ui.targetLang.selectedIndex].text;
+                    await executeTranslationFlow(text, targetLangName);
+                } else {
+                    ui.statusIndicator.innerHTML = "No audible voice recognized. Please try again.";
+                }
+            } catch (err) {
+                console.error("Transcription error:", err);
+                ui.statusIndicator.innerHTML = `<span class="text-red-500">❌ Transcription Failed: ${err.message}</span>`;
+                showToast('Transcription failed.', 'warning');
+            }
+        }
+
+        // --- Core Microphone Click Router ---
+        ui.micBtn.addEventListener('click', () => {
+            const engine = ui.inputEngine.value;
+            
+            if (state.isRecording) {
+                // Stop recording
+                if (engine === 'speech-api' && state.recognition) {
+                    state.recognition.stop();
+                } else {
+                    stopWhisperRecording();
+                }
+            } else {
+                // Start recording
+                if (engine === 'speech-api') {
+                    if (!SpeechRecognition) {
+                        showToast('Browser Speech recognition not supported in this browser. Use Whisper mode.', 'warning');
+                        ui.inputEngine.value = 'whisper-backend';
+                        return;
+                    }
+                    if (ui.sourceLang.value === 'auto') {
+                        state.recognition.lang = '';
+                    } else {
+                        state.recognition.lang = ui.sourceLang.value;
+                    }
+                    state.recognition.start();
+                } else {
+                    startWhisperRecording();
+                }
+            }
+        });
+
+        function updateMicUI(recording) {
+            if (recording) {
+                ui.micBtn.classList.replace('bg-lime-spark', 'bg-red-500');
+                ui.micIcon.className = 'fa-solid fa-stop text-white text-3xl';
+                ui.micBtn.classList.remove('recording-pulse-lime');
+                ui.micBtn.classList.add('recording-pulse-red');
+            } else {
+                ui.micBtn.classList.replace('bg-red-500', 'bg-lime-spark');
+                ui.micIcon.className = 'fa-solid fa-microphone text-black text-3xl';
+                ui.micBtn.classList.remove('recording-pulse-red');
+                ui.micBtn.classList.add('recording-pulse-lime');
+            }
+        }
+
+        // --- Translation Engine and Fallback Router ---
+        async function executeTranslationFlow(text, targetLanguage) {
+            try {
+                // Primary translation run
+                const result = await callTranslationModel(state.primaryModel, text, targetLanguage);
+                displayTranslation(result.text, state.primaryModel);
+                ui.statusIndicator.innerHTML = "<span>✅ Translation Completed.</span>";
+                
+                // Play TTS
+                autoPlayTranslationTTS(result.text, ui.targetLang.value);
+
+                // Increment session counter
+                incrementSessionCounter();
+            } catch (err) {
+                console.warn(`Primary Model (${state.primaryModel}) Failed:`, err);
+                
+                if (state.backupModel === 'none') {
+                    displayTranslationError(`Translation failed: ${err.message}. No backup model selected.`);
+                    return;
+                }
+
+                ui.statusIndicator.innerHTML = `<span>🔄 Re-routing translation via ${getFriendlyModelName(state.backupModel)}...</span>`;
+                
+                try {
+                    const result = await callTranslationModel(state.backupModel, text, targetLanguage);
+                    displayTranslation(result.text, state.backupModel);
+                    showToast('Used backup model fallback.', 'warning');
+                    ui.statusIndicator.innerHTML = "<span>✅ Translation Completed (Fallback).</span>";
+                    
+                    // Play TTS
+                    autoPlayTranslationTTS(result.text, ui.targetLang.value);
+
+                    incrementSessionCounter();
+                } catch (fallbackErr) {
+                    console.error("Backup Model also failed:", fallbackErr);
+                    displayTranslationError(`All translation services failed. Last error: ${fallbackErr.message}`);
+                }
+            }
+        }
+
+        async function callTranslationModel(modelIdentifier, text, targetLanguage) {
+            // Check if we use backend translation or browser direct calls
+            if (state.translationFlow === 'backend') {
+                return callBackendTranslation(modelIdentifier, text, targetLanguage);
+            }
+            
+            // Fallback to browser direct API calls (similar to old system)
+            const systemPrompt = `You are an expert, fluent translator. Translate the following text into ${targetLanguage}. ONLY output the raw translated text. Do not include quotes, conversational filler, or explanations.`;
+            
+            if (modelIdentifier === 'gemini') {
+                return callFreeFallbackDirect(text, targetLanguage);
+            } else {
+                let groqModelName = 'llama-3.1-8b-instant';
+                if (modelIdentifier === 'groq-70b') groqModelName = 'llama-3.3-70b-versatile';
+                if (modelIdentifier === 'groq-mixtral') groqModelName = 'mixtral-8x7b-32768';
+                if (modelIdentifier === 'groq-gemma2') groqModelName = 'gemma2-9b-it';
+                
+                return callGroqDirect(text, systemPrompt, groqModelName);
+            }
+        }
+
+        // Secure Backend Translation Call
+        async function callBackendTranslation(modelIdentifier, text, targetLanguage) {
+            const response = await fetch(getBackendUrl('/api/translate'), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    text: text,
+                    source_lang: ui.sourceLang.value,
+                    target_lang: targetLanguage,
+                    model: modelIdentifier,
+                    api_key: state.groqKey
+                })
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.error || `Server returned code ${response.status}`);
+            }
+
+            const data = await response.json();
+            return { text: data.translated_text };
+        }
+
+        // Direct Browser Free Fallback (MyMemory API - No Key Required)
+        async function callFreeFallbackDirect(text, targetLanguage) {
+            const sourceLang = ui.sourceLang.value === 'auto' ? 'en' : ui.sourceLang.value.split('-')[0];
+            // Get a basic 2-letter lang code for the target language name
+            const targetLangMap = { 'English': 'en', 'Hindi': 'hi', 'Malayalam': 'ml', 'Spanish': 'es', 'French': 'fr', 'German': 'de', 'Japanese': 'ja', 'Chinese (Simplified)': 'zh-CN', 'Italian': 'it' };
+            const targetLangCode = targetLangMap[targetLanguage] || 'en';
+            
+            const apiUrl = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLangCode}`;
+            
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error(`Free Translation API Error: ${response.status}`);
+            
+            const result = await response.json();
+            if (result.responseData && result.responseData.translatedText) {
+                return { text: result.responseData.translatedText };
+            } else {
+                throw new Error("Malformed response from free translation API");
+            }
+        }
+
+        // Direct Browser Groq Call
+        async function callGroqDirect(text, systemPrompt, modelName) {
+            if (!state.groqKey) {
+                throw new Error("Groq API key is missing. Add it in Settings or switch to Gemini.");
+            }
+
+            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${state.groqKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: modelName,
+                    messages: [
+                        { role: "system", content: systemPrompt },
+                        { role: "user", content: text }
+                    ],
+                    temperature: 0.3,
+                    max_tokens: 1024
+                })
+            });
+
+            if (!response.ok) {
+                const errData = await response.json().catch(()=>({}));
+                throw new Error(errData.error?.message || `Groq Direct API Error: ${response.status}`);
+            }
+
+            const result = await response.json();
+            if (result.choices && result.choices[0] && result.choices[0].message) {
+                return { text: result.choices[0].message.content };
+            } else {
+                throw new Error("Malformed response from Groq API");
+            }
+        }
+
+        // --- Helper Functions ---
+        function displayTranslation(translatedText, modelUsed) {
+            ui.targetText.value = translatedText;
+            ui.activeModelBadge.textContent = getFriendlyModelName(modelUsed);
+            ui.activeModelBadge.classList.remove('hidden');
+        }
+
+        function displayTranslationError(message) {
+            ui.targetText.value = message;
+            ui.statusIndicator.innerHTML = `<span class="text-red-500">❌ Error Encountered</span>`;
+            ui.activeModelBadge.classList.add('hidden');
+        }
+
+        function getFriendlyModelName(identifier) {
+            if (identifier === 'gemini') return 'Gemini 3.5 Flash';
+            if (identifier === 'groq-70b') return 'Llama 3.3 70B';
+            if (identifier === 'groq-8b') return 'Llama 3.1 8B';
+            if (identifier === 'groq-mixtral') return 'Mixtral 8x7B';
+            if (identifier === 'groq-gemma2') return 'Gemma 2 9B';
+            return identifier;
+        }
+
+        function incrementSessionCounter() {
+            state.sessionCount += 1;
+            ui.counterVal.textContent = state.sessionCount;
+            localStorage.setItem('translationCount', state.sessionCount);
+        }
+
+        function showToast(message, type = 'info') {
+            const dict = translations[state.uiLang];
+            let msg = message;
+            if (message === 'Configuration Saved!') msg = dict?.toastSuccess || message;
+            if (message === 'Used backup model fallback.') msg = dict?.toastModelFallback || message;
+
+            ui.toastMessage.textContent = msg;
+            ui.toast.className = 'fixed bottom-5 right-5 transform transition-all duration-300 px-5 py-4 rounded-xl flex items-center gap-3 z-50 bg-white shadow-xl';
+            
+            // Set styles based on type
+            if (type === 'success') {
+                ui.toastIconContainer.className = 'w-8 h-8 rounded-full bg-lime-spark flex items-center justify-center shrink-0';
+                ui.toastIcon.className = 'fa-solid fa-check text-black';
+            } else if (type === 'warning') {
+                ui.toastIconContainer.className = 'w-8 h-8 rounded-full bg-red-500 flex items-center justify-center shrink-0';
+                ui.toastIcon.className = 'fa-solid fa-triangle-exclamation text-white';
+            } else {
+                ui.toastIconContainer.className = 'w-8 h-8 rounded-full bg-lavender-mist flex items-center justify-center shrink-0';
+                ui.toastIcon.className = 'fa-solid fa-info text-black';
+            }
+
+            // Animate In
+            ui.toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            // Auto hide after 3.5s
+            setTimeout(() => {
+                ui.toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        // --- Custom Dropdown Component Initializer ---
+        function initializeCustomDropdowns() {
+            const selects = document.querySelectorAll('select');
+            
+            selects.forEach(select => {
+                if (select.dataset.customInitialized) return;
+                select.dataset.customInitialized = 'true';
+                
+                // Hide original select visually
+                select.style.display = 'none';
+                
+                // Create container
+                const container = document.createElement('div');
+                container.className = 'bento-dropdown-container';
+                
+                // Insert container right after select in DOM
+                select.parentNode.insertBefore(container, select.nextSibling);
+                container.appendChild(select);
+                
+                // Create trigger button
+                const trigger = document.createElement('button');
+                trigger.type = 'button';
+                trigger.className = 'bento-dropdown-trigger';
+                
+                const label = document.createElement('span');
+                label.className = 'bento-dropdown-selected-label';
+                
+                let icon;
+                if (select.id === 'uiLangSelect') {
+                    icon = document.createElement('i');
+                    icon.className = 'fa-solid fa-globe text-[11px] opacity-80';
+                    trigger.appendChild(icon);
+                    trigger.appendChild(label);
+                } else {
+                    icon = document.createElement('i');
+                    icon.className = 'fa-solid fa-chevron-down transition-transform duration-200';
+                    trigger.appendChild(label);
+                    trigger.appendChild(icon);
+                }
+                container.appendChild(trigger);
+                
+                // Create dropdown menu
+                const menu = document.createElement('div');
+                menu.className = 'bento-dropdown-menu';
+                container.appendChild(menu);
+                
+                // Update trigger label and populate options
+                function renderOptions() {
+                    menu.innerHTML = '';
+                    const options = select.options;
+                    const selectedIndex = select.selectedIndex;
+                    
+                    if (selectedIndex >= 0 && options[selectedIndex]) {
+                        label.textContent = options[selectedIndex].text;
+                    } else {
+                        label.textContent = 'Select...';
+                    }
+                    
+                    Array.from(options).forEach((opt, idx) => {
+                        const item = document.createElement('div');
+                        item.className = 'bento-dropdown-item';
+                        item.textContent = opt.text;
+                        
+                        if (idx === selectedIndex) {
+                            item.classList.add('selected');
+                            if (select.id !== 'uiLangSelect') {
+                                // Add check icon
+                                const check = document.createElement('i');
+                                check.className = 'fa-solid fa-check text-black';
+                                item.appendChild(check);
+                            }
+                        }
+                        
+                        item.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            select.selectedIndex = idx;
+                            select.dispatchEvent(new Event('change', { bubbles: true }));
+                            renderOptions();
+                            menu.classList.remove('show');
+                            if (select.id !== 'uiLangSelect') {
+                                icon.classList.remove('rotate-180');
+                            }
+                        });
+                        
+                        menu.appendChild(item);
+                    });
+                }
+                
+                // Initial render
+                renderOptions();
+                
+                // Toggle open/close
+                trigger.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    // Close all other dropdowns first
+                    document.querySelectorAll('.bento-dropdown-menu').forEach(m => {
+                        if (m !== menu) {
+                            m.classList.remove('show');
+                            const otherIcon = m.previousSibling.querySelector('i.fa-chevron-down');
+                            if (otherIcon) otherIcon.classList.remove('rotate-180');
+                        }
+                    });
+                    
+                    const isShown = menu.classList.toggle('show');
+                    if (isShown) {
+                        if (select.id !== 'uiLangSelect') {
+                            icon.classList.add('rotate-180');
+                        }
+                        // Scroll selected option into view inside the dropdown
+                        const selectedItem = menu.querySelector('.bento-dropdown-item.selected');
+                        if (selectedItem) {
+                            selectedItem.scrollIntoView({ block: 'nearest' });
+                        }
+                    } else {
+                        if (select.id !== 'uiLangSelect') {
+                            icon.classList.remove('rotate-180');
+                        }
+                    }
+                });
+                
+                // Listen to programmatical updates to original select
+                select.addEventListener('update-custom-dropdown', () => {
+                    renderOptions();
+                });
+            });
+            
+            // Close dropdowns on clicking outside
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.bento-dropdown-menu').forEach(menu => {
+                    menu.classList.remove('show');
+                    const iconEl = menu.previousSibling.querySelector('i.fa-chevron-down');
+                    if (iconEl) iconEl.classList.remove('rotate-180');
+                });
+            });
+        }
+
+        // --- Language Translation Engine ---
+        const translations = {
+            en: {
+                title: "NANCO TRANSLATE",
+                subtitle: "Bento AI Core Suite",
+                heroTitle: "Speak Natively.<br><span class=\"bg-lime-spark px-2 inline-block mt-2 transform -rotate-1 rounded-lg\">Translate Globally.</span>",
+                heroDesc: "Experience ultra-low latency voice translation using Web Speech APIs with automated high-precision Groq Whisper failover and translation fallbacks.",
+                settingsTitle: "<i class=\"fa-solid fa-sliders\"></i> Engine Configuration",
+                groqKeyLabel: "Groq API Key",
+                groqKeyHelp: "Uses backend key if empty. Get it free at console.groq.com",
+                transFlowLabel: "Translation Flow",
+                transFlowBackend: "Backend (Secure API Translation)",
+                transFlowBrowser: "Browser Direct (Frontend Fetch)",
+                readAloudModeLabel: "Read Aloud Mode",
+                readAloudModeEnabled: "Auto-Read Enabled",
+                readAloudModeDisabled: "Auto-Read Disabled",
+                primaryModelLabel: "Primary Model",
+                backupModelLabel: "Backup Model (Fallback)",
+                readAloudEngineLabel: "Read Aloud Engine",
+                saveConfigBtn: "Save Configuration",
+                inputEngineLabel: "Input Engine",
+                speakingLangLabel: "I am speaking",
+                targetLangLabel: "Translate to",
+                statusReady: "Ready. Click the microphone to start translating.",
+                originalTextLabel: "Original Text",
+                originalPlaceholder: "Original speech text will appear here...",
+                translationLabel: "Translation",
+                translationPlaceholder: "Translated text will appear here...",
+                guideTitle: "PRO-TIPS",
+                guideTip1: "Use Whisper mode (file upload) for highly accurate multilingual translation.",
+                guideTip2: "Click the speaker icon to play high-quality natural TTS audio.",
+                guideTip3: "Configure model overrides in the top gear configuration panel.",
+                sessionVolumeLabel: "Session Volume",
+                toastSuccess: "Configuration Saved Successfully!",
+                toastModelFallback: "Used backup model fallback."
+            },
+            ml: {
+                title: "നാൻകോ ട്രാൻസ്ലേറ്റ്",
+                subtitle: "ബെന്റോ ഐ കോർ സ്യൂട്ട്",
+                heroTitle: "സ്വദേശി ഭാഷയിൽ സംസാരിക്കുക.<br><span class=\"bg-lime-spark px-2 inline-block mt-2 transform -rotate-1 rounded-lg\">ആഗോളതലത്തിൽ വിവർത്തനം ചെയ്യുക.</span>",
+                heroDesc: "വെബ് സ്പീച്ച് എപിഐകൾ ഉപയോഗിച്ച് കുറഞ്ഞ ലേറ്റൻസിയിൽ തത്സമയ വിവർത്തനം അനുഭവിക്കുക. സ്വയമേവയുള്ള ഹൈ-പ്രിസിഷൻ ഗ്രോക് വിസ്‌പർ ഫെയ്‌ലോവർ പൊരുത്തപ്പെടുത്തലുകളോടെ.",
+                settingsTitle: "<i class=\"fa-solid fa-sliders\"></i> എഞ്ചിൻ ക്രമീകരണങ്ങൾ",
+                groqKeyLabel: "ഗ്രോക് എപിഐ കീ",
+                groqKeyHelp: "ശൂന്യമാണെങ്കിൽ ബാക്കെൻഡ് കീ ഉപയോഗിക്കുന്നു. console.groq.com-ൽ നിന്ന് സൗജന്യമായി നേടുക",
+                transFlowLabel: "വിവർത്തന ഫ്ലോ",
+                transFlowBackend: "ബാക്കെൻഡ് (സുരക്ഷിത എപിഐ വിവർത്തനം)",
+                transFlowBrowser: "ഡയറക്ട് ബ്രൗസർ (ഫ്രണ്ട് എൻഡ് ഫെച്ച്)",
+                readAloudModeLabel: "ഉറക്കെ വായിക്കുന്ന മോഡ്",
+                readAloudModeEnabled: "ഓട്ടോ-റീഡ് പ്രവർത്തനക്ഷമമാക്കി",
+                readAloudModeDisabled: "ഓട്ടോ-റീഡ് പ്രവർത്തനരഹിതമാക്കി",
+                primaryModelLabel: "പ്രാഥമിക മോഡൽ",
+                backupModelLabel: "ബാക്കപ്പ് മോഡൽ",
+                readAloudEngineLabel: "റീഡ് അലൗഡ് എഞ്ചിൻ",
+                saveConfigBtn: "ക്രമീകരണങ്ങൾ സേവ് ചെയ്യുക",
+                inputEngineLabel: "ഇൻപുട്ട് എഞ്ചിൻ",
+                speakingLangLabel: "ഞാൻ സംസാരിക്കുന്നത്",
+                targetLangLabel: "ഇതിലേക്ക് വിവർത്തനം ചെയ്യുക",
+                statusReady: "തയ്യാറാണ്. വിവർത്തനം ആരംഭിക്കാൻ മൈക്രോഫോണിൽ ക്ലിക്ക് ചെയ്യുക.",
+                originalTextLabel: "യഥാർത്ഥ വാചകം",
+                originalPlaceholder: "സംസാരിക്കുന്ന വാചകം ഇവിടെ ദൃശ്യമാകും...",
+                translationLabel: "വിവർത്തനം ചെയ്ത വാചകം",
+                translationPlaceholder: "വിവർത്തനം ചെയ്ത വാചകം ഇവിടെ ദൃശ്യമാകും...",
+                guideTitle: "പ്രൊ-ടിപ്പുകൾ",
+                guideTip1: "കൂടുതൽ കൃത്യതയാർന്ന വിവർത്തനത്തിനായി വിസ്പർ മോഡ് ഉപയോഗിക്കുക.",
+                guideTip2: "ഉയർന്ന നിലവാരമുള്ള ഓഡിയോ പ്ലേ ചെയ്യാൻ സ്പീക്കർ ഐക്കൺ അമർത്തുക.",
+                guideTip3: "മുകളിലെ ഗിയർ കോൺഫിഗറേഷൻ പാനലിൽ മോഡലുകൾ മാറ്റാൻ സാധിക്കും.",
+                sessionVolumeLabel: "സെഷൻ അളവ്",
+                toastSuccess: "ക്രമീകരണങ്ങൾ വിജയകരമായി സേവ് ചെയ്തു!",
+                toastModelFallback: "ബാക്കപ്പ് മോഡൽ ഉപയോഗിച്ചു."
+            },
+            hi: {
+                title: "नान्को ट्रांसलेट",
+                subtitle: "बेंटो एआई कोर सूट",
+                heroTitle: "अपनी भाषा में बोलें।<br><span class=\"bg-lime-spark px-2 inline-block mt-2 transform -rotate-1 rounded-lg\">वैश्विक अनुवाद करें।</span>",
+                heroDesc: "उच्च-सटीक ग्रोक व्हिस्पर फेलओवर और बैकअप अनुवादों के साथ वेब स्पीच एपीआई का उपयोग करके कम विलंबता वाले अनुवाद का अनुभव करें।",
+                settingsTitle: "<i class=\"fa-solid fa-sliders\"></i> इंजन कॉन्फ़िगरेशन",
+                groqKeyLabel: "ग्रोक एपीआई कुंजी",
+                groqKeyHelp: "खाली होने पर बैकएंड कुंजी का उपयोग किया जाता है। console.groq.com पर निःशुल्क प्राप्त करें",
+                transFlowLabel: "अनुवाद प्रवाह",
+                transFlowBackend: "अनुवाद बैकएंड (सुरक्षित एपीआई अनुवाद)",
+                transFlowBrowser: "सीधा ब्राउज़र (फ्रंटएंड फ़ेच)",
+                readAloudModeLabel: "सस्वर पाठ मोड",
+                readAloudModeEnabled: "ऑटो-रीड सक्षम",
+                readAloudModeDisabled: "ऑटो-रीड अक्षम",
+                primaryModelLabel: "प्राथमिक मॉडल",
+                backupModelLabel: "बैकअप मॉडल (फ़ॉलबैक)",
+                readAloudEngineLabel: "रीड अलाउड इंजन",
+                saveConfigBtn: "कॉन्फ़िगरेशन सहेजें",
+                inputEngineLabel: "इनपुट इंजन",
+                speakingLangLabel: "मैं बोल रहा हूँ",
+                targetLangLabel: "अनुवाद करें",
+                statusReady: "तैयार। अनुवाद शुरू करने के लिए माइक्रोफ़ोन पर क्लिक करें।",
+                originalTextLabel: "मूल पाठ",
+                originalPlaceholder: "मूल भाषण पाठ यहाँ दिखाई देगा...",
+                translationLabel: "अनुवाद",
+                translationPlaceholder: "अनुवादित पाठ यहाँ दिखाई देगा...",
+                guideTitle: "प्रो-सुझाव",
+                guideTip1: "अत्यधिक सटीक बहुभाषी अनुवाद के लिए व्हिस्पर मोड का उपयोग करें।",
+                guideTip2: "उच्च गुणवत्ता वाले टीटीएस ऑडियो चलाने के लिए स्पीकर आइकन पर क्लिक करें।",
+                guideTip3: "शीर्ष गियर कॉन्फ़िगरेशन पैनल में मॉडल ओवरराइड्स को बदलें।",
+                sessionVolumeLabel: "सत्र मात्रा",
+                toastSuccess: "कॉन्फ़िगरेशन सफलतापूर्वक सहेजा गया!",
+                toastModelFallback: "बैकअप मॉडल फ़ॉलबैक का उपयोग किया गया।"
+            }
+        };
+
+        function applyTranslations(lang) {
+            // Apply font family class to body
+            document.body.className = document.body.className.replace(/\blang-\w+\b/g, '');
+            document.body.classList.add(`lang-${lang}`);
+
+            const dict = translations[lang];
+            if (!dict) return;
+
+            // Set all data-i18n elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) {
+                    el.innerHTML = dict[key];
+                }
+            });
+
+            // Set all placeholder elements
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (dict[key]) {
+                    el.placeholder = dict[key];
+                }
+            });
+            
+            // Re-dispatch update event for all dropdowns to refresh their custom rendering
+            document.querySelectorAll('select').forEach(sel => sel.dispatchEvent(new Event('update-custom-dropdown')));
+        }
+
+        ui.uiLangSelect.addEventListener('change', () => {
+            state.uiLang = ui.uiLangSelect.value;
+            localStorage.setItem('uiLang', state.uiLang);
+            applyTranslations(state.uiLang);
+        });
+
+        // Set initial state
+        applyTranslations(state.uiLang);
+
+        // Initialize dropdowns on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeCustomDropdowns();
+        });
+        
+        // Fallback immediate initialization in case DOMContentLoaded already fired
+        initializeCustomDropdowns();
+    </script>
+</body>
+</html>
