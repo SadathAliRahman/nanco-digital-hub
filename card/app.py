@@ -49,7 +49,7 @@ def translate_api():
         elif model == 'groq-gemma2':
             groq_model_name = 'gemma2-9b-it'
         
-        system_prompt = f"You are an expert, fluent translator. Translate the following text into {target_lang}. ONLY output the raw translated text. Do not include quotes, conversational filler, or explanations."
+        system_prompt = f"You are an expert, fluent translator. The input text may be written in Manglish (Malayalam script written in English/Latin letters), native Malayalam script, English, or a mix of languages. Translate it accurately into {target_lang}. ONLY output the raw translated text. Do not include quotes, conversational filler, or explanations."
         
         chat_completion = temp_client.chat.completions.create(
             messages=[
@@ -80,29 +80,24 @@ def tts_api():
 
     try:
         from gtts import gTTS
-        import tempfile
+        import io
+        import base64
 
-        # Clean lang code to match gtts expected format (e.g., 'en' instead of 'en-US')
+        # Clean lang code to match gtts expected format
         lang_code = lang.split('-')[0]
 
         tts = gTTS(text=text, lang=lang_code)
         
-        # Save to temp file
-        with tempfile.NamedTemporaryFile(delete=False, suffix='.mp3') as temp_audio:
-            temp_path = temp_audio.name
-            
-        tts.save(temp_path)
+        # Save directly to an in-memory buffer
+        fp = io.BytesIO()
+        tts.write_to_fp(fp)
+        fp.seek(0)
 
-        @after_this_request
-        def cleanup(response):
-            try:
-                os.remove(temp_path)
-            except Exception as e:
-                app.logger.error(f"Error removing temp tts file: {e}")
-            return response
-
-        return send_file(temp_path, mimetype='audio/mpeg')
+        # Convert to Base64 to bypass Flask send_file version compatibility issues
+        audio_base64 = base64.b64encode(fp.read()).decode('utf-8')
+        return jsonify({'audio': audio_base64})
     except Exception as e:
+        app.logger.error(f"TTS Generation Error: {e}")
         return jsonify({'error': str(e)}), 500
 
 

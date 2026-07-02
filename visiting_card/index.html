@@ -84,40 +84,42 @@
 <body class="min-h-screen text-black flex flex-col items-center pb-20 pt-4 px-4 md:px-8">
 
     <!-- Floating Navigation Bar -->
-    <div class="w-full max-w-2xl mb-6">
-        <div class="bg-white rounded-full px-6 py-3 flex flex-row justify-between items-center shadow-bento">
+    <div class="w-full max-w-4xl mb-6">
+        <div class="bg-gray-900 text-white rounded-full px-6 py-3 flex flex-row justify-between items-center shadow-bento border border-white/10">
             <div class="flex items-center">
-                <span class="font-extrabold text-lg tracking-tight">Digital Visiting Card</span>
+                <span class="font-extrabold text-lg tracking-tight drop-shadow-md">Digital Visiting Card</span>
             </div>
-            <a href="https://nanco-five.vercel.app/" target="_blank" class="bento-pill bg-gray-100 px-5 py-2 text-sm font-bold hover:bg-gray-200">
+            <a href="https://nanco-five.vercel.app/" target="_blank" class="bento-pill bg-lime-spark text-black px-5 py-2 text-sm font-bold hover:bg-white transition-colors shadow-sm">
                 Website
             </a>
         </div>
     </div>
 
-    <div class="w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4">
 
         <!-- Hero / Branch Info -->
-        <div class="bento-card bg-white p-8 md:col-span-2 flex flex-col items-center text-center relative overflow-hidden">
-            <div class="absolute -top-20 -right-20 w-48 h-48 bg-leaf-wash rounded-full opacity-50 blur-3xl"></div>
-            <div class="absolute -bottom-20 -left-20 w-48 h-48 bg-lavender-mist rounded-full opacity-50 blur-3xl"></div>
+        <div class="bento-card bg-gray-900 p-8 md:col-span-2 flex flex-col items-center text-center relative overflow-hidden">
+            <!-- Background Image with Dark Overlay -->
+            <div class="absolute inset-0 z-0 bg-black">
+                <img src="../assets/visualizer%20bg.jpg" alt="Background" class="w-full h-full object-cover opacity-40">
+            </div>
             
-            <img src="../card/light-logo.png" alt="Nanco Logo" class="h-12 md:h-16 object-contain mb-4 relative z-10">
-            <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-2 relative z-10">NANCO FACTORY OUTLET-HO</h1>
-            <p class="text-gray-500 text-sm md:text-base font-medium max-w-md mb-4 relative z-10">
+            <img src="../card/light-logo.png" alt="Nanco Logo" class="h-12 md:h-16 object-contain mb-4 relative z-10 brightness-0 invert drop-shadow-md">
+            <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-2 relative z-10 text-white drop-shadow-lg">NANCO FACTORY OUTLET-HO</h1>
+            <p class="text-gray-200 text-sm md:text-base font-medium max-w-md mb-4 relative z-10 drop-shadow-md">
                 Tirur Kuttipuram Road, Codakel<br>Near Petrol Pump, PO Thirunavaya, 676301
             </p>
             
             <div class="flex flex-wrap justify-center gap-2 mb-2 relative z-10">
-                <span class="bg-gray-100 text-gray-700 px-4 py-1.5 rounded-full text-xs font-bold">GST: 32DBYPC0519Q1Z8</span>
-                <a href="tel:9744145756" class="bg-leaf-wash text-forest-ink px-4 py-1.5 rounded-full text-xs font-bold hover:bg-lime-spark transition-colors">
+                <span class="bg-black/40 text-white px-4 py-1.5 rounded-full text-xs font-bold backdrop-blur-md border border-white/10">GST: 32DBYPC0519Q1Z8</span>
+                <a href="tel:9744145756" class="bg-lime-spark text-black px-4 py-1.5 rounded-full text-xs font-bold hover:bg-white transition-colors shadow-lg">
                     <i class="fa-solid fa-phone mr-1"></i> 9744145756
                 </a>
             </div>
         </div>
 
         <!-- AI Voice Translator Link (Highlight) -->
-        <a href="../card/index.html" class="bento-card bg-lime-spark p-6 md:col-span-2 flex items-center justify-between group cursor-pointer">
+        <a href="../card/index.html" class="bento-card bg-lime-spark p-6 md:col-span-2 flex items-center justify-between group cursor-pointer shadow-md">
             <div>
                 <div class="text-xs font-bold uppercase tracking-widest mb-1 opacity-70">AI Tool</div>
                 <h3 class="text-xl font-extrabold">Nanco Voice Translator</h3>
@@ -128,57 +130,73 @@
             </div>
         </a>
 
+        <!-- Install All PWA App Link -->
+        <a href="https://nanco-five.vercel.app/" target="_blank" class="bento-card bg-gradient-to-r from-blue-600 to-indigo-800 text-white p-6 md:col-span-2 flex items-center justify-between group cursor-pointer relative overflow-hidden shadow-lg border border-black/5">
+            <!-- Background accent graphic -->
+            <i class="fa-solid fa-cloud-arrow-down absolute -right-4 -bottom-6 text-9xl opacity-10 transform group-hover:-translate-y-2 group-hover:scale-110 transition-all duration-500"></i>
+            
+            <div class="relative z-10">
+                <div class="text-xs font-bold uppercase tracking-widest mb-1 text-blue-200">App Center</div>
+                <h3 class="text-xl font-extrabold drop-shadow-sm">Install All Tools</h3>
+                <p class="text-sm font-medium mt-1 text-blue-100/90">Download the Nanco Hub PWA for native access.</p>
+            </div>
+            <div class="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm border border-white/20 group-hover:scale-110 group-hover:bg-white/20 transition-all relative z-10">
+                <i class="fa-solid fa-download text-xl text-white"></i>
+            </div>
+        </a>
+
         <!-- Staff Card -->
-        <div class="bento-card bg-lavender-mist p-6 flex flex-col justify-between">
-            <div class="flex items-center gap-4 mb-6">
-                <div class="w-16 h-16 bg-white rounded-full p-1 shadow-sm shrink-0">
+        <div class="bento-card bg-gray-900 p-6 flex flex-col justify-between relative overflow-hidden text-white">
+            <!-- Background Image with Dark Overlay -->
+            <div class="absolute inset-0 z-0 bg-black">
+                <img src="../assets/callbg.jpg" alt="Background" class="w-full h-full object-cover opacity-50">
+            </div>
+
+            <div class="flex items-center gap-4 mb-6 relative z-10 drop-shadow-md">
+                <div class="w-16 h-16 bg-white/10 rounded-full p-1 shadow-sm shrink-0 backdrop-blur-md border border-white/20">
                     <img src="staff/uploads/1781792643_6a33ff83ef217.jpeg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="w-full h-full rounded-full object-cover">
-                    <div class="w-full h-full rounded-full bg-gray-200 hidden items-center justify-center text-gray-500 text-xl font-bold">M</div>
+                    <div class="w-full h-full rounded-full bg-gray-800 hidden items-center justify-center text-white text-xl font-bold">M</div>
                 </div>
                 <div>
-                    <h3 class="text-lg font-extrabold">Muhamed</h3>
-                    <p class="text-sm font-medium opacity-75">Manager • Thirunavaya</p>
+                    <h3 class="text-lg font-extrabold text-white drop-shadow-lg">Muhamed</h3>
+                    <p class="text-sm font-medium text-gray-200">Manager • Thirunavaya</p>
                 </div>
             </div>
             
-            <div class="flex gap-2">
-                <a href="tel:9744145756" class="flex-1 bg-white rounded-2xl py-3 flex items-center justify-center gap-2 font-bold text-sm hover:bg-gray-50 transition-colors">
+            <div class="flex gap-2 relative z-10">
+                <a href="tel:9744145756" class="flex-1 bg-white/20 rounded-2xl py-3 flex items-center justify-center gap-2 font-bold text-sm text-white hover:bg-white/30 backdrop-blur-md border border-white/10 transition-colors shadow-lg">
                     <i class="fa-solid fa-phone"></i> Call
                 </a>
-                <a href="https://wa.me/8111804398" target="_blank" class="flex-1 bg-white rounded-2xl py-3 flex items-center justify-center gap-2 font-bold text-sm hover:bg-gray-50 transition-colors">
-                    <i class="fa-brands fa-whatsapp text-green-500 text-lg"></i> Chat
+                <a href="https://wa.me/8111804398" target="_blank" class="flex-1 bg-lime-spark rounded-2xl py-3 flex items-center justify-center gap-2 font-bold text-sm text-black hover:bg-white transition-colors shadow-lg">
+                    <i class="fa-brands fa-whatsapp text-green-700 text-lg"></i> Chat
                 </a>
             </div>
         </div>
 
         <!-- Quick Links Bento Grid -->
         <div class="grid grid-cols-2 gap-4">
-            <a href="https://trkmfg.com/admin/cart/" target="_blank" class="bento-card bg-white p-5 flex flex-col items-center justify-center text-center group cursor-pointer aspect-square">
-                <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl mb-3 icon-wrapper">
-                    <i class="fa-solid fa-store"></i>
-                </div>
-                <span class="font-bold text-sm">Online Store</span>
+            <!-- Cobalt Band with Grid Pattern -->
+            <a href="https://trkmfg.com/admin/cart/" target="_blank" class="bento-card bg-cobalt-band text-white p-5 flex flex-col items-end justify-start text-right group cursor-pointer aspect-square relative overflow-hidden shadow-lg border border-black/5" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px;">
+                <i class="fa-solid fa-store absolute -bottom-2 left-0 md:left-2 text-[7rem] md:text-[8rem] opacity-40 transform -rotate-12 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500"></i>
+                <span class="font-extrabold text-base md:text-lg drop-shadow-md relative z-10 leading-tight">Online<br>Store</span>
             </a>
             
-            <a href="https://trkmfg.com/color/login/offer_view.php" target="_blank" class="bento-card bg-white p-5 flex flex-col items-center justify-center text-center group cursor-pointer aspect-square">
-                <div class="w-12 h-12 bg-orange-50 text-orange-500 rounded-2xl flex items-center justify-center text-xl mb-3 icon-wrapper">
-                    <i class="fa-solid fa-tags"></i>
-                </div>
-                <span class="font-bold text-sm">Offers</span>
+            <!-- Mustard Pop with Diagonal Stripes -->
+            <a href="https://trkmfg.com/color/login/offer_view.php" target="_blank" class="bento-card bg-mustard-pop text-black p-5 flex flex-col items-end justify-start text-right group cursor-pointer aspect-square relative overflow-hidden shadow-lg border border-black/5" style="background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 8px);">
+                <i class="fa-solid fa-tags absolute -bottom-2 left-0 md:left-2 text-[7rem] md:text-[8rem] opacity-30 transform -rotate-12 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500"></i>
+                <span class="font-extrabold text-base md:text-lg drop-shadow-sm relative z-10 leading-tight">Special<br>Offers</span>
             </a>
             
-            <a href="https://maps.app.goo.gl/jFPQ5KvFjgc5iy5z5" target="_blank" class="bento-card bg-white p-5 flex flex-col items-center justify-center text-center group cursor-pointer aspect-square">
-                <div class="w-12 h-12 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center text-xl mb-3 icon-wrapper">
-                    <i class="fa-solid fa-location-dot"></i>
-                </div>
-                <span class="font-bold text-sm">Location</span>
+            <!-- Maroon Plate with Polka Dots -->
+            <a href="https://maps.app.goo.gl/jFPQ5KvFjgc5iy5z5" target="_blank" class="bento-card bg-maroon-plate text-white p-5 flex flex-col items-end justify-start text-right group cursor-pointer aspect-square relative overflow-hidden shadow-lg border border-black/5" style="background-image: radial-gradient(rgba(255,255,255,0.15) 2px, transparent 2px); background-size: 16px 16px;">
+                <i class="fa-solid fa-location-dot absolute -bottom-2 left-2 md:left-4 text-[7rem] md:text-[8rem] opacity-40 transform -rotate-12 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500"></i>
+                <span class="font-extrabold text-base md:text-lg drop-shadow-md relative z-10 leading-tight">Store<br>Location</span>
             </a>
 
-            <a href="https://trkmfg.com/nanco/login/all_product.php" target="_blank" class="bento-card bg-white p-5 flex flex-col items-center justify-center text-center group cursor-pointer aspect-square">
-                <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center text-xl mb-3 icon-wrapper">
-                    <i class="fa-solid fa-play"></i>
-                </div>
-                <span class="font-bold text-sm text-balance">App Video</span>
+            <!-- Forest Ink with Reverse Diagonal Stripes -->
+            <a href="https://trkmfg.com/nanco/login/all_product.php" target="_blank" class="bento-card bg-forest-ink text-white p-5 flex flex-col items-end justify-start text-right group cursor-pointer aspect-square relative overflow-hidden shadow-lg border border-black/5" style="background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,0.06) 0, rgba(255,255,255,0.06) 2px, transparent 2px, transparent 8px);">
+                <i class="fa-solid fa-play absolute -bottom-2 left-0 md:left-2 text-[7rem] md:text-[8rem] opacity-40 transform -rotate-12 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500"></i>
+                <span class="font-extrabold text-base md:text-lg text-balance drop-shadow-md relative z-10 leading-tight">App<br>Video</span>
             </a>
         </div>
 
@@ -200,8 +218,8 @@
         </div>
 
         <!-- Additional Links List -->
-        <div class="bento-card bg-white p-6 md:col-span-2">
-            <h3 class="font-extrabold text-lg mb-4">Resources</h3>
+        <div class="bento-card bg-lavender-mist p-6 md:col-span-2 border border-black/5">
+            <h3 class="font-extrabold text-lg mb-4 text-black">Resources</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <a href="https://nanco-five.vercel.app/colors.html" target="_blank" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 transition-colors group">
                     <div class="w-10 h-10 bg-leaf-wash rounded-full flex items-center justify-center text-forest-ink icon-wrapper"><i class="fa-solid fa-palette"></i></div>

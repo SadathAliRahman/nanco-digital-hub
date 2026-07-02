@@ -260,7 +260,9 @@
     <div class="w-full max-w-6xl px-4 mt-4 md:mt-6">
         <div class="bg-white rounded-full px-5 py-3 md:px-8 md:py-4 flex flex-row justify-between items-center shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
             <div class="flex items-center">
-                <img src="light-logo.png" alt="Nanco Logo" class="h-7 md:h-10 object-contain">
+                <a href="../visiting_card/index.html" class="cursor-pointer hover:opacity-75 transition-opacity" title="Back to Digital Visiting Card">
+                    <img src="light-logo.png" alt="Nanco Logo" class="h-7 md:h-10 object-contain">
+                </a>
             </div>
             <div class="flex items-center gap-2 md:gap-3">
                 <select id="uiLangSelect" class="w-16 p-2 text-xs font-extrabold bg-transparent text-black">
@@ -323,18 +325,18 @@
                     <div>
                         <label class="block text-xs font-bold text-black uppercase mb-1" data-i18n="primaryModelLabel">Primary Model</label>
                         <select id="primaryModel" class="w-full p-3 bento-input text-sm font-bold bg-white">
+                            <option value="gemini" selected>⚡ Free Translate (No Key)</option>
                             <option value="groq-8b">Groq Llama 3.1 8B</option>
-                            <option value="groq-70b" selected>Groq Llama 3.3 70B</option>
+                            <option value="groq-70b">Groq Llama 3.3 70B</option>
                             <option value="groq-mixtral">Groq Mixtral 8x7B</option>
                             <option value="groq-gemma2">Groq Gemma 2 9B</option>
-                            <option value="gemini">Gemini 3.5 Flash</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-black uppercase mb-1" data-i18n="backupModelLabel">Backup Model (Fallback)</label>
                         <select id="backupModel" class="w-full p-3 bento-input text-sm font-bold bg-white">
-                            <option value="gemini" selected>Gemini 3.5 Flash</option>
-                            <option value="groq-8b">Groq Llama 3.1 8B</option>
+                            <option value="gemini">⚡ Free Translate (No Key)</option>
+                            <option value="groq-8b" selected>Groq Llama 3.1 8B</option>
                             <option value="groq-70b">Groq Llama 3.3 70B</option>
                             <option value="none">None (Fail immediately)</option>
                         </select>
@@ -372,6 +374,7 @@
                     <select id="sourceLang" class="bento-input p-3 text-sm font-bold bg-white">
                         <option value="ml-IN" selected>Malayalam</option>
                         <option value="hi-IN">Hindi</option>
+                        <option value="ta-IN">Tamil</option>
                         <option value="auto">Auto-detect Language</option>
                         <option value="en-US">English</option>
                         <option value="es-ES">Spanish</option>
@@ -389,6 +392,8 @@
                         <option value="en-US" selected>English</option>
                         <option value="hi-IN">Hindi</option>
                         <option value="ml-IN">Malayalam</option>
+                        <option value="ta-IN">Tamil</option>
+                        <option value="ar-SA">Arabic</option>
                         <option value="es-ES">Spanish</option>
                         <option value="fr-FR">French</option>
                         <option value="de-DE">German</option>
@@ -400,10 +405,13 @@
             </div>
 
             <!-- Big Circular Pulse Microphone Button -->
-            <div class="relative my-6 flex justify-center items-center">
-                <button id="micBtn" class="bg-lime-spark w-24 h-24 rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-transform duration-100 z-10">
+            <div class="relative my-6 flex flex-col justify-center items-center gap-3">
+                <button id="micBtn" class="bg-lime-spark w-24 h-24 rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-transform duration-100 z-10 select-none touch-none" style="-webkit-user-select:none;user-select:none;">
                     <i id="micIcon" class="fa-solid fa-microphone text-black text-3xl"></i>
                 </button>
+                <p class="text-xs font-semibold text-black/50 tracking-wide text-center">
+                    <span>Tap to toggle &nbsp;·&nbsp;</span><span class="text-black/70">Hold for continuous speak</span>
+                </p>
             </div>
 
             <!-- Status Status Indicator -->
@@ -423,7 +431,7 @@
                         <span class="text-xs font-bold text-black uppercase tracking-wider bg-white px-2 py-0.5 rounded-md" data-i18n="originalTextLabel">Original Text</span>
                         <span id="transcriptionBadge" class="text-[10px] font-bold text-black opacity-0">Transcribed</span>
                     </div>
-                    <textarea id="sourceText" readonly class="w-full h-48 p-4 bento-border rounded-xl resize-none outline-none text-black font-semibold text-base leading-relaxed bg-white" placeholder="Original speech text will appear here..." data-i18n-placeholder="originalPlaceholder"></textarea>
+                    <textarea id="sourceText" class="w-full h-48 p-4 bento-border rounded-xl resize-none outline-none text-black font-semibold text-base leading-relaxed bg-white" placeholder="Original speech text will appear here..." data-i18n-placeholder="originalPlaceholder"></textarea>
                 </div>
 
                 <!-- Right: Translation Box -->
@@ -440,6 +448,12 @@
                         </button>
                         <button id="copyBtn" class="bento-btn bg-white hover:bg-linen-canvas p-3 text-black text-sm flex items-center justify-center w-11 h-11" title="Copy translation">
                             <i class="fa-regular fa-copy text-lg"></i>
+                        </button>
+                        <button id="downloadVoiceBtn" class="bento-btn bg-white hover:bg-lime-spark p-3 text-black text-sm flex items-center justify-center w-11 h-11" title="Download voice audio">
+                            <i class="fa-solid fa-download text-lg"></i>
+                        </button>
+                        <button id="shareVoiceBtn" class="bento-btn bg-white hover:bg-lime-spark p-3 text-black text-sm flex items-center justify-center w-11 h-11" title="Share voice audio">
+                            <i class="fa-solid fa-share-nodes text-lg"></i>
                         </button>
                     </div>
                 </div>
@@ -504,12 +518,13 @@
             audioChunks: [],
             groqKey: localStorage.getItem('groqApiKey') || '',
             translationFlow: localStorage.getItem('translationFlow') || 'browser',
-            primaryModel: localStorage.getItem('primaryModel') || 'groq-70b',
-            backupModel: localStorage.getItem('backupModel') || 'gemini',
+            primaryModel: localStorage.getItem('primaryModel') || 'gemini',
+            backupModel: localStorage.getItem('backupModel') || 'groq-8b',
             readAloudMode: localStorage.getItem('readAloudMode') || 'enabled',
             readAloudEngine: localStorage.getItem('readAloudEngine') || 'web',
             sessionCount: parseInt(localStorage.getItem('translationCount') || '0', 10),
-            uiLang: localStorage.getItem('uiLang') || 'en'
+            uiLang: localStorage.getItem('uiLang') || 'en',
+            lastAudioFile: null
         };
 
         // --- DOM Elements ---
@@ -531,6 +546,8 @@
             primaryModelSelect: document.getElementById('primaryModel'),
             backupModelSelect: document.getElementById('backupModel'),
             copyBtn: document.getElementById('copyBtn'),
+            shareVoiceBtn: document.getElementById('shareVoiceBtn'),
+            downloadVoiceBtn: document.getElementById('downloadVoiceBtn'),
             ttsBtn: document.getElementById('ttsBtn'),
             activeModelBadge: document.getElementById('activeModelBadge'),
             transcriptionBadge: document.getElementById('transcriptionBadge'),
@@ -665,11 +682,153 @@
             });
         });
 
+        // --- Background TTS File Pre-Generation ---
+        async function preGenerateShareAudio(text, targetLangName) {
+            if (!text) return;
+            state.lastAudioFile = null; // Discard old audio immediately
+
+            const targetLangMap = { 'English': 'en', 'Hindi': 'hi', 'Malayalam': 'ml', 'Spanish': 'es', 'French': 'fr', 'German': 'de', 'Japanese': 'ja', 'Chinese (Simplified)': 'zh-CN', 'Italian': 'it', 'Tamil': 'ta', 'Arabic': 'ar' };
+            const langCode = targetLangMap[targetLangName] || 'en';
+
+            try {
+                const response = await fetch(getBackendUrl('/api/tts'), {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: text, lang: langCode })
+                });
+
+                if (!response.ok) return;
+                const data = await response.json();
+                
+                // Decode base64 to binary array
+                const binaryString = atob(data.audio);
+                const len = binaryString.length;
+                const bytes = new Uint8Array(len);
+                for (let i = 0; i < len; i++) {
+                    bytes[i] = binaryString.charCodeAt(i);
+                }
+                const blob = new Blob([bytes], { type: "audio/mpeg" });
+                state.lastAudioFile = new File([blob], "translated_voice.mp3", { type: "audio/mpeg" });
+            } catch (err) {
+                console.warn("Background audio pre-generation failed:", err);
+            }
+        }
+
+        async function shareOrDownloadFile(file) {
+            if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    title: 'Nanco Voice Translation',
+                    text: 'Here is the translated voice from Nanco Hub.',
+                    files: [file]
+                });
+                ui.statusIndicator.innerHTML = "<span>✅ Voice shared successfully.</span>";
+                showToast('Shared successfully!', 'success');
+            } else {
+                // Fallback to auto-download if native sharing is unsupported
+                const url = URL.createObjectURL(file);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = file.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                ui.statusIndicator.innerHTML = "<span>✅ Voice audio downloaded.</span>";
+                showToast('Downloaded voice audio!', 'success');
+            }
+        }
+
+        ui.shareVoiceBtn.addEventListener('click', async () => {
+            const text = ui.targetText.value;
+            if (!text) return;
+
+            ui.shareVoiceBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-lg"></i>';
+            
+            // 1. Instant path: if pre-generated file already exists in memory
+            if (state.lastAudioFile) {
+                try {
+                    await shareOrDownloadFile(state.lastAudioFile);
+                } catch (err) {
+                    if (err.name === 'AbortError') {
+                        ui.statusIndicator.innerHTML = "<span>ℹ️ Share cancelled.</span>";
+                    } else {
+                        console.error("Error sharing voice:", err);
+                        showToast("Could not share voice. Try again.", "warning");
+                    }
+                } finally {
+                    ui.shareVoiceBtn.innerHTML = '<i class="fa-solid fa-share-nodes text-lg"></i>';
+                }
+                return;
+            }
+
+            // 2. Fallback path: pre-generation not finished yet, so generate on-the-fly
+            ui.statusIndicator.innerHTML = "<span>⏳ Generating audio file for sharing...</span>";
+            const targetLangName = ui.targetLang.value;
+            await preGenerateShareAudio(text, targetLangName);
+
+            if (state.lastAudioFile) {
+                try {
+                    await shareOrDownloadFile(state.lastAudioFile);
+                } catch (err) {
+                    if (err.name === 'AbortError') {
+                        ui.statusIndicator.innerHTML = "<span>ℹ️ Share cancelled.</span>";
+                    } else {
+                        console.error("Error sharing voice:", err);
+                        showToast("Could not share voice. Try again.", "warning");
+                    }
+                }
+            } else {
+                ui.statusIndicator.innerHTML = `<span class="text-red-500">❌ Failed to generate audio.</span>`;
+                showToast("Could not share voice. Try again.", "warning");
+            }
+            ui.shareVoiceBtn.innerHTML = '<i class="fa-solid fa-share-nodes text-lg"></i>';
+        });
+
+        ui.downloadVoiceBtn.addEventListener('click', async () => {
+            const text = ui.targetText.value;
+            if (!text) return;
+
+            ui.downloadVoiceBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-lg"></i>';
+
+            const triggerDownload = (file) => {
+                const url = URL.createObjectURL(file);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = file.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                ui.statusIndicator.innerHTML = "<span>✅ Voice audio downloaded.</span>";
+                showToast('Downloaded voice audio!', 'success');
+            };
+
+            // 1. Instant path: if pre-generated file already exists in memory
+            if (state.lastAudioFile) {
+                triggerDownload(state.lastAudioFile);
+                ui.downloadVoiceBtn.innerHTML = '<i class="fa-solid fa-download text-lg"></i>';
+                return;
+            }
+
+            // 2. Fallback path: pre-generation not finished yet, so generate on-the-fly
+            ui.statusIndicator.innerHTML = "<span>⏳ Generating audio file for download...</span>";
+            const targetLangName = ui.targetLang.value;
+            await preGenerateShareAudio(text, targetLangName);
+
+            if (state.lastAudioFile) {
+                triggerDownload(state.lastAudioFile);
+            } else {
+                ui.statusIndicator.innerHTML = `<span class="text-red-500">❌ Failed to generate audio.</span>`;
+                showToast("Could not download voice. Try again.", "warning");
+            }
+            ui.downloadVoiceBtn.innerHTML = '<i class="fa-solid fa-download text-lg"></i>';
+        });
+
         // --- Web Speech API Speech Recognition ---
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (SpeechRecognition) {
             state.recognition = new SpeechRecognition();
-            state.recognition.continuous = false;
+            state.recognition.continuous = true;
             state.recognition.interimResults = true;
 
             state.recognition.onstart = () => {
@@ -683,16 +842,16 @@
             };
 
             state.recognition.onresult = (event) => {
-                let interimTranscript = '';
                 let finalTranscript = '';
-                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                let interimTranscript = '';
+                for (let i = 0; i < event.results.length; ++i) {
                     if (event.results[i].isFinal) {
-                        finalTranscript += event.results[i][0].transcript;
+                        finalTranscript += event.results[i][0].transcript + ' ';
                     } else {
                         interimTranscript += event.results[i][0].transcript;
                     }
                 }
-                ui.sourceText.value = finalTranscript || interimTranscript;
+                ui.sourceText.value = (finalTranscript + interimTranscript).trim();
             };
 
             state.recognition.onend = () => {
@@ -811,33 +970,75 @@
         }
 
         // --- Core Microphone Click Router ---
-        ui.micBtn.addEventListener('click', () => {
+        let holdTimer = null;
+        let isHoldMode = false;
+
+        function startRecording() {
             const engine = ui.inputEngine.value;
-            
-            if (state.isRecording) {
-                // Stop recording
-                if (engine === 'speech-api' && state.recognition) {
-                    state.recognition.stop();
-                } else {
-                    stopWhisperRecording();
+            if (engine === 'speech-api') {
+                if (!SpeechRecognition) {
+                    showToast('Browser Speech recognition not supported. Use Whisper mode.', 'warning');
+                    return;
                 }
+                if (ui.sourceLang.value === 'auto') {
+                    state.recognition.lang = '';
+                } else {
+                    state.recognition.lang = ui.sourceLang.value;
+                }
+                state.recognition.start();
             } else {
-                // Start recording
-                if (engine === 'speech-api') {
-                    if (!SpeechRecognition) {
-                        showToast('Browser Speech recognition not supported in this browser. Use Whisper mode.', 'warning');
-                        ui.inputEngine.value = 'whisper-backend';
-                        return;
-                    }
-                    if (ui.sourceLang.value === 'auto') {
-                        state.recognition.lang = '';
-                    } else {
-                        state.recognition.lang = ui.sourceLang.value;
-                    }
-                    state.recognition.start();
+                startWhisperRecording();
+            }
+        }
+
+        function stopRecording() {
+            const engine = ui.inputEngine.value;
+            if (engine === 'speech-api' && state.recognition) {
+                state.recognition.stop();
+            } else {
+                stopWhisperRecording();
+            }
+        }
+
+        ui.micBtn.addEventListener('pointerdown', (e) => {
+            e.preventDefault();
+            isHoldMode = false;
+            // After 300ms of holding, switch to hold-to-record mode
+            holdTimer = setTimeout(() => {
+                isHoldMode = true;
+                if (!state.isRecording) startRecording();
+            }, 300);
+        });
+
+        ui.micBtn.addEventListener('pointerup', (e) => {
+            e.preventDefault();
+            clearTimeout(holdTimer);
+            if (isHoldMode) {
+                // Release = stop recording
+                if (state.isRecording) stopRecording();
+            } else {
+                // Short tap = toggle
+                if (state.isRecording) {
+                    stopRecording();
                 } else {
-                    startWhisperRecording();
+                    startRecording();
                 }
+            }
+            isHoldMode = false;
+        });
+
+        ui.micBtn.addEventListener('pointercancel', () => {
+            clearTimeout(holdTimer);
+            if (isHoldMode && state.isRecording) stopRecording();
+            isHoldMode = false;
+        });
+
+        ui.micBtn.addEventListener('pointerleave', () => {
+            // If finger slides off button while holding, stop recording
+            if (isHoldMode && state.isRecording) {
+                clearTimeout(holdTimer);
+                stopRecording();
+                isHoldMode = false;
             }
         });
 
@@ -858,6 +1059,9 @@
         // --- Translation Engine and Fallback Router ---
         async function executeTranslationFlow(text, targetLanguage) {
             try {
+                // Clear old audio file immediately
+                state.lastAudioFile = null;
+
                 // Primary translation run
                 const result = await callTranslationModel(state.primaryModel, text, targetLanguage);
                 displayTranslation(result.text, state.primaryModel);
@@ -865,6 +1069,9 @@
                 
                 // Play TTS
                 autoPlayTranslationTTS(result.text, ui.targetLang.value);
+
+                // Pre-generate audio for sharing in background
+                preGenerateShareAudio(result.text, ui.targetLang.value);
 
                 // Increment session counter
                 incrementSessionCounter();
@@ -887,6 +1094,9 @@
                     // Play TTS
                     autoPlayTranslationTTS(result.text, ui.targetLang.value);
 
+                    // Pre-generate audio for sharing in background
+                    preGenerateShareAudio(result.text, ui.targetLang.value);
+
                     incrementSessionCounter();
                 } catch (fallbackErr) {
                     console.error("Backup Model also failed:", fallbackErr);
@@ -902,7 +1112,7 @@
             }
             
             // Fallback to browser direct API calls (similar to old system)
-            const systemPrompt = `You are an expert, fluent translator. Translate the following text into ${targetLanguage}. ONLY output the raw translated text. Do not include quotes, conversational filler, or explanations.`;
+            const systemPrompt = `You are an expert, fluent translator. The input text may be written in Manglish (Malayalam script written in English/Latin letters), native Malayalam script, English, or a mix of languages. Translate it accurately into ${targetLanguage}. ONLY output the raw translated text. Do not include quotes, conversational filler, or explanations.`;
             
             if (modelIdentifier === 'gemini') {
                 return callFreeFallbackDirect(text, targetLanguage);
@@ -941,19 +1151,20 @@
 
         // Direct Browser Free Fallback (MyMemory API - No Key Required)
         async function callFreeFallbackDirect(text, targetLanguage) {
-            const sourceLang = ui.sourceLang.value === 'auto' ? 'en' : ui.sourceLang.value.split('-')[0];
             // Get a basic 2-letter lang code for the target language name
-            const targetLangMap = { 'English': 'en', 'Hindi': 'hi', 'Malayalam': 'ml', 'Spanish': 'es', 'French': 'fr', 'German': 'de', 'Japanese': 'ja', 'Chinese (Simplified)': 'zh-CN', 'Italian': 'it' };
+            const targetLangMap = { 'English': 'en', 'Hindi': 'hi', 'Malayalam': 'ml', 'Spanish': 'es', 'French': 'fr', 'German': 'de', 'Japanese': 'ja', 'Chinese (Simplified)': 'zh-CN', 'Italian': 'it', 'Tamil': 'ta', 'Arabic': 'ar' };
             const targetLangCode = targetLangMap[targetLanguage] || 'en';
             
-            const apiUrl = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLangCode}`;
+            const apiUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${targetLangCode}&dt=t&q=${encodeURIComponent(text)}`;
             
             const response = await fetch(apiUrl);
             if (!response.ok) throw new Error(`Free Translation API Error: ${response.status}`);
             
             const result = await response.json();
-            if (result.responseData && result.responseData.translatedText) {
-                return { text: result.responseData.translatedText };
+            if (result && result[0]) {
+                // Join text segments if the text contains multiple lines
+                const translatedText = result[0].map(item => item[0]).join('');
+                return { text: translatedText };
             } else {
                 throw new Error("Malformed response from free translation API");
             }
@@ -1009,7 +1220,7 @@
         }
 
         function getFriendlyModelName(identifier) {
-            if (identifier === 'gemini') return 'Gemini 3.5 Flash';
+            if (identifier === 'gemini') return '⚡ Free Translate';
             if (identifier === 'groq-70b') return 'Llama 3.3 70B';
             if (identifier === 'groq-8b') return 'Llama 3.1 8B';
             if (identifier === 'groq-mixtral') return 'Mixtral 8x7B';
@@ -1188,6 +1399,29 @@
                 });
             });
         }
+
+        // --- Auto-Translate on Type / Select ---
+        let typingTimer;
+        ui.sourceText.addEventListener('input', () => {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(() => {
+                const finalStr = ui.sourceText.value.trim();
+                if (finalStr) {
+                    ui.statusIndicator.innerHTML = "<span>🤖 Translating text...</span>";
+                    const targetLangName = ui.targetLang.options[ui.targetLang.selectedIndex].text;
+                    executeTranslationFlow(finalStr, targetLangName);
+                }
+            }, 1000); // 1 second debounce
+        });
+
+        ui.targetLang.addEventListener('change', () => {
+            const finalStr = ui.sourceText.value.trim();
+            if (finalStr) {
+                ui.statusIndicator.innerHTML = "<span>🤖 Translating to new language...</span>";
+                const targetLangName = ui.targetLang.options[ui.targetLang.selectedIndex].text;
+                executeTranslationFlow(finalStr, targetLangName);
+            }
+        });
 
         // --- Language Translation Engine ---
         const translations = {
