@@ -1,0 +1,2202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nanco Paints — Paints for Better Satisfaction | Malappuram</title>
+  <meta name="description"
+    content="Nanco Paints Malappuram. ISO 9001-2015 Certified. Premium quality paints for workers, outlets, and projects. Call +91 8891220590.">
+  <meta name="keywords" content="Nanco Paints, Malappuram, paint company, paint workers, Kerala, ISO certified paints">
+  <link rel="canonical" href="https://nancopaints.com/">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+
+<body>
+
+  <!-- FLOATING NAV -->
+  <nav class="nav-float" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#" id="nav-home-logo">
+        <img src="assets/light-logo.png" alt="Nanco Paints">
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" id="nav-home">Home</a></li>
+        <li><a href="products.html" id="nav-products">Products</a></li>
+        <li><a href="services.html" id="nav-services">Services</a></li>
+        <li><a href="calculators.html" id="nav-calculators">Calculators</a></li>
+        <li><a href="colors.html" id="nav-colors">Color Studio</a></li>
+        <li><a href="about_us.html" id="nav-about">About Us</a></li>
+      </ul>
+      <div class="nav-search-bar">
+        <input type="text" id="nav-search-input" placeholder="Search..." aria-label="Search site">
+        <button class="nav-search-submit" aria-label="Submit search"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="nav-right" style="display:flex;align-items:center;gap:12px;">
+        <button class="nav-search-btn" aria-label="Toggle search">
+          <i class="fas fa-search search-icon"></i>
+          <i class="fas fa-times close-icon"></i>
+        </button>
+        <div class="nav-lang-selector">
+          <button class="nav-lang-btn" id="lang-btn" aria-label="Select Language" aria-expanded="false" style="width: 44px; height: 44px; padding: 0; justify-content: center; border-radius: 50%;">
+            <span class="lang-text">EN</span>
+          </button>
+          <div class="nav-lang-dropdown" id="lang-dropdown">
+            <a href="#" class="lang-option active" data-lang="en">English</a>
+            <a href="#" class="lang-option" data-lang="ml">മലയാളം</a>
+          </div>
+        </div>
+        <a class="nav-cta" href="login.html" id="nav-login-btn">Login</a>
+      </div>
+      <button class="nav-toggle" id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <style>
+      /* Smooth Search Bar Animations */
+      .nav-links {
+        transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, transform 0.3s ease;
+        max-width: 800px;
+        opacity: 1;
+        transform: translateY(0);
+        overflow: hidden;
+      }
+      .nav-inner.search-active .nav-links {
+        max-width: 0;
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+      }
+      .nav-search-bar {
+        display: flex;
+        align-items: center;
+        background: #f3f3f1;
+        border-radius: 99px;
+        height: 40px;
+        margin: 0;
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, margin 0.4s ease, border-radius 0.4s ease;
+        pointer-events: none;
+        flex: 1;
+      }
+      .nav-inner.search-active .nav-search-bar {
+        max-width: 1000px;
+        opacity: 1;
+        margin-right: -16px; /* Perfectly touches the search toggle button, overriding nav-inner gap */
+        border-radius: 99px 0 0 99px;
+        pointer-events: auto;
+      }
+      .nav-search-bar input {
+        border: none;
+        background: transparent;
+        outline: none;
+        flex: 1;
+        padding: 8px 16px;
+        font-size: 15px;
+        color: var(--color-ink-black);
+        width: 100%;
+      }
+      .nav-search-submit {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-ink-black);
+      }
+      
+      /* Morphing Search/Close Button with Seamless Merge styling */
+      .nav-search-btn {
+        background: transparent;
+        border: none;
+        color: var(--color-ink-black);
+        font-size: 18px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        transition: background 0.3s ease, border-radius 0.3s ease;
+      }
+      .nav-inner.search-active .nav-search-btn {
+        background: #f3f3f1;
+        border-radius: 0 99px 99px 0;
+      }
+      .nav-search-btn .search-icon,
+      .nav-search-btn .close-icon {
+        position: absolute;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+      }
+      .nav-search-btn .close-icon {
+        opacity: 0;
+        transform: rotate(-90deg) scale(0.5);
+      }
+      .nav-inner.search-active .nav-search-btn .search-icon {
+        opacity: 0;
+        transform: rotate(90deg) scale(0.5);
+      }
+      .nav-inner.search-active .nav-search-btn .close-icon {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+      }
+    </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const searchBtn = document.querySelector('.nav-search-btn');
+        const navInner = document.querySelector('.nav-inner');
+        const searchInput = document.querySelector('.nav-search-bar input');
+        
+        if (searchBtn && navInner) {
+          searchBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isActive = navInner.classList.toggle('search-active');
+            if (isActive && searchInput) {
+              setTimeout(() => searchInput.focus(), 200);
+            }
+          });
+        }
+      });
+    </script>
+  </nav>
+
+  <!-- MOBILE NAV OVERLAY -->
+  <div class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Mobile menu">
+    <a href="index.html" id="mnav-home">Home</a>
+    <a href="products.html" id="mnav-products">Products</a>
+    <a href="services.html" id="mnav-services">Services</a>
+    <a href="calculators.html" id="mnav-calculators">Calculators</a>
+    <a href="colors.html" id="mnav-colors">Color Studio</a>
+    <a href="about_us.html" id="mnav-about">About Us</a>
+    <div class="mnav-lang-selector"
+      style="padding: 12px 16px; border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 12px; display: flex; flex-direction: column; gap: 8px; margin: 4px 0;">
+      <span
+        style="font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--color-sage-mute); letter-spacing: 0.04em;"><i
+          class="fas fa-globe" style="margin-right:6px;"></i> Language / ഭാഷ</span>
+      <div style="display: flex; gap: 8px;">
+        <a href="#" class="mnav-lang-opt active" data-lang="en"
+          style="flex: 1; text-align: center; padding: 10px; font-size: 14px; border: 1.5px solid var(--color-ink-black); border-radius: 8px; font-weight: 700; text-decoration: none; color: var(--color-ink-black);">English</a>
+        <a href="#" class="mnav-lang-opt" data-lang="ml"
+          style="flex: 1; text-align: center; padding: 10px; font-size: 14px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 8px; font-weight: 500; text-decoration: none; color: var(--color-sage-mute);">മലയാളം</a>
+      </div>
+    </div>
+    <a href="login.html" id="mnav-login" style="background:var(--color-lime-spark);font-weight:700;">Login</a>
+  </div>
+
+  <main>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" aria-label="Hero">
+      <img src="assets/house-bg.png" class="hero-house-bg" alt="" aria-hidden="true">
+      <div class="hero-yellow-overlay"></div>
+      <div class="hero-inner">
+        <div class="hero-left" style="color: white;">
+          <div class="hero-tag" id="hero-tag" style="color: black;">
+            <i class="fas fa-award" style="color:var(--color-mustard-pop);margin-right:6px;"></i> ISO 9001-2015
+            Certified
+          </div>
+          <h1 class="hero-headline" id="hero-title" style="color: white;">Paint for<br>Better Lives.</h1>
+          <p class="hero-sub" id="hero-sub" style="color: white;">
+            Nanco Paints brings premium-quality, certified paints to homes, offices, and factories across Kerala. Bold
+            colours. Lasting finish.
+          </p>
+          <div class="hero-actions">
+            <button class="btn-primary" id="hero-view-products" style="border:none;cursor:pointer;">I will help you buy</button>
+            <a class="btn-ghost" href="#" id="hero-download-app" style="display: inline-flex; align-items: center;"><i
+                class="fas fa-download" style="margin-right:6px;"></i> Install App</a>
+          </div>
+        </div>
+        <div class="hero-right" aria-hidden="true">
+          <div class="hero-image-wrap">
+            <img src="assets/HERO-PAINT.png" class="hero-bucket-image" alt="Nanco Paints Bucket">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Background Toggle Dots -->
+      <div class="bg-toggle-dots" style="position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 8px; align-items: center;">
+      </div>
+
+      <style>
+        .bg-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: rgba(0, 0, 0, 0.25);
+          border: 1px solid rgba(0, 0, 0, 0.3);
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bg-dot.active {
+          width: 32px;
+          height: 10px;
+          border-radius: 99px;
+          background: var(--color-ink-black);
+          border-color: var(--color-ink-black);
+        }
+      </style>
+    </section>
+
+    <!-- Background Toggle Script -->
+    <script>
+      const API_BASE = 'http://127.0.0.1:5000/api';
+      const ENABLE_API = false; // Set to true to enable backend fetch
+
+      document.addEventListener('DOMContentLoaded', async () => {
+        // ===== APPLY SAVED HERO SETTINGS =====
+        try {
+          if (!ENABLE_API) throw new Error('API disabled');
+          const heroRes = await fetch(`${API_BASE}/hero-settings`, { cache: 'no-store' });
+          if (!heroRes.ok) throw new Error('API Error');
+            const heroData = await heroRes.json();
+          if (!heroData.error) {
+            const heroSection = document.querySelector('.hero-section');
+            const overlay = document.querySelector('.hero-yellow-overlay');
+            const tagEl = document.getElementById('hero-tag');
+            const titleEl = document.getElementById('hero-title');
+            const subEl = document.getElementById('hero-sub');
+            const bucketImg = document.querySelector('.hero-bucket-image');
+
+            if (heroSection && heroData.bg_color)
+              heroSection.style.background = heroData.bg_color;
+            if (overlay && heroData.overlay_color) {
+              const isMob = window.innerWidth < 600;
+              overlay.style.background = `linear-gradient(${isMob ? 'to bottom' : 'to right'}, ${heroData.overlay_color} ${isMob ? '80%' : '40%'}, transparent 100%)`;
+            }
+            if (tagEl && heroData.tag_text)
+              tagEl.innerHTML = `<i class="fas fa-award" style="color:var(--color-mustard-pop);margin-right:6px;"></i> ${heroData.tag_text}`;
+            if (titleEl && heroData.headline)
+              titleEl.textContent = heroData.headline;
+            if (subEl && heroData.sub_text)
+              subEl.textContent = heroData.sub_text;
+            if (bucketImg && heroData.bucket_image_url)
+              bucketImg.src = heroData.bucket_image_url;
+            // house_bg_url is handled below in the backgrounds array
+            if (heroData.house_bg_url) {
+              const bgImg = document.querySelector('.hero-house-bg');
+              if (bgImg) bgImg.src = heroData.house_bg_url;
+            }
+          }
+        } catch (err) {
+          console.warn('Hero settings not available, using defaults.');
+        }
+
+        // ===== HERO BACKGROUND SLIDER =====
+        const bgImg = document.querySelector('.hero-house-bg');
+        const dotsContainer = document.querySelector('.bg-toggle-dots');
+
+        let backgrounds = [];
+        const defaultSlide = {
+            url: 'assets/house-bg.png', bg_color: '#c8d90f', overlay_color: '#c8d90f',
+            tag_text: 'ISO 9001-2015 Certified', headline: 'Paint for Better Lives.',
+            sub_text: 'Nanco Paints brings premium-quality, certified paints to homes, offices, and factories across Kerala. Bold colours. Lasting finish.',
+            bucket_image_url: 'assets/HERO-PAINT.png'
+        };
+
+        try {
+          let dataRes = null, settingsRes = null;
+          if (ENABLE_API) {
+            [dataRes, settingsRes] = await Promise.all([
+              fetch(`${API_BASE}/data`, { cache: 'no-store' }).catch(() => null),
+              fetch(`${API_BASE}/hero-settings`, { cache: 'no-store' }).catch(() => null)
+            ]);
+          }
+          
+          const data = dataRes && dataRes.ok ? await dataRes.json() : {};
+          const settings = settingsRes && settingsRes.ok ? await settingsRes.json() : {};
+
+          if (!settings.hide_default_hero) backgrounds.push(defaultSlide);
+          if (data.heroBgs && data.heroBgs.length > 0) backgrounds = backgrounds.concat(data.heroBgs);
+          
+          if (backgrounds.length === 0) backgrounds.push(defaultSlide); // fallback
+        } catch (err) {
+          console.error('Error loading backgrounds from backend:', err);
+          backgrounds = [defaultSlide];
+        }
+
+        // Apply all settings for a given slide index
+        // Apply all settings for a given slide index
+        function applySlide(index) {
+          const slide = backgrounds[index];
+          if (!slide) return;
+
+          const heroSection = document.querySelector('.hero-section');
+          const overlay = document.querySelector('.hero-yellow-overlay');
+          const tagEl = document.getElementById('hero-tag');
+          const titleEl = document.getElementById('hero-title');
+          const subEl = document.getElementById('hero-sub');
+          const bucketImg = document.querySelector('.hero-bucket-image');
+
+          if (bgImg) bgImg.src = slide.url;
+          if (heroSection && slide.bg_color) heroSection.style.background = slide.bg_color;
+          if (overlay && slide.overlay_color) {
+            const isMob = window.innerWidth < 600;
+            overlay.style.background = `linear-gradient(${isMob ? 'to bottom' : 'to right'}, ${slide.overlay_color} ${isMob ? '80%' : '40%'}, transparent 100%)`;
+          }
+          
+          if (window.currentLanguage === 'ml' && index === 0) {
+            const dict = translations['ml'];
+            if (tagEl) {
+              tagEl.innerHTML = dict['hero-tag'];
+              tagEl.style.color = slide.tag_color || '#ffffff';
+            }
+            if (titleEl) {
+              titleEl.innerHTML = dict['hero-title'];
+              titleEl.style.color = slide.headline_color || '#ffffff';
+            }
+            if (subEl) {
+              subEl.innerHTML = dict['hero-sub'];
+              subEl.style.color = slide.sub_color || '#ffffff';
+            }
+          } else {
+            if (tagEl && slide.tag_text) {
+              tagEl.innerHTML = `<i class="fas fa-award" style="color:var(--color-mustard-pop);margin-right:6px;"></i> ${slide.tag_text}`;
+              tagEl.style.color = slide.tag_color || '#ffffff';
+            }
+            if (titleEl && slide.headline) {
+              titleEl.textContent = slide.headline;
+              titleEl.style.color = slide.headline_color || '#ffffff';
+            }
+            if (subEl && slide.sub_text) {
+              subEl.textContent = slide.sub_text;
+              subEl.style.color = slide.sub_color || '#ffffff';
+            }
+          }
+          if (bucketImg && slide.bucket_image_url) bucketImg.src = slide.bucket_image_url;
+
+          // Update active dot
+          document.querySelectorAll('.bg-dot').forEach((dot, idx) => {
+            dot.classList.toggle('active', idx === index);
+          });
+        }
+
+        // Render dots
+        if (dotsContainer) {
+          dotsContainer.innerHTML = '';
+          if (backgrounds.length > 1) {
+            backgrounds.forEach((_, idx) => {
+              const dot = document.createElement('span');
+              dot.className = `bg-dot${idx === 0 ? ' active' : ''}`;
+              dot.setAttribute('data-index', idx);
+              dotsContainer.appendChild(dot);
+            });
+          }
+        }
+
+        // Apply first slide (hero-settings fetch already applied defaults above if no slides)
+        if (backgrounds.length > 0) applySlide(0);
+
+        if (dotsContainer) {
+          dotsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('bg-dot')) {
+              applySlide(parseInt(e.target.getAttribute('data-index')));
+            }
+          });
+        }
+      });
+    </script>
+
+    <!-- COLOUR OF THE YEAR CAROUSEL -->
+    <section class="coy-section" aria-labelledby="coy-heading">
+      <div class="section-inner" style="max-width: 1300px; padding: 40px 20px 20px;">
+        <div class="coy-header">
+          <div class="coy-title-wrap">
+            <span class="section-label" id="coy-label"><i class="fas fa-palette" style="margin-right:6px;"></i> Curated Shades</span>
+            <h2 class="section-title" id="coy-heading">Colour of the Year</h2>
+            <p class="section-sub" id="coy-sub">Explore and elevate your space with featured shades of Nanco Paints.</p>
+          </div>
+          <div class="coy-actions">
+            <a href="colors.html" class="btn-coy-view" id="coy-catalog-btn">View colour catalogue <i class="fas fa-arrow-right" style="margin-left: 6px;"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="coy-slider-container">
+        <button class="coy-btn coy-prev" id="coyPrev" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
+        
+        <div class="coy-slider-track" id="coyTrack">
+          <!-- Item 1 -->
+          <a href="colors.html" class="coy-item">
+            <div class="coy-content">
+              <img class="coy-bg" src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/colour-of-the-year/desktop/moonlit-silk-desktop-bg-updated.webp" alt="Moonlit Silk Room">
+              <div class="coy-img-wrap">
+                <img class="coy-fg" src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/colour-of-the-year/desktop/moonlit-silk-updated-desktop.webp" alt="Moonlit Silk">
+              </div>
+              <div class="coy-text-wrap">
+                <span class="coy-explore"><i class="fas fa-chevron-right"></i></span>
+              </div>
+            </div>
+          </a>
+          <!-- Item 2 -->
+          <a href="colors.html" class="coy-item">
+            <div class="coy-content">
+              <img class="coy-bg" src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/colour-of-the-year/desktop/cardinal-shade-desktop-bg.webp" alt="Cardinal Room">
+              <div class="coy-img-wrap">
+                <img class="coy-fg" src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/colour-of-the-year/desktop/cardinal-room-desktop.webp" alt="Cardinal">
+              </div>
+              <div class="coy-text-wrap">
+                <span class="coy-explore"><i class="fas fa-chevron-right"></i></span>
+              </div>
+            </div>
+          </a>
+          <!-- Item 3 -->
+          <a href="colors.html" class="coy-item">
+            <div class="coy-content">
+              <img class="coy-bg" src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/colour-of-the-year/desktop/terra-shade-desktop-bg.webp" alt="Dessert Love Room">
+              <div class="coy-img-wrap">
+                <img class="coy-fg" src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/colour-of-the-year/desktop/terra-room-desktop.webp" alt="Dessert Love">
+              </div>
+              <div class="coy-text-wrap">
+                <span class="coy-explore"><i class="fas fa-chevron-right"></i></span>
+              </div>
+            </div>
+          </a>
+          <!-- Item 4 -->
+          <a href="colors.html" class="coy-item">
+            <div class="coy-content">
+              <img class="coy-bg" src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/colour-of-the-year/desktop/silver-escapade-shade-desktop-bg.webp" alt="Silverfish Room">
+              <div class="coy-img-wrap">
+                <img class="coy-fg" src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/colour-of-the-year/desktop/silver-escapade-room-desktop.webp" alt="Silverfish">
+              </div>
+              <div class="coy-text-wrap">
+                <span class="coy-explore"><i class="fas fa-chevron-right"></i></span>
+              </div>
+            </div>
+          </a>
+          <!-- Item 5 -->
+          <a href="colors.html" class="coy-item">
+            <div class="coy-content">
+              <img class="coy-bg" src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/colour-of-the-year/desktop/transcendent-pink-shade-desktop-bg.webp" alt="Clematis Pink Room">
+              <div class="coy-img-wrap">
+                <img class="coy-fg" src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/colour-of-the-year/desktop/transcendent-pink-room-desktop.webp" alt="Clematis Pink">
+              </div>
+              <div class="coy-text-wrap">
+                <span class="coy-explore"><i class="fas fa-chevron-right"></i></span>
+              </div>
+            </div>
+          </a>
+          <!-- Item 6 -->
+          <a href="colors.html" class="coy-item">
+            <div class="coy-content">
+              <img class="coy-bg" src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/colour-of-the-year/desktop/cherish-shade-desktop-bg.webp" alt="Ivy League Room">
+              <div class="coy-img-wrap">
+                <img class="coy-fg" src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/colour-of-the-year/desktop/cherish-room-desktop.webp" alt="Ivy League">
+              </div>
+              <div class="coy-text-wrap">
+                <span class="coy-explore"><i class="fas fa-chevron-right"></i></span>
+              </div>
+            </div>
+          </a>
+          <!-- Item 7 -->
+          <a href="colors.html" class="coy-item">
+            <div class="coy-content">
+              <img class="coy-bg" src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/colour-of-the-year/desktop/curiosity-shade-desktop-bg.webp" alt="Retro Blue Room">
+              <div class="coy-img-wrap">
+                <img class="coy-fg" src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/colour-of-the-year/desktop/curiosity-room-desktop.webp" alt="Retro Blue">
+              </div>
+              <div class="coy-text-wrap">
+                <span class="coy-explore"><i class="fas fa-chevron-right"></i></span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <button class="coy-btn coy-next" id="coyNext" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </section>
+
+    <script>
+      // Slider navigation for COY
+      document.addEventListener('DOMContentLoaded', () => {
+        const track = document.getElementById('coyTrack');
+        const btnPrev = document.getElementById('coyPrev');
+        const btnNext = document.getElementById('coyNext');
+        
+        if (track && btnPrev && btnNext) {
+          btnPrev.addEventListener('click', () => {
+            track.scrollBy({ left: -300, behavior: 'smooth' });
+          });
+          btnNext.addEventListener('click', () => {
+            track.scrollBy({ left: 300, behavior: 'smooth' });
+          });
+        }
+      });
+    </script>
+
+    <!-- SERVICES BENTO GRID -->
+    <section class="section-wrap" aria-labelledby="services-heading">
+      <div class="section-inner">
+        <span class="section-label" id="services-label"><i class="fas fa-tools" style="margin-right:6px;"></i> Our
+          Services</span>
+        <h2 class="section-title" id="services-heading">Everything you need<br>in one place.</h2>
+        <p class="section-sub" id="services-sub">Access worker portals, product info, project galleries, and tools — all designed for the Nanco community.</p>
+
+        <div class="bento-grid">
+
+          <!-- ROW 1: Full-width hero card — Paint Workers -->
+          <a class="bento-card card-lime bento-full" href="#" id="card-paint-workers">
+            <div class="bento-card-icon"><i class="fas fa-paint-roller"></i></div>
+            <div class="bento-card-title" id="card-paint-workers-title">Paint Workers Portal</div>
+            <div class="bento-card-desc" id="card-paint-workers-desc">Exclusive offers, training resources, and the latest announcements for registered Nanco paint workers.</div>
+            <div class="bento-card-arrow" id="card-paint-workers-arrow">View Portal</div>
+          </a>
+
+          <!-- ROW 2: 60 / 40 split — Factory Outlets + Product Info -->
+          <a class="bento-card card-white bento-60" href="#" id="card-factory-outlets">
+            <div class="bento-card-icon"><i class="fas fa-store"></i></div>
+            <div class="bento-card-title" id="card-outlets-title">Factory Outlets</div>
+            <div class="bento-card-desc" id="card-outlets-desc">Find your nearest Nanco outlet and get directions to the closest store.</div>
+            <div class="bento-card-arrow" id="card-outlets-arrow">View Map</div>
+          </a>
+          <a class="bento-card card-cobalt bento-40" href="products.html" id="card-products">
+            <div class="bento-card-icon"><i class="fas fa-box-open"></i></div>
+            <div class="bento-card-title" id="card-products-title">Product Info &amp; Videos</div>
+            <div class="bento-card-desc" id="card-products-desc">Full product range with pricing, specs, and how-to videos.</div>
+            <div class="bento-card-arrow" style="color:#fff;border-color:rgba(255,255,255,0.4);" id="card-products-arrow">View Products</div>
+          </a>
+
+          <!-- ROW 3: 3 equal cards — Color Studio, Catalogs, Calculator -->
+          <a class="bento-card card-forest bento-third" href="#" id="card-color-studio">
+            <div class="bento-card-icon"><i class="fas fa-palette"></i></div>
+            <div class="bento-card-title" id="card-colors-title">Color Studio</div>
+            <div class="bento-card-desc" id="card-colors-desc">Browse project photos, gallery, and colour inspiration boards.</div>
+            <div class="bento-card-arrow" style="color:#fff;border-color:rgba(255,255,255,0.4);" id="card-colors-arrow">Explore</div>
+          </a>
+          <a class="bento-card card-lavender bento-third" href="#" id="card-catalogs">
+            <div class="bento-card-icon"><i class="fas fa-book-open"></i></div>
+            <div class="bento-card-title" id="card-catalogs-title">Catalogs</div>
+            <div class="bento-card-desc" id="card-catalogs-desc">Download full product catalogs with colour codes and usage guides.</div>
+            <div class="bento-card-arrow" id="card-catalogs-arrow">Download</div>
+          </a>
+          <a class="bento-card card-mustard bento-third" href="calculators.html" id="card-calculator">
+            <div class="bento-card-icon"><i class="fas fa-calculator"></i></div>
+            <div class="bento-card-title" id="card-calculator-title">Paint Calculator</div>
+            <div class="bento-card-desc" id="card-calculator-desc">Calculate the exact quantity and cost of paint for any room.</div>
+            <div class="bento-card-arrow" id="card-calculator-arrow">Calculate</div>
+          </a>
+
+          <!-- ROW 4: Full-width — Paint Visualizer -->
+          <a class="bento-card card-maroon bento-full" href="paint_visualizer.html" id="card-visualizer">
+            <div class="bento-card-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+            <div class="bento-card-title" id="card-visualizer-title">Virtual Paint Visualizer</div>
+            <div class="bento-card-desc" id="card-visualizer-desc">Try on different shades and visualize your dream space virtually before you buy.</div>
+            <div class="bento-card-arrow" style="color:#fff;border-color:rgba(255,255,255,0.4);" id="card-visualizer-arrow">Try Visualizer</div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED PRODUCTS BANNER CAROUSEL -->
+    <section class="section-wrap featured-section" aria-labelledby="featured-heading">
+      <div class="section-inner">
+        <span class="section-label" id="featured-label">
+          <i class="fas fa-star" style="margin-right:6px;"></i> Curated Collection
+        </span>
+        <div class="featured-header">
+          <h2 class="section-title" id="featured-heading">Featured Products</h2>
+          <div class="featured-controls">
+            <button class="feat-control-btn feat-prev" id="featPrev" aria-label="Previous Slide">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="feat-control-btn feat-next" id="featNext" aria-label="Next Slide">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="featured-slider-container">
+          <div class="featured-slider-track" id="featTrack">
+            <!-- Slide 1: Royale Glitz -->
+            <div class="featured-slide" data-index="0">
+              <a href="products.html" class="featured-banner-link">
+                <picture>
+                  <source media="(min-width:992px)" srcset="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/featured-products/featured-product-royale-glitz-desk-updated.webp">
+                  <source media="(min-width:320px)" srcset="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/featured-products/royale-glitz-mobile-updated.webp">
+                  <img src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/featured-products/featured-product-royale-glitz-desk-updated.webp" alt="Royale Glitz" class="featured-banner-img" loading="lazy">
+                </picture>
+              </a>
+            </div>
+            
+            <!-- Slide 2: Apcolite All Protek Shyne -->
+            <div class="featured-slide" data-index="1">
+              <a href="products.html" class="featured-banner-link">
+                <picture>
+                  <source media="(min-width:992px)" srcset="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/featured-products/all-protek-desktop-updated.webp">
+                  <source media="(min-width:320px)" srcset="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/featured-products/all-protek-mobile-updated.webp">
+                  <img src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/featured-products/all-protek-desktop-updated.webp" alt="Apcolite All Protek Shyne" class="featured-banner-img" loading="lazy">
+                </picture>
+              </a>
+            </div>
+            
+            <!-- Slide 3: Apex Ultima Protek -->
+            <div class="featured-slide" data-index="2">
+              <a href="products.html" class="featured-banner-link">
+                <picture>
+                  <source media="(min-width:992px)" srcset="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/featured-products/ultima-protek-desktop-updated.webp">
+                  <source media="(min-width:320px)" srcset="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/featured-products/ultima-protek-mobile-updated.webp">
+                  <img src="https://static.asianpaints.com/content/dam/asian_paints/home-ph2/featured-products/ultima-protek-desktop-updated.webp" alt="Apex Ultima Protek" class="featured-banner-img" loading="lazy">
+                </picture>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Slider dots indicator -->
+          <div class="featured-dots" id="featDots">
+            <span class="feat-dot active" data-slide="0"></span>
+            <span class="feat-dot" data-slide="1"></span>
+            <span class="feat-dot" data-slide="2"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', async () => {
+        const track = document.getElementById('featTrack');
+        const dotsContainer = document.getElementById('featDots');
+        const btnPrev = document.getElementById('featPrev');
+        const btnNext = document.getElementById('featNext');
+        
+        if (!track || !dotsContainer) return;
+
+        // Step 1: Detect available images in the banner_products folder
+        let images = [];
+        try {
+          // Attempt to retrieve from backend API
+          const ENABLE_API = false; // Set to true when backend is available
+          if (ENABLE_API) {
+            const res = await fetch('/api/banner-images');
+            if (res.ok) {
+              const data = await res.json();
+              if (data.images && data.images.length > 0) {
+                images = data.images.map(img => `assets/banner_products/${img}`);
+              }
+            }
+          }
+        } catch (err) {
+          console.log("Backend API not reachable. Probing local assets sequentially...");
+        }
+
+        // Step 2: Removed sequential probing to prevent 404 console errors
+
+        // Step 3: Absolute fallback if folder is unreadable or empty
+        if (images.length === 0) {
+          images = [
+            'assets/banner_products/1.jpeg',
+            'assets/banner_products/2.jpeg',
+            'assets/banner_products/3.jpeg'
+          ];
+        }
+
+        // Step 4: Inject slides and dots into DOM dynamically
+        track.innerHTML = '';
+        dotsContainer.innerHTML = '';
+
+        images.forEach((imgPath, index) => {
+          // Build slide
+          const slide = document.createElement('div');
+          slide.className = 'featured-slide';
+          slide.setAttribute('data-index', index);
+          slide.innerHTML = `
+            <a href="products.html" class="featured-banner-link">
+              <picture>
+                <img src="${imgPath}" alt="Featured Product ${index + 1}" class="featured-banner-img" loading="lazy">
+              </picture>
+            </a>
+          `;
+          track.appendChild(slide);
+
+          // Build dot
+          const dot = document.createElement('span');
+          dot.className = `feat-dot${index === 0 ? ' active' : ''}`;
+          dot.setAttribute('data-slide', index);
+          dotsContainer.appendChild(dot);
+        });
+
+        // Step 5: Initialize slider control & autoplay logic using injected elements
+        const slides = track.querySelectorAll('.featured-slide');
+        const dots = dotsContainer.querySelectorAll('.feat-dot');
+        
+        let currentIndex = 0;
+        let slideInterval;
+        
+        function updateSlider(index) {
+          currentIndex = (index + slides.length) % slides.length;
+          track.style.transform = `translateX(-${currentIndex * 100}%)`;
+          
+          dots.forEach((dot, idx) => {
+            if (idx === currentIndex) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          });
+        }
+        
+        function nextSlide() {
+          updateSlider(currentIndex + 1);
+        }
+        
+        function prevSlide() {
+          updateSlider(currentIndex - 1);
+        }
+        
+        function startAutoPlay() {
+          slideInterval = setInterval(nextSlide, 4000);
+        }
+        
+        function stopAutoPlay() {
+          clearInterval(slideInterval);
+        }
+        
+        if (btnPrev) {
+          btnPrev.addEventListener('click', () => {
+            prevSlide();
+            stopAutoPlay();
+            startAutoPlay();
+          });
+        }
+        
+        if (btnNext) {
+          btnNext.addEventListener('click', () => {
+            nextSlide();
+            stopAutoPlay();
+            startAutoPlay();
+          });
+        }
+        
+        dots.forEach((dot, idx) => {
+          dot.addEventListener('click', () => {
+            updateSlider(idx);
+            stopAutoPlay();
+            startAutoPlay();
+          });
+        });
+        
+        const container = document.querySelector('.featured-slider-container');
+        if (container) {
+          container.addEventListener('mouseenter', stopAutoPlay);
+          container.addEventListener('mouseleave', startAutoPlay);
+        }
+        
+        startAutoPlay();
+      });
+    </script>
+
+    <!-- COBALT BAND — STATS -->
+    <section class="band-cobalt" aria-labelledby="stats-heading">
+      <img src="assets/house-bg1.png" class="stats-house-bg" alt="" aria-hidden="true">
+      <div class="section-inner">
+        <span class="section-label" id="stats-label"><i class="fas fa-chart-bar" style="margin-right:6px;"></i> By the
+          Numbers</span>
+        <h2 class="section-title" id="stats-heading">Trusted across<br>all of Kerala.</h2>
+        <p class="section-sub" id="stats-sub">Nanco Paints has built a reputation for quality, certification, and
+          service excellence.</p>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-num">25<span class="stat-unit">+</span></div>
+            <div class="stat-label" id="stat-1-label">Years of certified excellence in the paint industry</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">50<span class="stat-unit">+</span></div>
+            <div class="stat-label" id="stat-2-label">Retail and factory outlets across Malappuram & Kerala</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">200<span class="stat-unit">+</span></div>
+            <div class="stat-label" id="stat-3-label">Premium paint products and finish variants available</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSPIRING IDEAS / SHORTS SECTION -->
+    <section class="section-wrap shorts-section" aria-labelledby="shorts-heading">
+      <div class="section-inner">
+        <div class="shorts-header">
+          <span class="section-label" id="shorts-label" style="color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.3);">
+            <i class="fas fa-lightbulb" style="margin-right:6px;"></i> Inspiration
+          </span>
+          <h2 class="section-title text-white" id="shorts-heading" style="color: #fff;">Here is what are we.</h2>
+        </div>
+
+        <div class="shorts-carousel-container">
+          <div class="shorts-slider-track" id="shortsTrack">
+            <!-- Short 1 -->
+            <a href="colors.html" class="short-card">
+              <video class="short-video" loop muted playsinline preload="metadata">
+                <source src="videos/1.mp4" type="video/mp4">
+              </video>
+              <div class="short-overlay">
+                <div class="short-views"><i class="fas fa-play"></i> 3K</div>
+                <div class="short-cta">Explore shade <i class="fas fa-arrow-right"></i></div>
+              </div>
+            </a>
+            
+            <!-- Short 2 -->
+            <a href="colors.html" class="short-card">
+              <video class="short-video" loop muted playsinline preload="metadata">
+                <source src="videos/2.mp4" type="video/mp4">
+              </video>
+              <div class="short-overlay">
+                <div class="short-views"><i class="fas fa-play"></i> 2.8K</div>
+                <div class="short-cta">Explore shade <i class="fas fa-arrow-right"></i></div>
+              </div>
+            </a>
+
+            <!-- Short 3 -->
+            <a href="colors.html" class="short-card">
+              <video class="short-video" loop muted playsinline preload="metadata">
+                <source src="videos/3.mp4" type="video/mp4">
+              </video>
+              <div class="short-overlay">
+                <div class="short-views"><i class="fas fa-play"></i> 2.2K</div>
+                <div class="short-cta">Explore shade <i class="fas fa-arrow-right"></i></div>
+              </div>
+            </a>
+            
+            <!-- Short 4 -->
+            <a href="services.html" class="short-card">
+              <video class="short-video" loop muted playsinline preload="metadata">
+                <source src="videos/4.mp4" type="video/mp4">
+              </video>
+              <div class="short-overlay">
+                <div class="short-views"><i class="fas fa-play"></i> 2.2K</div>
+                <div class="short-cta">Explore catalogue <i class="fas fa-arrow-right"></i></div>
+              </div>
+            </a>
+
+            <!-- Short 5 -->
+            <a href="colors.html" class="short-card">
+              <video class="short-video" loop muted playsinline preload="metadata">
+                <source src="videos/5.mp4" type="video/mp4">
+              </video>
+              <div class="short-overlay">
+                <div class="short-views"><i class="fas fa-play"></i> 2.5K</div>
+                <div class="short-cta">Explore shade <i class="fas fa-arrow-right"></i></div>
+              </div>
+            </a>
+            
+            <!-- Short 6 -->
+            <a href="colors.html" class="short-card">
+              <video class="short-video" loop muted playsinline preload="metadata">
+                <source src="videos/6.mp4" type="video/mp4">
+              </video>
+              <div class="short-overlay">
+                <div class="short-views"><i class="fas fa-play"></i> 2.4K</div>
+                <div class="short-cta">Explore shade <i class="fas fa-arrow-right"></i></div>
+              </div>
+            </a>
+            
+            <!-- Short 7 -->
+            <a href="colors.html" class="short-card">
+              <video class="short-video" loop muted playsinline preload="metadata">
+                <source src="videos/7.mp4" type="video/mp4">
+              </video>
+              <div class="short-overlay">
+                <div class="short-views"><i class="fas fa-play"></i> 2K</div>
+                <div class="short-cta">Explore shade <i class="fas fa-arrow-right"></i></div>
+              </div>
+            </a>
+            
+            <!-- Short 8 -->
+            <a href="services.html" class="short-card">
+              <video class="short-video" loop muted playsinline preload="metadata">
+                <source src="videos/8.mp4" type="video/mp4">
+              </video>
+              <div class="short-overlay">
+                <div class="short-views"><i class="fas fa-play"></i> 2.2K</div>
+                <div class="short-cta">Explore catalogue <i class="fas fa-arrow-right"></i></div>
+              </div>
+            </a>
+
+            <!-- Short 9 -->
+            <a href="paint_visualizer.html" class="short-card">
+              <video class="short-video" loop muted playsinline preload="metadata">
+                <source src="videos/9.mp4" type="video/mp4">
+              </video>
+              <div class="short-overlay">
+                <div class="short-views"><i class="fas fa-play"></i> 1.7K</div>
+                <div class="short-cta">Get Inspiration <i class="fas fa-arrow-right"></i></div>
+              </div>
+            </a>
+          </div>
+          
+          <button class="shorts-control shorts-prev" id="shortsPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+          <button class="shorts-control shorts-next" id="shortsNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHORTS VIDEO MODAL -->
+    <div class="shorts-modal" id="shortsModal" aria-hidden="true">
+      <div class="shorts-modal-overlay" id="shortsModalOverlay"></div>
+      
+      <!-- Top Action Buttons -->
+      <div class="shorts-modal-actions">
+        <button class="shorts-modal-btn" aria-label="Picture in Picture"><i class="fas fa-external-link-alt"></i></button>
+        <button class="shorts-modal-btn" id="shortsModalClose" aria-label="Close"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="swiper shorts-modal-swiper">
+        <div class="swiper-wrapper" id="shortsModalSwiperWrapper">
+          <!-- Slides injected via JS -->
+        </div>
+      </div>
+      
+      <!-- Floating Inquiry Button -->
+      <div class="shorts-modal-inquiry">
+         Send us your inquiry <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const shortsTrack = document.getElementById('shortsTrack');
+        const swiperWrapper = document.getElementById('shortsModalSwiperWrapper');
+        const API_BASE = 'http://127.0.0.1:5000/api';
+        const ENABLE_API = false; // Set to true to enable backend fetch
+
+        // Videos are now statically defined in HTML — just init the UI directly
+        function loadDynamicVideos() {
+          initShortsUI();
+        }
+
+        // 2. Shorts UI Initialization
+        function initShortsUI() {
+          const shortsPrev = document.getElementById('shortsPrev');
+          const shortsNext = document.getElementById('shortsNext');
+          const shortCards = document.querySelectorAll('.short-card');
+          
+          if (shortsTrack && shortsPrev && shortsNext) {
+            const scrollAmount = window.innerWidth < 992 ? 220 : 260;
+            // Clean listeners by replacing elements or cloning
+            const newPrev = shortsPrev.cloneNode(true);
+            const newNext = shortsNext.cloneNode(true);
+            shortsPrev.parentNode.replaceChild(newPrev, shortsPrev);
+            shortsNext.parentNode.replaceChild(newNext, shortsNext);
+
+            newPrev.addEventListener('click', () => {
+              shortsTrack.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+            newNext.addEventListener('click', () => {
+              shortsTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+          }
+
+          // Shorts Modal Logic (Swiper 3D Coverflow)
+          const modal = document.getElementById('shortsModal');
+          const modalOverlay = document.getElementById('shortsModalOverlay');
+          const modalClose = document.getElementById('shortsModalClose');
+          
+          if (modal && swiperWrapper) {
+            const formatTime = (time) => {
+              if (isNaN(time)) return "0:00";
+              const m = Math.floor(time / 60);
+              const s = Math.floor(time % 60);
+              return `${m}:${s < 10 ? '0' : ''}${s}`;
+            };
+
+            // Populate Swiper
+            let swiperHTML = '';
+            shortCards.forEach((card) => {
+              const vidElem = card.querySelector('video');
+              const vidSrcElem = card.querySelector('video source');
+              const ctaElem = card.querySelector('.short-cta');
+              const viewsElem = card.querySelector('.short-views');
+              
+              const src = (vidElem && vidElem.getAttribute('src')) ? vidElem.src : (vidSrcElem ? vidSrcElem.src : '');
+              const ctaText = ctaElem ? ctaElem.innerText : 'Explore';
+              const targetUrl = card.getAttribute('href') || '#';
+              const viewsText = viewsElem ? viewsElem.innerText.trim() : '2.5K';
+              
+              swiperHTML += `
+                <div class="swiper-slide shorts-modal-content">
+                  <div class="shorts-modal-video-wrapper">
+                    <video class="shorts-modal-video" src="${src}" playsinline loop preload="metadata"></video>
+                    <div class="shorts-modal-video-overlay">
+                      <div class="shorts-modal-caption">
+                        <div class="short-views" style="margin-bottom:0;"><i class="fas fa-play"></i> <span class="shorts-modal-views">${viewsText}</span></div>
+                      </div>
+                      <div class="shorts-modal-side-controls">
+                        <button class="shorts-modal-icon-btn shorts-modal-mute"><i class="fas fa-volume-up"></i></button>
+                        <button class="shorts-modal-icon-btn"><i class="fas fa-share"></i></button>
+                      </div>
+                      <div class="shorts-modal-timeline-wrapper">
+                         <button class="shorts-modal-play-btn shorts-modal-play-pause"><i class="fas fa-play"></i></button>
+                         <div class="shorts-modal-timeline">
+                           <div class="shorts-modal-progress"></div>
+                         </div>
+                         <div class="shorts-modal-time">0:00 / 0:00</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="shorts-modal-info">
+                    <a href="${targetUrl}" class="shorts-modal-cta-link">
+                       <div class="shorts-modal-cta-btn">
+                          ${ctaText} <i class="fas fa-arrow-right"></i>
+                       </div>
+                    </a>
+                  </div>
+                </div>
+              `;
+            });
+            swiperWrapper.innerHTML = swiperHTML;
+
+            // Trigger translation update again for modal cards
+            if (typeof setLanguage === 'function') {
+              setLanguage(window.currentLanguage || localStorage.getItem('nanco-lang') || 'en');
+            }
+
+            let modalSwiperInstance = null;
+
+            const pauseAllVideos = () => {
+              document.querySelectorAll('.shorts-modal-video').forEach(vid => {
+                vid.pause();
+                const slide = vid.closest('.shorts-modal-content');
+                if (slide) {
+                  const ppBtn = slide.querySelector('.shorts-modal-play-pause');
+                  if (ppBtn) ppBtn.innerHTML = '<i class="fas fa-play"></i>';
+                }
+              });
+            };
+
+            const playActiveVideo = (index) => {
+              const slides = document.querySelectorAll('.shorts-modal-swiper .swiper-slide');
+              const activeSlide = slides[index];
+              if (activeSlide) {
+                const vid = activeSlide.querySelector('video');
+                if (vid) {
+                  vid.currentTime = 0;
+                  vid.play().catch(err => console.log('Autoplay prevented:', err));
+                  const ppBtn = activeSlide.querySelector('.shorts-modal-play-pause');
+                  if (ppBtn) ppBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                }
+              }
+            };
+
+            const initSwiper = () => {
+              if (!modalSwiperInstance && window.Swiper) {
+                modalSwiperInstance = new Swiper('.shorts-modal-swiper', {
+                  effect: 'coverflow',
+                  grabCursor: false,
+                  centeredSlides: true,
+                  slidesPerView: 'auto',
+                  coverflowEffect: {
+                    rotate: 0,
+                    stretch: 0,
+                    depth: 400,
+                    modifier: 1,
+                    slideShadows: true,
+                  },
+                  on: {
+                    slideChangeTransitionEnd: function () {
+                      pauseAllVideos();
+                      playActiveVideo(this.activeIndex);
+                    },
+                    sliderMove: function() {
+                      pauseAllVideos();
+                    }
+                  }
+                });
+              }
+            };
+
+            shortCards.forEach((card, index) => {
+              card.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
+                initSwiper();
+                if (modalSwiperInstance) {
+                  modalSwiperInstance.update();
+                  modalSwiperInstance.slideTo(index, 0);
+                }
+                pauseAllVideos();
+                playActiveVideo(index);
+              });
+            });
+            
+            const closeModal = () => {
+              if(document.activeElement instanceof HTMLElement) document.activeElement.blur();
+              setTimeout(() => {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+                pauseAllVideos();
+                document.body.style.cursor = '';
+                document.documentElement.style.cursor = '';
+              }, 10);
+            };
+            
+            modalClose.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', closeModal);
+
+            // Event Delegation for dynamically created slides
+            swiperWrapper.addEventListener('click', (e) => {
+               const playPauseBtn = e.target.closest('.shorts-modal-play-pause');
+               if (playPauseBtn) {
+                 const slide = playPauseBtn.closest('.shorts-modal-content');
+                 const vid = slide.querySelector('.shorts-modal-video');
+                 if (vid.paused) {
+                   vid.play();
+                   playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                 } else {
+                   vid.pause();
+                   playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                 }
+               }
+
+               const muteBtn = e.target.closest('.shorts-modal-mute');
+               if (muteBtn) {
+                 const slide = muteBtn.closest('.shorts-modal-content');
+                 const vid = slide.querySelector('.shorts-modal-video');
+                 vid.muted = !vid.muted;
+                 muteBtn.innerHTML = vid.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+               }
+               
+               const timeline = e.target.closest('.shorts-modal-timeline');
+               if (timeline) {
+                 const slide = timeline.closest('.shorts-modal-content');
+                 const vid = slide.querySelector('.shorts-modal-video');
+                 const rect = timeline.getBoundingClientRect();
+                 const clickX = e.clientX - rect.left;
+                 const percent = clickX / rect.width;
+                 if (vid.duration) {
+                   vid.currentTime = percent * vid.duration;
+                 }
+               }
+            });
+
+            // Update Progress Bar & Timer
+            document.querySelectorAll('.shorts-modal-video').forEach(vid => {
+               vid.addEventListener('timeupdate', () => {
+                 const slide = vid.closest('.shorts-modal-content');
+                 if (!slide) return;
+                 const progress = slide.querySelector('.shorts-modal-progress');
+                 const timeDisplay = slide.querySelector('.shorts-modal-time');
+                 
+                 if (progress && timeDisplay && vid.duration) {
+                   const percent = (vid.currentTime / vid.duration) * 100;
+                   progress.style.width = percent + '%';
+                   timeDisplay.innerText = `${formatTime(vid.currentTime)} / ${formatTime(vid.duration)}`;
+                 }
+               });
+            });
+          }
+
+          // Hover Play
+          shortCards.forEach(card => {
+            const vid = card.querySelector('video');
+            if (vid) {
+              let playPromise;
+              card.addEventListener('mouseenter', () => {
+                playPromise = vid.play();
+                if (playPromise !== undefined) {
+                  playPromise.catch(e => console.log('Autoplay prevented:', e));
+                }
+              });
+              card.addEventListener('mouseleave', () => {
+                if (playPromise !== undefined) {
+                  playPromise.then(() => {
+                    vid.pause();
+                  }).catch(e => {});
+                } else {
+                  vid.pause();
+                }
+              });
+            }
+          });
+        }
+
+        // Run async video loader
+        loadDynamicVideos();
+      });
+    </script>
+
+
+    <!-- CONTACT SECTION -->
+    <section class="section-wrap" aria-labelledby="contact-heading">
+      <div class="section-inner">
+        <span class="section-label" id="contact-label"><i class="fas fa-map-marker-alt" style="margin-right:6px;"></i>
+          Get in Touch</span>
+        <h2 class="section-title" id="contact-heading">We're here<br>for you.</h2>
+        <p class="section-sub" id="contact-sub">Visit us, call us, or drop us a line. Our team is ready to help with any
+          enquiry.</p>
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-map-marked-alt"></i></div>
+            <h4 id="contact-visit-title">Visit Us</h4>
+            <p id="contact-visit-desc">ISO 9001-2015 Certified Company<br>Malappuram, Kerala — Pin 676301</p>
+            <div class="cert-badge" id="contact-visit-badge"><i class="fas fa-check-circle"
+                style="margin-right:6px;"></i> ISO 9001-2015 Certified</div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+            <h4 id="contact-call-title">Call Us</h4>
+            <p id="contact-call-desc">Ph: +91 8891220590<br>Tel: 7594050590</p>
+            <a class="btn-ghost" href="tel:+918891220590" id="contact-call-btn"
+              style="margin-top:8px;font-size:14px;padding:10px 20px;">Call Now</a>
+          </div>
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+            <h4 id="contact-mail-title">Mail Us</h4>
+            <p id="contact-mail-desc">nancopaints90@gmail.com</p>
+            <a class="btn-ghost" href="mailto:nancopaints90@gmail.com" id="contact-email-btn"
+              style="margin-top:8px;font-size:14px;padding:10px 20px;">Send Email</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAROON CTA BAND -->
+    <section class="band-maroon" aria-labelledby="cta-heading">
+      <div class="section-inner">
+        <span class="section-label" id="cta-label"><i class="fas fa-rocket" style="margin-right:6px;"></i> Get
+          Started</span>
+        <h2 class="section-title" id="cta-heading">Ready to paint<br>your world?</h2>
+        <p class="section-sub" id="cta-sub">Browse our full range of premium products, find your nearest outlet, or log
+          in to your account.</p>
+        <div class="hero-actions" style="margin-top:36px;">
+          <a class="btn-primary" href="products.html" id="cta-products-btn">Browse Products</a>
+          <a class="btn-ghost" href="login/login.php" id="cta-login-btn">Login to Account</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-section" aria-label="Footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand-name">
+          <img src="assets/dark-logo.png" alt="Nanco Paints">
+        </div>
+        <p class="footer-tagline" id="footer-tagline">Paints for Better Satisfaction.<br>ISO 9001-2015 Certified.
+          Kerala, India.</p>
+        <div class="footer-socials">
+          <a class="social-pill" href="#" id="footer-facebook" aria-label="Facebook"><i
+              class="fab fa-facebook-f"></i></a>
+          <a class="social-pill" href="#" id="footer-instagram" aria-label="Instagram"><i
+              class="fab fa-instagram"></i></a>
+          <a class="social-pill" href="#" id="footer-whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5 id="footer-nav-title">Navigation</h5>
+        <ul>
+          <li><a href="index.html" id="footer-home">Home</a></li>
+          <li><a href="services.html" id="footer-services">Services</a></li>
+          <li><a href="products.html" id="footer-products">Products</a></li>
+          <li><a href="about_us.html" id="footer-about">About Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 id="footer-res-title">Resources</h5>
+        <ul>
+          <li><a href="services.html" id="footer-catalogs">Catalogs</a></li>
+          <li><a href="calculators.html" id="footer-calculator">Paint Calculator</a></li>
+          <li><a href="paint_visualizer.html" id="footer-color-studio">Color Studio</a></li>
+          <li><a href="login/login.php" id="footer-login">Worker Login</a></li>
+        </ul>
+      </div>
+      <div class="footer-subscribe">
+        <h5 id="footer-sub-title"
+          style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.4);margin-bottom:16px;">
+          Subscribe</h5>
+        <p id="footer-sub-desc">Stay updated on new products, offers, and announcements from Nanco.</p>
+        <div class="subscribe-row">
+          <input type="email" id="footer-email-input" placeholder="your@email.com" aria-label="Email address">
+          <button type="submit" id="footer-subscribe-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p id="footer-copy">© 2024 Nanco Paints. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#" id="footer-terms">Terms</a>
+        <a href="#" id="footer-privacy">Privacy</a>
+        <a href="#" id="footer-contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <script>
+    // Mobile nav toggle
+    const btn = document.getElementById('mobile-menu-btn');
+    const nav = document.getElementById('mobile-nav');
+    btn.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+    });
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!btn.contains(e.target) && !nav.contains(e.target)) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', false);
+      }
+    });
+
+    // Language switcher toggle
+    const langBtn = document.getElementById('lang-btn');
+    const langDropdown = document.getElementById('lang-dropdown');
+
+    if (langBtn && langDropdown) {
+      langBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = langDropdown.classList.toggle('open');
+        langBtn.setAttribute('aria-expanded', isOpen);
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
+          langDropdown.classList.remove('open');
+          langBtn.setAttribute('aria-expanded', false);
+        }
+      });
+    }
+
+    // Language selection logic
+    const desktopLangOpts = document.querySelectorAll('.lang-option');
+    const mobileLangOpts = document.querySelectorAll('.mnav-lang-opt');
+    const langBtnText = document.querySelector('.lang-text');
+
+    const translations = {
+      en: {
+        'nav-home': 'Home',
+        'nav-outlets': 'Our Outlets',
+        'nav-products': 'Products',
+        'nav-services': 'Services',
+        'nav-calculators': 'Calculators',
+        'nav-colors': 'Color Studio',
+        'nav-about': 'About Us',
+        'nav-login-btn': 'Login',
+        'nav-search-input': 'Search...',
+
+        'mnav-home': 'Home',
+        'mnav-outlets': 'Our Outlets',
+        'mnav-products': 'Products',
+        'mnav-services': 'Services',
+        'mnav-calculators': 'Calculators',
+        'mnav-colors': 'Color Studio',
+        'mnav-about': 'About Us',
+        'mnav-login': 'Login',
+
+        'hero-tag': '<i class="fas fa-award" style="color:var(--color-mustard-pop);margin-right:6px;"></i> <span style="color:#000000;">ISO 9001-2015 Certified</span>',
+        'hero-title': 'Paint for<br>Better Lives.',
+        'hero-sub': 'Nanco Paints brings premium-quality, certified paints to homes, offices, and factories across Kerala. Bold colours. Lasting finish.',
+        'hero-view-products': 'I will help you buy',
+        'hero-find-outlet': 'Find an Outlet',
+        'hero-download-app': '<i class="fas fa-download" style="margin-right:6px;"></i> Install App',
+
+        'coy-label': '<i class="fas fa-palette" style="margin-right:6px;"></i> Curated Shades',
+        'coy-heading': 'Colour of the Year',
+        'coy-sub': 'Explore and elevate your space with featured shades of Nanco Paints.',
+        'coy-catalog-btn': 'View colour catalogue <i class="fas fa-arrow-right" style="margin-left: 6px;"></i>',
+
+        'featured-label': '<i class="fas fa-star" style="margin-right:6px;"></i> Curated Collection',
+        'featured-heading': 'Featured Products',
+
+        'services-label': '<i class="fas fa-tools" style="margin-right:6px;"></i> Our Services',
+        'services-heading': 'Everything you need<br>in one place.',
+        'services-sub': 'Access worker portals, product info, project galleries, and tools — all designed for the Nanco community.',
+
+        'card-paint-workers-title': 'Paint Workers Portal',
+        'card-paint-workers-desc': 'Exclusive offers, training resources, and the latest announcements for registered Nanco paint workers.',
+        'card-paint-workers-arrow': 'View Portal',
+
+        'card-outlets-title': 'Factory Outlets',
+        'card-outlets-desc': 'Find your nearest Nanco outlet and get directions.',
+        'card-outlets-arrow': 'View Map',
+
+        'card-products-title': 'Product Info & Videos',
+        'card-products-desc': 'Full product range with pricing, specs, and how-to videos.',
+        'card-products-arrow': 'View Products',
+
+        'card-colors-title': 'Color Studio',
+        'card-colors-desc': 'Browse project photos, gallery, and colour inspiration boards.',
+        'card-colors-arrow': 'Explore',
+
+        'card-catalogs-title': 'Catalogs',
+        'card-catalogs-desc': 'Download full product catalogs with colour codes and usage guides.',
+        'card-catalogs-arrow': 'Download',
+
+        'card-calculator-title': 'Paint Calculator',
+        'card-calculator-desc': 'Calculate the exact quantity and cost of paint for any room or surface.',
+        'card-calculator-arrow': 'Calculate',
+
+        'card-visualizer-title': 'Virtual Paint Visualizer',
+        'card-visualizer-desc': 'Try on different shades and visualize your dream space virtually before you buy.',
+        'card-visualizer-arrow': 'Try Visualizer',
+
+        'stats-label': '<i class="fas fa-chart-bar" style="margin-right:6px;"></i> By the Numbers',
+        'stats-heading': 'Trusted across<br>all of Kerala.',
+        'stats-sub': 'Nanco Paints has built a reputation for quality, certification, and service excellence.',
+        'stat-1-label': 'Years of certified excellence in the paint industry',
+        'stat-2-label': 'Retail and factory outlets across Malappuram & Kerala',
+        'stat-3-label': 'Premium paint products and finish variants available',
+
+        'shorts-label': '<i class="fas fa-lightbulb" style="margin-right:6px;"></i> Inspiration',
+        'shorts-heading': 'Here is what are we.',
+
+        'contact-label': '<i class="fas fa-map-marker-alt" style="margin-right:6px;"></i> Get in Touch',
+        'contact-heading': 'We\'re here<br>for you.',
+        'contact-sub': 'Visit us, call us, or drop us a line. Our team is ready to help with any enquiry.',
+        'contact-visit-title': 'Visit Us',
+        'contact-visit-desc': 'ISO 9001-2015 Certified Company<br>Malappuram, Kerala — Pin 676301',
+        'contact-visit-badge': '<i class="fas fa-check-circle" style="margin-right:6px;"></i> ISO 9001-2015 Certified',
+        'contact-call-title': 'Call Us',
+        'contact-call-desc': 'Ph: +91 8891220590<br>Tel: 7594050590',
+        'contact-call-btn': 'Call Now',
+        'contact-mail-title': 'Mail Us',
+        'contact-mail-desc': 'nancopaints90@gmail.com',
+        'contact-email-btn': 'Send Email',
+
+        'cta-label': '<i class="fas fa-rocket" style="margin-right:6px;"></i> Get Started',
+        'cta-heading': 'Ready to paint<br>your world?',
+        'cta-sub': 'Browse our full range of premium products, find your nearest outlet, or log in to your account.',
+        'cta-products-btn': 'Browse Products',
+        'cta-login-btn': 'Login to Account',
+
+        'footer-tagline': 'Paints for Better Satisfaction.<br>ISO 9001-2015 Certified. Kerala, India.',
+        'footer-nav-title': 'Navigation',
+        'footer-home': 'Home',
+        'footer-outlets': 'Our Outlets',
+        'footer-products': 'Products',
+        'footer-services': 'Services',
+        'footer-about': 'About Us',
+        'footer-res-title': 'Resources',
+        'footer-catalogs': 'Catalogs',
+        'footer-calculator': 'Paint Calculator',
+        'footer-color-studio': 'Color Studio',
+        'footer-login': 'Worker Login',
+        'footer-sub-title': 'Subscribe',
+        'footer-sub-desc': 'Stay updated on new products, offers, and announcements from Nanco.',
+        'footer-email-input': 'your@email.com',
+        'footer-copy': '© 2024 Nanco Paints. All rights reserved.',
+        'footer-terms': 'Terms',
+        'footer-privacy': 'Privacy',
+        'footer-contact': 'Contact',
+        'announcement-text': '<i class="fas fa-palette" style="margin-right:6px;"></i> <span>ISO 9001-2015 CERTIFIED</span> — Nanco Paints: Trusted quality across Kerala &nbsp;·&nbsp; Factory Outlets now open in Malappuram'
+      },
+      ml: {
+        'nav-home': 'ഹോം',
+        'nav-outlets': 'ഞങ്ങളുടെ ശാഖകൾ',
+        'nav-products': 'ഉൽപ്പന്നങ്ങൾ',
+        'nav-services': 'സേവനങ്ങൾ',
+        'nav-calculators': 'കാൽക്കുലേറ്ററുകൾ',
+        'nav-colors': 'കളർ സ്റ്റുഡിയോ',
+        'nav-about': 'ഞങ്ങളെക്കുറിച്ച്',
+        'nav-login-btn': 'ലോഗിൻ',
+        'nav-search-input': 'തിരയുക...',
+
+        'mnav-home': 'ഹോം',
+        'mnav-outlets': 'ഞങ്ങളുടെ ശാഖകൾ',
+        'mnav-products': 'ഉൽപ്പന്നങ്ങൾ',
+        'mnav-services': 'സേവനങ്ങൾ',
+        'mnav-calculators': 'കാൽക്കുലേറ്ററുകൾ',
+        'mnav-colors': 'കളർ സ്റ്റുഡിയോ',
+        'mnav-about': 'ഞങ്ങളെക്കുറിച്ച്',
+        'mnav-login': 'ലോഗിൻ',
+
+        'hero-tag': '<i class="fas fa-award" style="color:var(--color-mustard-pop);margin-right:6px;"></i> ISO 9001-2015 സാക്ഷ്യപ്പെടുത്തിയത്',
+        'hero-title': 'മെച്ചപ്പെട്ട ജീവിതത്തിന്<br>വർണ്ണങ്ങളേകൂ.',
+        'hero-sub': 'നാൻകോ പെയിന്റ്സ് കേരളത്തിലുടനീളമുള്ള വീടുകളിലും ഓഫീസുകളിലും ഫാക്ടറികളിലും മികച്ച ഗുണനിലവാരമുള്ള പെയിന്റുകൾ എത്തിക്കുന്നു. മനോഹരമായ നിറങ്ങൾ, ഈടുനിൽക്കുന്ന ഭംഗി.',
+        'hero-view-products': 'നിങ്ങളെ വാങ്ങാൻ സഹായിക്കാം',
+        'hero-find-outlet': 'ശാഖകൾ കണ്ടെത്തുക',
+        'hero-download-app': '<i class="fas fa-download" style="margin-right:6px;"></i> ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യുക',
+
+        'coy-label': '<i class="fas fa-palette" style="margin-right:6px;"></i> തിരഞ്ഞെടുത്ത നിറങ്ങൾ',
+        'coy-heading': 'വർഷത്തിന്റെ നിറം',
+        'coy-sub': 'നാൻകോ പെയിന്റ്സിന്റെ പ്രധാന നിറങ്ങൾ ഉപയോഗിച്ച് നിങ്ങളുടെ ഇടം മനോഹരമാക്കൂ.',
+        'coy-catalog-btn': 'കളർ കാറ്റലോഗ് കാണുക <i class="fas fa-arrow-right" style="margin-left: 6px;"></i>',
+
+        'featured-label': '<i class="fas fa-star" style="margin-right:6px;"></i> മികച്ച കളക്ഷനുകൾ',
+        'featured-heading': 'പ്രത്യേക ഉൽപ്പന്നങ്ങൾ',
+
+        'services-label': '<i class="fas fa-tools" style="margin-right:6px;"></i> ഞങ്ങളുടെ സേവനങ്ങൾ',
+        'services-heading': 'നിങ്ങൾക്ക് ആവശ്യമുള്ളതെല്ലാം<br>ഒരു കുടക്കീഴിൽ.',
+        'services-sub': 'വർക്കർ പോർട്ടലുകൾ, ഉൽപ്പന്ന വിവരങ്ങൾ, പ്രോജക്റ്റ് ഗാലറികൾ, കാൽക്കുലേറ്ററുകൾ എന്നിവയെല്ലാം ഇവിടെ ലഭ്യമാണ്.',
+
+        'card-paint-workers-title': 'പെയിന്റ് വർക്കേഴ്സ് പോർട്ടൽ',
+        'card-paint-workers-desc': 'രജിസ്റ്റർ ചെയ്ത പെയിന്റിംഗ് തൊഴിലാളികൾക്കായി പ്രത്യേക ഓഫറുകളും പരിശീലനങ്ങളും അറിയിപ്പുകളും.',
+        'card-paint-workers-arrow': 'പോർട്ടലിൽ പ്രവേശിക്കുക',
+
+        'card-outlets-title': 'ഫാക്ടറി ഔട്ട്‌ലെറ്റുകൾ',
+        'card-outlets-desc': 'നിങ്ങളുടെ ഏറ്റവും അടുത്തുള്ള നാൻകോ ഔട്ട്‌ലെറ്റുകൾ കണ്ടെത്തുക.',
+        'card-outlets-arrow': 'മാപ്പ് കാണുക',
+
+        'card-products-title': 'ഉൽപ്പന്ന വിവരങ്ങളും വീഡിയോകളും',
+        'card-products-desc': 'വില വിവരങ്ങൾ, സവിശേഷതകൾ, പരിശീലന വീഡിയോകൾ എന്നിവയടങ്ങിയ ഉൽപ്പന്ന ശ്രേണി.',
+        'card-products-arrow': 'ഉൽപ്പന്നങ്ങൾ കാണുക',
+
+        'card-colors-title': 'കളർ സ്റ്റുഡിയോ',
+        'card-colors-desc': 'പ്രോജക്റ്റ് ഫോട്ടോകൾ, ഗാലറികൾ, ഡിസൈൻ പ്രചോദനങ്ങൾ എന്നിവ പര്യവേക്ഷണം ചെയ്യുക.',
+        'card-colors-arrow': 'തുടങ്ങുക',
+
+        'card-catalogs-title': 'കാറ്റലോഗുകൾ',
+        'card-catalogs-desc': 'കളർ കോഡുകളും നിർദ്ദേശങ്ങളുമുള്ള പൂർണ്ണ കാറ്റലോഗുകൾ ഡൗൺലോഡ് ചെയ്യുക.',
+        'card-catalogs-arrow': 'ഡൗൺലോഡ്',
+
+        'card-calculator-title': 'പെയിന്റ് കാൽക്കുലേറ്റർ',
+        'card-calculator-desc': 'മുറികൾക്കോ പ്രതലങ്ങൾക്കോ ആവശ്യമായ പെയിന്റിന്റെ അളവും ചിലവും കണക്കാക്കുക.',
+        'card-calculator-arrow': 'കണക്കാക്കുക',
+
+        'card-visualizer-title': 'വെർച്വൽ പെയിന്റ് വിഷ്വലൈസർ',
+        'card-visualizer-desc': 'വാങ്ങുന്നതിന് മുൻപായി നിങ്ങളുടെ സ്വപ്ന ഇടം വ്യത്യസ്ത നിറങ്ങളിൽ വെർച്വലായി പരീക്ഷിക്കുക.',
+        'card-visualizer-arrow': 'വിഷ്വലൈസർ നോക്കുക',
+
+        'stats-label': '<i class="fas fa-chart-bar" style="margin-right:6px;"></i> കണക്കുകളിലൂടെ',
+        'stats-heading': 'കേരളത്തിലുടനീളം<br>വിശ്വസനീയം.',
+        'stats-sub': 'ഗുണനിലവാരം, അംഗീകാരങ്ങൾ, മികച്ച സേവനം എന്നിവയിലൂടെ നാൻകോ പെയിന്റ്സ് വിശ്വാസ്യത നേടിയെടുത്തിരിക്കുന്നു.',
+        'stat-1-label': 'പെയിന്റ് വ്യവസായത്തിലെ 25 വർഷത്തിലധികം സാക്ഷ്യപ്പെടുത്തിയ മികവ്',
+        'stat-2-label': 'മലപ്പുറത്തും കേരളത്തിലുടനീളവുമായി 50-ലധികം റീട്ടെയിൽ, ഫാക്ടറി ഔട്ട്‌ലെറ്റുകൾ',
+        'stat-3-label': '200-ലധികം പ്രീമിയം പെയിന്റ് ഉൽപ്പന്നങ്ങളും ഫിനിഷ് വേരിയന്റുകളും ലഭ്യമാണ്',
+
+        'shorts-label': '<i class="fas fa-lightbulb" style="margin-right:6px;"></i> പ്രചോദനം',
+        'shorts-heading': 'ഞങ്ങൾ ആരാണെന്ന് കാണൂ.',
+
+        'contact-label': '<i class="fas fa-map-marker-alt" style="margin-right:6px;"></i> ഞങ്ങളുമായി ബന്ധപ്പെടുക',
+        'contact-heading': 'ഞങ്ങൾ നിങ്ങൾക്കായി<br>ഇവിടെയുണ്ട്.',
+        'contact-sub': 'ഞങ്ങളെ സന്ദർശിക്കുക, വിളിക്കുക അല്ലെങ്കിൽ ഇമെയിൽ അയക്കുക. സഹായിക്കാൻ ഞങ്ങൾ സദാ സന്നദ്ധരാണ്.',
+        'contact-visit-title': 'ഞങ്ങളെ സന്ദർശിക്കുക',
+        'contact-visit-desc': 'ISO 9001-2015 അംഗീകൃത കമ്പനി<br>മലപ്പുറം, കേരളം — പിൻ 676301',
+        'contact-visit-badge': '<i class="fas fa-check-circle" style="margin-right:6px;"></i> ISO 9001-2015 അംഗീകൃതം',
+        'contact-call-title': 'ഞങ്ങളെ വിളിക്കുക',
+        'contact-call-desc': 'ഫോൺ: +91 8891220590<br>ടെലിഫോൺ: 7594050590',
+        'contact-call-btn': 'ഇപ്പോൾ വിളിക്കുക',
+        'contact-mail-title': 'മെയിൽ അയക്കുക',
+        'contact-mail-desc': 'nancopaints90@gmail.com',
+        'contact-email-btn': 'ഇമെയിൽ അയക്കുക',
+
+        'cta-label': '<i class="fas fa-rocket" style="margin-right:6px;"></i> ആരംഭിക്കുക',
+        'cta-heading': 'നിങ്ങളുടെ ലോകം<br>വർണ്ണാഭമാക്കാൻ തയ്യാറാണോ?',
+        'cta-sub': 'ഞങ്ങളുടെ മുഴുവൻ ഉൽപ്പന്നങ്ങളും കാണുക, അടുത്തുള്ള ഔട്ട്‌ലെറ്റ് കണ്ടെത്തുക, അല്ലെങ്കിൽ അക്കൗണ്ടിലേക്ക് ലോഗിൻ ചെയ്യുക.',
+        'cta-products-btn': 'ഉൽപ്പന്നങ്ങൾ കാണുക',
+        'cta-login-btn': 'അക്കൗണ്ടിൽ ലോഗിൻ ചെയ്യുക',
+
+        'footer-tagline': 'മികച്ച സംതൃപ്തിക്കായി പെയിന്റുകൾ.<br>ISO 9001-2015 അംഗീകൃതം. കേരളം, ഇന്ത്യ.',
+        'footer-nav-title': 'നാവിഗേഷൻ',
+        'footer-home': 'ഹോം',
+        'footer-outlets': 'ഞങ്ങളുടെ ശാഖകൾ',
+        'footer-products': 'ഉൽപ്പന്നങ്ങൾ',
+        'footer-services': 'സേവനങ്ങൾ',
+        'footer-about': 'ഞങ്ങളെക്കുറിച്ച്',
+        'footer-res-title': 'വിഭവങ്ങൾ',
+        'footer-catalogs': 'കാറ്റലോഗുകൾ',
+        'footer-calculator': 'പെയിന്റ് കാൽക്കുലേറ്റർ',
+        'footer-color-studio': 'കളർ സ്റ്റുഡിയോ',
+        'footer-login': 'തൊഴിലാളി ലോഗിൻ',
+        'footer-sub-title': 'അംഗത്വമെടുക്കുക',
+        'footer-sub-desc': 'നാൻകോയിൽ നിന്നുള്ള പുതിയ ഉൽപ്പന്നങ്ങളും ഓഫറുകളും അറിയിപ്പുകളും അറിയുക.',
+        'footer-email-input': 'നിങ്ങളുടെ@ഇമെയിൽ.com',
+        'footer-copy': '© 2024 നാൻകോ പെയിന്റ്സ്. എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.',
+        'footer-terms': 'വ്യവസ്ഥകൾ',
+        'footer-privacy': 'സ്വകാര്യത',
+        'footer-contact': 'ബന്ധപ്പെടുക',
+        'announcement-text': '<i class="fas fa-palette" style="margin-right:6px;"></i> <span>ISO 9001-2015 അംഗീകൃതം</span> — നാൻകോ പെയിന്റ്സ്: കേരളത്തിലുടനീളം വിശ്വസനീയമായ ഗുണനിലവാരം &nbsp;·&nbsp; ഫാക്ടറി ഔട്ട്‌ലെറ്റുകൾ ഇപ്പോൾ മലപ്പുറത്ത് ആരംഭിച്ചിരിക്കുന്നു'
+      }
+    };
+
+    function setLanguage(lang) {
+      localStorage.setItem('nanco-lang', lang);
+      window.currentLanguage = lang;
+
+      // Update body class for font overrides
+      if (lang === 'ml') {
+        document.body.classList.add('lang-ml');
+      } else {
+        document.body.classList.remove('lang-ml');
+      }
+
+      if (langBtnText) {
+        langBtnText.textContent = lang.toUpperCase();
+      }
+
+      desktopLangOpts.forEach(opt => {
+        if (opt.getAttribute('data-lang') === lang) {
+          opt.classList.add('active');
+        } else {
+          opt.classList.remove('active');
+        }
+      });
+
+      mobileLangOpts.forEach(opt => {
+        if (opt.getAttribute('data-lang') === lang) {
+          opt.classList.add('active');
+          opt.style.fontWeight = '700';
+          opt.style.borderColor = 'var(--color-ink-black)';
+          opt.style.color = 'var(--color-ink-black)';
+        } else {
+          opt.classList.remove('active');
+          opt.style.fontWeight = '500';
+          opt.style.borderColor = 'rgba(0,0,0,0.1)';
+          opt.style.color = 'var(--color-sage-mute)';
+        }
+      });
+
+      // Translate all DOM elements
+      const dict = translations[lang];
+      for (const id in dict) {
+        const el = document.getElementById(id);
+        if (el) {
+          if (el.tagName === 'INPUT') {
+            el.setAttribute('placeholder', dict[id]);
+          } else {
+            el.innerHTML = dict[id];
+          }
+        }
+      }
+
+      // Re-apply slide translations if on the first slide
+      const bgImg = document.querySelector('.hero-house-bg');
+      if (bgImg) {
+        const activeDot = document.querySelector('.bg-dot.active');
+        const activeIndex = activeDot ? parseInt(activeDot.getAttribute('data-index')) : 0;
+        if (activeIndex === 0) {
+          const tagEl = document.getElementById('hero-tag');
+          const titleEl = document.getElementById('hero-title');
+          const subEl = document.getElementById('hero-sub');
+          if (tagEl) tagEl.innerHTML = dict['hero-tag'] || '';
+          if (titleEl) titleEl.innerHTML = dict['hero-title'] || '';
+          if (subEl) subEl.innerHTML = dict['hero-sub'] || '';
+        }
+      }
+
+      // Translate shorts card CTAs
+      const shortCardCtas = document.querySelectorAll('#shortsTrack .short-card .short-cta');
+      shortCardCtas.forEach(cta => {
+        const text = cta.textContent.trim().toLowerCase();
+        if (text.includes('explore shade') || text.includes('നിറങ്ങൾ കാണുക')) {
+          cta.innerHTML = lang === 'ml' ? 'നിറങ്ങൾ കാണുക <i class="fas fa-arrow-right"></i>' : 'Explore shade <i class="fas fa-arrow-right"></i>';
+        } else if (text.includes('explore catalogue') || text.includes('കാറ്റലോഗ് കാണുക')) {
+          cta.innerHTML = lang === 'ml' ? 'കാറ്റലോഗ് കാണുക <i class="fas fa-arrow-right"></i>' : 'Explore catalogue <i class="fas fa-arrow-right"></i>';
+        } else if (text.includes('get inspiration') || text.includes('പ്രചോദനം നേടുക')) {
+          cta.innerHTML = lang === 'ml' ? 'പ്രചോദനം നേടുക <i class="fas fa-arrow-right"></i>' : 'Get Inspiration <i class="fas fa-arrow-right"></i>';
+        }
+      });
+
+      // Translate modal CTA buttons
+      const modalCtaButtons = document.querySelectorAll('.shorts-modal-cta-btn');
+      modalCtaButtons.forEach(btn => {
+        const text = btn.textContent.trim().toLowerCase();
+        if (text.includes('explore shade') || text.includes('നിറങ്ങൾ കാണുക')) {
+          btn.innerHTML = lang === 'ml' ? 'നിറങ്ങൾ കാണുക <i class="fas fa-arrow-right"></i>' : 'Explore shade <i class="fas fa-arrow-right"></i>';
+        } else if (text.includes('explore catalogue') || text.includes('കാറ്റലോഗ് കാണുക')) {
+          btn.innerHTML = lang === 'ml' ? 'കാറ്റലോഗ് കാണുക <i class="fas fa-arrow-right"></i>' : 'Explore catalogue <i class="fas fa-arrow-right"></i>';
+        } else if (text.includes('get inspiration') || text.includes('പ്രചോദനം നേടുക')) {
+          btn.innerHTML = lang === 'ml' ? 'പ്രചോദനം നേടുക <i class="fas fa-arrow-right"></i>' : 'Get Inspiration <i class="fas fa-arrow-right"></i>';
+        }
+      });
+    }
+
+    desktopLangOpts.forEach(opt => {
+      opt.addEventListener('click', (e) => {
+        e.preventDefault();
+        const lang = opt.getAttribute('data-lang');
+        setLanguage(lang);
+        if (langDropdown) {
+          langDropdown.classList.remove('open');
+          langBtn.setAttribute('aria-expanded', false);
+        }
+      });
+    });
+
+    mobileLangOpts.forEach(opt => {
+      opt.addEventListener('click', (e) => {
+        e.preventDefault();
+        const lang = opt.getAttribute('data-lang');
+        setLanguage(lang);
+      });
+    });
+
+    // Init language state
+    const savedLang = localStorage.getItem('nanco-lang') || 'en';
+    setLanguage(savedLang);
+
+    // Intersection observer for scroll-reveal
+    const cards = document.querySelectorAll('.bento-card, .stat-card, .info-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    cards.forEach(c => {
+      c.style.opacity = '0';
+      c.style.transform = 'translateY(18px)';
+      c.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      observer.observe(c);
+    });
+
+    // Chatbot Toggle Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const chatToggleBtn = document.getElementById('chatbot-toggle-btn');
+      const chatWindow = document.getElementById('chatbot-window');
+      const chatCloseBtn = document.getElementById('chatbot-close-btn');
+
+      if (chatToggleBtn && chatWindow) {
+        chatToggleBtn.addEventListener('click', () => {
+          chatWindow.classList.add('open');
+          chatToggleBtn.style.display = 'none'; // hide the floating button
+        });
+      }
+
+      if (chatCloseBtn && chatWindow && chatToggleBtn) {
+        chatCloseBtn.addEventListener('click', () => {
+          chatWindow.classList.remove('open');
+          chatToggleBtn.style.display = 'flex'; // show the floating button again
+        });
+      }
+
+      // Popup Menu Logic
+      const plusBtn = document.querySelector('.plus-icon');
+      const popupMenu = document.getElementById('popupMenu');
+      if (plusBtn && popupMenu) {
+        plusBtn.addEventListener('click', () => {
+          popupMenu.style.display = popupMenu.style.display === 'none' || popupMenu.style.display === '' ? 'block' : 'none';
+        });
+      }
+
+      // AI Response Logic
+      const chatbox = document.getElementById('chatbox');
+      const aiResponsePopup = document.getElementById('aiResponsePopup');
+      const aiResponseClose = document.getElementById('aiResponseClose');
+      const aiResponseMessages = document.getElementById('aiResponseMessages');
+      const sendBtn = document.getElementById('sendBtn');
+      const micBtn = document.getElementById('micBtn');
+      // Backend URL (automatically uses local backend on localhost, and same-domain api in production)
+      const API_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '')
+        ? 'http://localhost:5000/api'
+        : '/api';
+
+      const TOOL_REGEX = /\\?\[\s*TOOL:\s*(.*?)\s*\\?\|\s*(.*?)\s*\\?\|\s*(.*?)\s*\\?\]/gi;
+
+      function appendMessage(text, isUser = false, isError = false) {
+        if (!aiResponseMessages) return;
+
+        if (isError) {
+          const errDiv = document.createElement('div');
+          errDiv.className = 'ai-assistant';
+          errDiv.innerHTML = `<div class="ai-response-error">${text}</div>`;
+          aiResponseMessages.appendChild(errDiv);
+          aiResponseMessages.scrollTop = aiResponseMessages.scrollHeight;
+          return;
+        }
+
+        if (isUser) {
+          const msgDiv = document.createElement('div');
+          msgDiv.className = 'ai-user';
+          msgDiv.textContent = text;
+          aiResponseMessages.appendChild(msgDiv);
+          aiResponseMessages.scrollTop = aiResponseMessages.scrollHeight;
+          return;
+        }
+
+        // --- Bot message: split into text parts and tool cards ---
+        const wrapDiv = document.createElement('div');
+        wrapDiv.className = 'ai-assistant';
+
+        // Extract tool markers and split text
+        const tools = [];
+        let cleanText = text.replace(TOOL_REGEX, (match, name, image, url) => {
+          tools.push({ name: name.trim(), image: image.trim(), url: url.trim() });
+          return '';
+        });
+
+        // Render the clean text (strip extra whitespace/newlines around removed markers)
+        cleanText = cleanText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        cleanText = cleanText.trim().replace(/\n{2,}/g, '\n').replace(/\n/g, '<br>');
+        if (cleanText) {
+          const textNode = document.createElement('p');
+          textNode.className = 'ai-text';
+          textNode.innerHTML = cleanText;
+          wrapDiv.appendChild(textNode);
+        }
+
+        // Render tool cards in a row
+        if (tools.length > 0) {
+          const toolRow = document.createElement('div');
+          toolRow.className = 'ai-tool-row';
+          tools.forEach(tool => {
+            const card = document.createElement('a');
+            card.href = tool.url;
+            card.className = 'ai-tool-card';
+            let imgPath = tool.image;
+            if (imgPath && !imgPath.startsWith('http') && !imgPath.startsWith('assets/')) {
+              imgPath = 'assets/' + imgPath;
+            }
+            card.style.backgroundImage = `url('${imgPath}')`;
+            card.innerHTML = `<div class="ai-tool-overlay"></div><span class="ai-tool-name"><i class="fas fa-arrow-right ai-tool-icon"></i>${tool.name}</span>`;
+            toolRow.appendChild(card);
+          });
+          wrapDiv.appendChild(toolRow);
+        }
+
+        aiResponseMessages.appendChild(wrapDiv);
+        aiResponseMessages.scrollTop = aiResponseMessages.scrollHeight;
+      }
+
+      function showLoader(show) {
+        if (!aiResponseMessages) return;
+        let loaderDiv = document.getElementById('typingLoader');
+        if (show) {
+          if (!loaderDiv) {
+            loaderDiv = document.createElement('div');
+            loaderDiv.id = 'typingLoader';
+            loaderDiv.className = 'ai-assistant';
+            loaderDiv.innerHTML = `
+              <div class="typing-indicator">
+                <span></span><span></span><span></span>
+              </div>
+            `;
+            aiResponseMessages.appendChild(loaderDiv);
+          }
+        } else {
+          if (loaderDiv) {
+            loaderDiv.remove();
+          }
+        }
+        aiResponseMessages.scrollTop = aiResponseMessages.scrollHeight;
+      }
+
+      if (chatbox && aiResponsePopup) {
+        chatbox.addEventListener('input', () => {
+          chatbox.style.height = '24px';
+          chatbox.style.height = Math.min(chatbox.scrollHeight, 120) + 'px';
+
+          if (chatbox.value.trim().length > 0) {
+            if (sendBtn) sendBtn.style.display = 'inline-block';
+            if (micBtn) micBtn.style.display = 'none';
+          } else {
+            if (sendBtn) sendBtn.style.display = 'none';
+            if (micBtn) micBtn.style.display = 'inline-block';
+          }
+        });
+
+        const handleSend = async () => {
+          const text = chatbox.value.trim();
+          if (text.length > 0) {
+            aiResponsePopup.classList.add('show');
+            chatbox.value = '';
+            chatbox.dispatchEvent(new Event('input'));
+
+            appendMessage(text, true);
+            showLoader(true);
+
+            try {
+              const res = await fetch(`${API_URL}/chat`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: text })
+              });
+              if (!res.ok) throw new Error('API Error');
+            const data = await res.json();
+              showLoader(false);
+
+              if (data.error) {
+                appendMessage(data.error, false, true);
+              } else {
+                appendMessage(data.response, false);
+              }
+            } catch (err) {
+              showLoader(false);
+              appendMessage("Error connecting to backend.", false, true);
+            }
+          }
+        };
+
+        chatbox.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSend();
+          }
+        });
+
+        if (sendBtn) {
+          sendBtn.addEventListener('click', handleSend);
+        }
+      }
+
+      // Voice Recording Logic
+      let mediaRecorder;
+      let audioChunks = [];
+      let isRecording = false;
+
+      if (micBtn) {
+        micBtn.addEventListener('click', async () => {
+          if (!isRecording) {
+            // Start recording
+            try {
+              const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+              mediaRecorder = new MediaRecorder(stream);
+
+              mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) audioChunks.push(event.data);
+              };
+
+              mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                audioChunks = [];
+
+                aiResponsePopup.classList.add('show');
+                showLoader(true);
+
+                const formData = new FormData();
+                formData.append('audio', audioBlob, 'recording.webm');
+
+                try {
+                  const res = await fetch(`${API_URL}/voice`, {
+                    method: 'POST',
+                    body: formData
+                  });
+                  if (!res.ok) throw new Error('API Error');
+            const data = await res.json();
+                  showLoader(false);
+
+                  if (data.error) {
+                    appendMessage(data.error, false, true);
+                  } else {
+                    appendMessage(data.transcription, true); // User's transcribed voice
+                    appendMessage(data.response, false);    // Bot response
+                  }
+                } catch (err) {
+                  showLoader(false);
+                  appendMessage("Error processing voice.", false, true);
+                }
+              };
+
+              mediaRecorder.start();
+              isRecording = true;
+              micBtn.style.color = '#ff6b6b'; // indicate recording
+              micBtn.textContent = 'stop_circle';
+            } catch (err) {
+              console.error("Mic access denied:", err);
+              alert("Please allow microphone access to use voice chat.");
+            }
+          } else {
+            // Stop recording
+            mediaRecorder.stop();
+            isRecording = false;
+            micBtn.style.color = ''; // reset color
+            micBtn.textContent = 'mic';
+          }
+        });
+      }
+
+      if (aiResponseClose) {
+        aiResponseClose.addEventListener('click', () => {
+          aiResponsePopup.classList.remove('show');
+        });
+      }
+
+      // PWA Install Logic
+      let deferredPrompt;
+      const installBtn = document.getElementById('hero-download-app');
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+
+      window.openPwaModal = function () {
+        const modal = document.getElementById('pwa-install-modal');
+        if (modal) {
+          modal.style.display = 'flex';
+          setTimeout(() => modal.style.opacity = '1', 10);
+        }
+      };
+
+      window.closePwaModal = function () {
+        const modal = document.getElementById('pwa-install-modal');
+        if (modal) {
+          modal.style.opacity = '0';
+          setTimeout(() => modal.style.display = 'none', 300);
+        }
+      };
+
+      if (installBtn) {
+        installBtn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          if (!deferredPrompt) {
+            window.openPwaModal();
+            return;
+          }
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          console.log(`User response to the install prompt: ${outcome}`);
+          deferredPrompt = null;
+        });
+      }
+
+      // Check session to update nav login button dynamically
+      const session = JSON.parse(sessionStorage.getItem('nanco_session') || 'null');
+      if (session && session.token) {
+        const loginBtn = document.getElementById('nav-login-btn');
+        const mLoginBtn = document.getElementById('mnav-login');
+        
+        if (session.role === 'admin') {
+          if (loginBtn) {
+            loginBtn.textContent = 'Admin Panel';
+            loginBtn.href = 'admin.html';
+          }
+          if (mLoginBtn) {
+            mLoginBtn.textContent = 'Admin Panel';
+            mLoginBtn.href = 'admin.html';
+          }
+        } else {
+          if (loginBtn) {
+            loginBtn.innerHTML = `<i class="fa-regular fa-user" style="margin-right:6px;"></i> ${session.name}`;
+            loginBtn.href = '#';
+            loginBtn.onclick = (e) => {
+              e.preventDefault();
+              if (confirm('Do you want to log out?')) {
+                sessionStorage.removeItem('nanco_session');
+                location.reload();
+              }
+            };
+          }
+          if (mLoginBtn) {
+            mLoginBtn.innerHTML = `<i class="fa-regular fa-user" style="margin-right:6px;"></i> Logout (${session.name})`;
+            mLoginBtn.href = '#';
+            mLoginBtn.onclick = (e) => {
+              e.preventDefault();
+              sessionStorage.removeItem('nanco_session');
+              location.reload();
+            };
+          }
+        }
+      }
+    });
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('Service Worker registered successfully:', reg.scope))
+          .catch(err => console.error('Service Worker registration failed:', err));
+      });
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+  <!-- CHATBOT WIDGET -->
+  <div class="chatbot-container" id="chatbot-container">
+
+    <div class="chat-input-wrapper" id="chatbot-window">
+      <div class="inputbar">
+
+        <div class="ai-response-popup" id="aiResponsePopup">
+          <div class="ai-response-header">
+            <span class="ai-badge">
+              <img src="assets/dark-logo.png" alt="logo" class="logo-cb">
+            </span>
+            <div class="ai-response-model"></div>
+            <button class="ai-response-close" id="aiResponseClose" title="Close">×</button>
+          </div>
+          <div class="ai-response-messages" id="aiResponseMessages">
+            <!-- Messages will go here -->
+          </div>
+        </div>
+
+        <div class="popup-menu" id="popupMenu" style="display: none;">
+          <ul>
+            <li class="upload"><span class="material-symbols-outlined mso">attach_file</span> Add Attachment</li>
+            <li><span class="material-symbols-outlined mso">image</span> AI Generate Image</li>
+            <li><span class="material-symbols-outlined mso">mic</span> Hands-free Mode</li>
+          </ul>
+          <input type="file" id="fileUpload" style="display: none;" multiple="">
+        </div>
+        <span class="material-symbols-outlined mso plus-icon">add</span>
+        <div id="previewContainer" class="preview-container"></div>
+        <textarea class="chatbox" id="chatbox" placeholder="Ask anything"></textarea>
+        <!-- Mic button -->
+        <span class="material-symbols-outlined mso mic-icon" id="micBtn" style="display: inline-block;">mic</span>
+        <!-- Send button (hidden initially) -->
+        <span class="material-symbols-outlined mso send-icon" id="sendBtn" style="display:none;">send</span>
+      </div>
+      <div class="chat-close-circle" id="chatbot-close-btn">
+        <i class="fas fa-times"></i>
+      </div>
+    </div>
+    <button class="chatbot-toggle-btn" id="chatbot-toggle-btn" aria-label="Open Chatbot">
+      <i class="fas fa-comments chat-open-icon"></i>
+    </button>
+  </div>
+
+  <!-- ANNOUNCEMENT BANNER -->
+  <div class="banner-strip" role="banner" aria-label="Announcement" id="announcement-text">
+    <i class="fas fa-palette" style="margin-right:6px;"></i> <span>ISO 9001-2015 CERTIFIED</span> — Nanco Paints:
+    Trusted quality across Kerala &nbsp;·&nbsp; Factory Outlets now open in Malappuram
+  </div>
+
+  <!-- PWA Install Instructions Modal -->
+  <div id="pwa-install-modal"
+    style="position: fixed; inset: 0; background: rgba(11, 23, 44, 0.7); backdrop-filter: blur(8px); z-index: 10000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+    <div
+      style="background: var(--color-white-plate); border-radius: var(--radius-cards); width: 100%; max-width: 440px; padding: 32px 24px; position: relative; margin: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.15);">
+      <div style="text-align: center; position: relative;">
+        <button onclick="closePwaModal()"
+          style="position: absolute; top: 16px; right: 16px; background: rgba(0,0,0,0.05); border:none; color:var(--color-ink-black); width:32px; height:32px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center;"><i
+            class="fas fa-times"></i></button>
+        <div
+          style="width: 60px; height: 60px; background: var(--color-white-plate); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.05);">
+          <img src="assets/logo.png" alt="Nanco Paints" style="width: 100%; height: 100%; object-fit: contain; padding: 8px;">
+        </div>
+        <h3 style="font-size: 22px; font-weight: 800; color: var(--color-ink-black); margin-bottom: 12px;">Install Nanco
+          Paints</h3>
+        <p style="font-size: 14px; color: var(--color-sage-mute); margin-bottom: 20px; line-height: 1.5;">To install
+          Nanco Paints as an app on your device, follow these steps:</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px; font-size: 14px; text-align: left;">
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div
+            style="background: var(--color-linen-canvas); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; color: var(--color-ink-black);">
+            1</div>
+          <p style="color: var(--color-ink-black); margin: 0;"><strong>On iOS Safari:</strong> Tap the
+            <strong>Share</strong> button <i class="fas fa-share-square"></i> in the bottom menu, scroll down, and tap
+            <strong>Add to Home Screen</strong>.</p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div
+            style="background: var(--color-linen-canvas); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; color: var(--color-ink-black);">
+            2</div>
+          <p style="color: var(--color-ink-black); margin: 0;"><strong>On Android Chrome:</strong> Tap the menu <i
+              class="fas fa-ellipsis-v"></i> and select <strong>Install App</strong> or <strong>Add to Home
+              Screen</strong>.</p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div
+            style="background: var(--color-linen-canvas); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; color: var(--color-ink-black);">
+            3</div>
+          <p style="color: var(--color-ink-black); margin: 0;"><strong>On Desktop (Chrome/Edge):</strong> Click the
+            <strong>Install</strong> icon <i class="fas fa-plus-circle"></i> or similar icon in the address bar at the
+            top of the window.</p>
+        </div>
+      </div>
+      <button onclick="closePwaModal()" class="btn-primary"
+        style="width: 100%; margin-top: 24px; padding: 14px; background: var(--color-cobalt-band); color: white; border: none; border-radius: var(--radius-buttons); font-weight: 700;">Got
+        It</button>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

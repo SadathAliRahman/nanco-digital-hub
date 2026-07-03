@@ -1,0 +1,963 @@
+[
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "TOPAZ ONLY INTERIOR",
+    "finish": "SMOOTH WASH & GLOSSY FINISH",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "APEX",
+    "coverage_per_liter": "100 to 140 sq ft per litre",
+    "order_notes": [
+      "Colourend cost extra",
+      "Only light shade order",
+      "1 Ltr Net After Tinting"
+    ],
+    "description": "For repainting or colour changing, apply 2 coats of topaz emulsion directly only after applying primer.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 496,
+        "retail_price": 430,
+        "offer_price": 257,
+        "save_amount": 173,
+        "item_code": "35"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 1894,
+        "retail_price": 1580,
+        "offer_price": 985,
+        "save_amount": 595,
+        "item_code": "34"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 4675,
+        "retail_price": 3600,
+        "offer_price": 2432,
+        "save_amount": 907,
+        "item_code": "33"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 8366,
+        "retail_price": 6800,
+        "offer_price": 4350,
+        "save_amount": 2068,
+        "item_code": "32"
+      }
+    ],
+    "specifications_and_usage": [
+      "Apply after the wall has dried if the wall is wet",
+      "Direct apply over primer",
+      "Glossy type, area coverage depends on wall finishing"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "EMERALD 2 IN 1 EMULSION",
+    "finish": "SMOOTH WASH & GLOSSY FINISH",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "APEX",
+    "coverage_per_liter": "100 to 110 sq ft per litre",
+    "order_notes": [
+      "Colourend cost extra",
+      "Only light shade order",
+      "1 Ltr Net After Tinting"
+    ],
+    "description": "For repainting or colour changing, apply 2 coats of emerald emulsion directly only after applying primer.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 569,
+        "retail_price": 460,
+        "offer_price": 296,
+        "save_amount": 164,
+        "item_code": "36"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 2189,
+        "retail_price": 1650,
+        "offer_price": 1139,
+        "save_amount": 551,
+        "item_code": "37"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 5121,
+        "retail_price": 3600,
+        "offer_price": 2663,
+        "save_amount": 937,
+        "item_code": "38"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 9605,
+        "retail_price": 7200,
+        "offer_price": 4995,
+        "save_amount": 2709,
+        "item_code": "39"
+      }
+    ],
+    "specifications_and_usage": [
+      "Apply after the wall has dried if the wall is wet",
+      "Direct apply over primer",
+      "Glossy type, area coverage depends on wall finishing"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "PU PLATINUM",
+    "finish": "HI GLOSSY FINISH & WASHABLE",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "ULTIMAX PTOTECK",
+    "coverage_per_liter": "100 - 130 sq ft per litre",
+    "order_notes": [
+      "Colourend cost extra",
+      "Only light shade order",
+      "1 Ltr Net After Tinting"
+    ],
+    "description": "For repainting or colour changing, apply 2 coats of platinum ultima directly only after applying primer.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 802,
+        "retail_price": 680,
+        "offer_price": 417,
+        "save_amount": 263,
+        "item_code": "43"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 3121,
+        "retail_price": 2850,
+        "offer_price": 1623,
+        "save_amount": 1227,
+        "item_code": "42"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 8212,
+        "retail_price": 7700,
+        "offer_price": 4029,
+        "save_amount": 3671,
+        "item_code": "41"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 15092,
+        "retail_price": 9800,
+        "offer_price": 7848,
+        "save_amount": 4289,
+        "item_code": "40"
+      }
+    ],
+    "specifications_and_usage": [
+      "Apply after the wall has dried if the wall is wet",
+      "Direct apply over primer",
+      "Area coverage depends on wall finishing"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "OLIVE PU LAMINATION 2 IN 1",
+    "finish": "WASHABLE HI GLOSSY FINISH & LUXURY EMULSION",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "ULTIMA DURALIFE LAMINATION",
+    "coverage_per_liter": "100 to 130 sq ft per litre",
+    "order_notes": [
+      "Colourend cost extra",
+      "Only light shade order",
+      "1 Ltr Net After Tinting"
+    ],
+    "description": "For repainting or colour changing, apply 2 coats of Olive pu platinum directly only after applying primer.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 926,
+        "retail_price": 750,
+        "offer_price": 482,
+        "save_amount": 268,
+        "item_code": "45"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 3617,
+        "retail_price": 2900,
+        "offer_price": 1881,
+        "save_amount": 1019,
+        "item_code": "46"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 8989,
+        "retail_price": 7100,
+        "offer_price": 4672,
+        "save_amount": 2428,
+        "item_code": "47"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 19635,
+        "retail_price": 15128,
+        "offer_price": 10210,
+        "save_amount": 4918,
+        "item_code": "48"
+      }
+    ],
+    "specifications_and_usage": [
+      "Apply after the wall has dried if the wall is wet",
+      "Direct apply over primer",
+      "Area coverage depends on wall finishing"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "TILE COAT PU COATING",
+    "finish": "HI GLOSSY FINISH (ALL COLORS)",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "INDICO & AMCOS TILE COAT",
+    "coverage_per_liter": "100 to 120 sq ft per litre",
+    "order_notes": [],
+    "description": "Premium quality emulsion applied on roof tiles and sunshades.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 897,
+        "retail_price": 690,
+        "offer_price": 467,
+        "save_amount": 223,
+        "item_code": "60"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 3499,
+        "retail_price": 2850,
+        "offer_price": 1819,
+        "save_amount": 1031,
+        "item_code": "59"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 8691,
+        "retail_price": 5990,
+        "offer_price": 4519,
+        "save_amount": 1331,
+        "item_code": "58"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 17275,
+        "retail_price": 13984,
+        "offer_price": 8983,
+        "save_amount": 5001,
+        "item_code": "57"
+      }
+    ],
+    "specifications_and_usage": [
+      "Apply after the wall has dried if the wall is wet",
+      "Direct apply 3 and 4 coat finish",
+      "Area coverage depends on wall finishing"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "SBR WATER PROOF POLIMER COATING",
+    "finish": "2 in 1 ELASTOMERIC",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "DR FIXIT 302",
+    "coverage_per_liter": "100 to 110 sq ft per litre",
+    "order_notes": [],
+    "description": "Cement primer that can be applied inside and outside over white cement.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 628,
+        "retail_price": 420,
+        "offer_price": 325,
+        "save_amount": 65,
+        "item_code": "72"
+      },
+      {
+        "unit": "5 Ltr",
+        "mrp": 2974,
+        "retail_price": 1950,
+        "offer_price": 1546,
+        "save_amount": 404,
+        "item_code": "71"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 5977,
+        "retail_price": 4150,
+        "offer_price": 3108,
+        "save_amount": 1042,
+        "item_code": "70"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 11847,
+        "retail_price": 8625,
+        "offer_price": 6161,
+        "save_amount": 2464,
+        "item_code": "69"
+      }
+    ],
+    "specifications_and_usage": [
+      "Mix 1 Ltr SBR with 2kg tile adhesive. Add enough water to apply with a brush.",
+      "Apply after the wall has dried if the wall is wet.",
+      "To make waterproof primer from cement primer, add 2 litres of this per 20 litres of cement primer.",
+      "To remove kitchen stains, mix half litre per 1 litre of premium primer and apply 2 coats. Then apply Emulsion.",
+      "Area coverage depends on wall finishing."
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "2K WATER PROOFING RESIN ONLY",
+    "finish": "2 in 1 ELASTOMERIC",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "DR. FIXIT 2K",
+    "coverage_per_liter": "80 to 90 sq ft per litre",
+    "order_notes": [],
+    "description": "Can be used for coating on bathroom walls with leakage and cracks on the terrace.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 699,
+        "retail_price": 610,
+        "offer_price": 364,
+        "save_amount": 246,
+        "item_code": "65"
+      },
+      {
+        "unit": "5 Ltr",
+        "mrp": 3342,
+        "retail_price": 3350,
+        "offer_price": 1738,
+        "save_amount": 1612,
+        "item_code": "66"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 6714,
+        "retail_price": 6450,
+        "offer_price": 3492,
+        "save_amount": 2958,
+        "item_code": "67"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 13322,
+        "retail_price": 10850,
+        "offer_price": 6928,
+        "save_amount": 3922,
+        "item_code": "68"
+      }
+    ],
+    "specifications_and_usage": [
+      "Apply 2 coats without adding water",
+      "Area coverage depends on wall finishing"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "MAX MASTER WATER PROOF RAIN COAT",
+    "finish": "2 in 1 ELASTOMERIC",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "DR FIXIT RAIN COAT",
+    "coverage_per_liter": "100 to 110 sq ft per litre",
+    "order_notes": [
+      "Colourend cost extra",
+      "Only light shade order"
+    ],
+    "description": "Water proof rain coat applied on terrace concrete to reduce dampness and heat.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 640,
+        "retail_price": 550,
+        "offer_price": 333,
+        "save_amount": 217,
+        "item_code": "61"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 2472,
+        "retail_price": 2250,
+        "offer_price": 1286,
+        "save_amount": 964,
+        "item_code": "62"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 6124,
+        "retail_price": 4250,
+        "offer_price": 3185,
+        "save_amount": 1065,
+        "item_code": "63"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 12142,
+        "retail_price": 8650,
+        "offer_price": 6314,
+        "save_amount": 2336,
+        "item_code": "64"
+      }
+    ],
+    "specifications_and_usage": [
+      "Mix 1 litre water with 1 litre of first coat and apply as a primer coat.",
+      "Apply second and third coats without adding water.",
+      "Area coverage depends on wall finishing"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "DARK COLOUR BASE GLOSSY",
+    "finish": "HI GLOSSY FINISH ( ALL COLORS) SPECIAL COLOUR COST EXTRA",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "TILE GUARD",
+    "coverage_per_liter": "100 to 110 sq ft per litre",
+    "order_notes": [],
+    "description": "Premium quality emulsion applied on roof tiles and sunshades.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 453,
+        "retail_price": 490,
+        "offer_price": 295,
+        "save_amount": 195,
+        "item_code": "52"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 1742,
+        "retail_price": 1850,
+        "offer_price": 1132,
+        "save_amount": 718,
+        "item_code": "51"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 4309,
+        "retail_price": 3850,
+        "offer_price": 2801,
+        "save_amount": 1049,
+        "item_code": "50"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 8534,
+        "retail_price": 7500,
+        "offer_price": 5547,
+        "save_amount": 2253,
+        "item_code": "49"
+      }
+    ],
+    "specifications_and_usage": [
+      "Apply after the wall has dried if the wall is wet",
+      "Direct apply 3 and 4 coat finish",
+      "Area coverage depends on wall finishing"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "SMART TILE GUARD",
+    "finish": "HI GLOSSY FINISH ( ALL COLORS) SPECIAL COLOUR COST EXTRA",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "INDICO & AMCOS TILE COAT",
+    "coverage_per_liter": "100 to 110 sq ft per litre",
+    "order_notes": [],
+    "description": "Premium quality emulsion applied on roof tiles and sunshades.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 496,
+        "retail_price": 610,
+        "offer_price": 322,
+        "save_amount": 288,
+        "item_code": "53"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 1912,
+        "retail_price": 1990,
+        "offer_price": 1243,
+        "save_amount": 747,
+        "item_code": "54"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 4734,
+        "retail_price": 4850,
+        "offer_price": 3077,
+        "save_amount": 1773,
+        "item_code": "55"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 9383,
+        "retail_price": 9800,
+        "offer_price": 6100,
+        "save_amount": 3700,
+        "item_code": "56"
+      }
+    ],
+    "specifications_and_usage": [
+      "Apply after the wall has dried if the wall is wet",
+      "Direct apply 3 and 4 coat finish",
+      "Area coverage depends on wall finishing"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "CEMENT PRIMER PREMIUM INTERIOR",
+    "finish": "matt finish",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "ASIAN INTERIOR PRIMER",
+    "coverage_per_liter": "100 to 130 sq ft per litre",
+    "order_notes": [
+      "Colourend cost extra",
+      "Only light shade order"
+    ],
+    "description": "Premium primer applied directly on walls without white cement coating. Apply over PU sealer water proofing.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 254,
+        "retail_price": 180,
+        "offer_price": 131,
+        "save_amount": 44,
+        "item_code": "44"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 808,
+        "retail_price": 650,
+        "offer_price": 420,
+        "save_amount": 230,
+        "item_code": "7"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 1817,
+        "retail_price": 1350,
+        "offer_price": 945,
+        "save_amount": 405,
+        "item_code": "6"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 2982,
+        "retail_price": 3200,
+        "offer_price": 1550,
+        "save_amount": 842,
+        "item_code": "1"
+      }
+    ],
+    "specifications_and_usage": [
+      "Area coverage depends on wall finishing",
+      "On white cement applied walls, water mix per litre is 100 to 200 ML"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "CEMENT PREMIUM PRIMER 2 IN 1",
+    "finish": "MATT FINISH",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "ASIAN, DECO, PRIMER",
+    "coverage_per_liter": "100 to 130 sq ft per litre",
+    "order_notes": [
+      "Colourend cost extra",
+      "Only light shade order"
+    ],
+    "description": "Premium primer applied directly on walls without white cement coating. Apply over PU sealer water proofing.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 257,
+        "retail_price": 200,
+        "offer_price": 156,
+        "save_amount": 44,
+        "item_code": "11"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 938,
+        "retail_price": 650,
+        "offer_price": 488,
+        "save_amount": 162,
+        "item_code": "10"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 2289,
+        "retail_price": 1750,
+        "offer_price": 1191,
+        "save_amount": 559,
+        "item_code": "9"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 4354,
+        "retail_price": 3900,
+        "offer_price": 2264,
+        "save_amount": 1320,
+        "item_code": "8"
+      }
+    ],
+    "specifications_and_usage": [
+      "On white cement applied walls, water mix per LTR 100 to 200 ML",
+      "Area coverage depends on wall finishing"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "DAM PROOF PRIMER HYDRO LOC- 2 IN 1",
+    "finish": "MATT FINISH",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "ASIAN DAM PROOF",
+    "coverage_per_liter": "100 to 130 sq ft per litre",
+    "order_notes": [
+      "Colourend cost extra",
+      "Only light shade order"
+    ],
+    "description": "Dam proof primer applied directly on walls without white cement coating. Apply over PU sealer water proofing.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 416,
+        "retail_price": 340,
+        "offer_price": 216,
+        "save_amount": 124,
+        "item_code": "19"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 1575,
+        "retail_price": 1150,
+        "offer_price": 813,
+        "save_amount": 348,
+        "item_code": "18"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 3882,
+        "retail_price": 3100,
+        "offer_price": 2019,
+        "save_amount": 849,
+        "item_code": "17"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 7658,
+        "retail_price": 6500,
+        "offer_price": 3499,
+        "save_amount": 2518,
+        "item_code": "16"
+      }
+    ],
+    "specifications_and_usage": [
+      "Water proof protection & inner coat protection",
+      "Apply after the wall has dried if the wall is wet",
+      "Area coverage depends on wall finishing",
+      "On white cement applied walls, mix 100 to 200 ML water per litre"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "SEAL O PRIMER",
+    "finish": "MATT FINISH",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "HYDRO LOC PREMIUM PRIMER",
+    "coverage_per_liter": "100 to 130 sq ft per litre",
+    "order_notes": [
+      "Colourend cost extra",
+      "Only light shade order"
+    ],
+    "description": "Seal O Primer applied directly on walls without white cement coating. Apply over PU sealer water proofing to prevent paint peeling in damp areas.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 375,
+        "retail_price": 322,
+        "offer_price": 195,
+        "save_amount": 109,
+        "item_code": "12"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 1410,
+        "retail_price": 1209,
+        "offer_price": 733,
+        "save_amount": 417,
+        "item_code": "13"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 3086,
+        "retail_price": 2647,
+        "offer_price": 1604,
+        "save_amount": 1053,
+        "item_code": "14"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 5652,
+        "retail_price": 4849,
+        "offer_price": 2939,
+        "save_amount": 1910,
+        "item_code": "15"
+      }
+    ],
+    "specifications_and_usage": [
+      "Apply after the wall has dried if the wall is wet",
+      "Area coverage depends on wall finishing",
+      "On white cement applied walls, mix 100 to 200 ML water per litre"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "SILVER EMULSION INTERIOR",
+    "finish": "MATT FINISH",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "ace sparc",
+    "coverage_per_liter": "100 TO 130 sq ft per litre",
+    "order_notes": [
+      "Colourend cost extra",
+      "Only light shade order",
+      "1 Ltr Net After Tinting"
+    ],
+    "description": "Apply 2 coats of silver emulsion directly inside without applying primer.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 334,
+        "retail_price": 295,
+        "offer_price": 173,
+        "save_amount": 61,
+        "item_code": "20"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 1245,
+        "retail_price": 1100,
+        "offer_price": 647,
+        "save_amount": 453,
+        "item_code": "21"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 2319,
+        "retail_price": 2100,
+        "offer_price": 1205,
+        "save_amount": 895,
+        "item_code": "22"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 3838,
+        "retail_price": 3500,
+        "offer_price": 1996,
+        "save_amount": 1069,
+        "item_code": "23"
+      }
+    ],
+    "specifications_and_usage": [
+      "Apply after the wall has dried if the wall is wet",
+      "Water mix per LTR 100 TO 200 ML on applied primer",
+      "Area coverage depends on wall finishing"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "SPICE EMELSION ADVANCED 2 IN 1",
+    "finish": "MATT FINISH",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "ASIAN ACE",
+    "coverage_per_liter": "100 TO 130 sq ft per litre",
+    "order_notes": [
+      "Colourend cost extra",
+      "Only light shade order",
+      "1 Ltr Net After Tinting"
+    ],
+    "description": "Apply 2 coats of spice emulsion directly inside and outside without applying primer.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 378,
+        "retail_price": 320,
+        "offer_price": 196,
+        "save_amount": 124,
+        "item_code": "27"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 1422,
+        "retail_price": 1250,
+        "offer_price": 740,
+        "save_amount": 363,
+        "item_code": "26"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 2761,
+        "retail_price": 2450,
+        "offer_price": 1435,
+        "save_amount": 1015,
+        "item_code": "25"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 5121,
+        "retail_price": 3950,
+        "offer_price": 2663,
+        "save_amount": 1239,
+        "item_code": "24"
+      }
+    ],
+    "specifications_and_usage": [
+      "Apply after the wall has dried if the wall is wet",
+      "Water mix per LTR 100 TO 200 ML on applied primer",
+      "Area coverage depends on wall finishing"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "SAPPHIRE ADVANCED 2 IN 1",
+    "finish": "MATT FINISH",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "ASIAN ACE ADVANCED",
+    "coverage_per_liter": "100 TO 130 sq ft per litre",
+    "order_notes": [
+      "Colourend cost extra",
+      "Only light shade order",
+      "1 Ltr Net After Tinting"
+    ],
+    "description": "Apply 2 coats of Sapphire emulsion directly inside and outside without applying primer.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 404,
+        "retail_price": 330,
+        "offer_price": 210,
+        "save_amount": 120,
+        "item_code": "28"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 1528,
+        "retail_price": 1290,
+        "offer_price": 794,
+        "save_amount": 496,
+        "item_code": "29"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 3174,
+        "retail_price": 2581,
+        "offer_price": 1651,
+        "save_amount": 930,
+        "item_code": "30"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 6242,
+        "retail_price": 4300,
+        "offer_price": 3246,
+        "save_amount": 1054,
+        "item_code": "31"
+      }
+    ],
+    "specifications_and_usage": [
+      "Apply after the wall has dried if the wall is wet",
+      "Water mix per LTR 100 TO 200 ML on applied primer",
+      "Area coverage depends on wall finishing"
+    ]
+  },
+  {
+    "brand": "Nanco Paints",
+    "store_type": "Factory Outlet",
+    "product_name": "DARK COLOUR BASE MATT",
+    "finish": "MATT FINISH ( ALL COLORS) SPECIAL COLOUR COST EXTRA",
+    "product_image_url": "",
+    "feature_tags_image_url": "",
+    "product_range_similar_to": "TILE GUARD",
+    "coverage_per_liter": "100 to 110 sq ft per litre",
+    "order_notes": [],
+    "description": "Premium quality emulsion applied on roof tiles and sunshades.",
+    "pricing_table": [
+      {
+        "unit": "1 Ltr",
+        "mrp": 453,
+        "retail_price": 490,
+        "offer_price": 295,
+        "save_amount": 195,
+        "item_code": "52"
+      },
+      {
+        "unit": "4 Ltr",
+        "mrp": 1742,
+        "retail_price": 1850,
+        "offer_price": 1132,
+        "save_amount": 718,
+        "item_code": "51"
+      },
+      {
+        "unit": "10 Ltr",
+        "mrp": 4309,
+        "retail_price": 3850,
+        "offer_price": 2801,
+        "save_amount": 1049,
+        "item_code": "50"
+      },
+      {
+        "unit": "20 Ltr",
+        "mrp": 8534,
+        "retail_price": 7500,
+        "offer_price": 5547,
+        "save_amount": 2253,
+        "item_code": "49"
+      }
+    ],
+    "specifications_and_usage": [
+      "Apply after the wall has dried if the wall is wet",
+      "Direct apply 3 and 4 coat finish",
+      "Area coverage depends on wall finishing"
+    ]
+  }
+]

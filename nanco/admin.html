@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Nanco Paints</title>
+  <meta name="description" content="Nanco Paints admin panel for managing products and images.">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Admin specific styles */
+    .admin-container {
+      padding: 40px 24px;
+      max-width: var(--page-max-width);
+      margin: 0 auto;
+    }
+    
+    .admin-form-group {
+      margin-bottom: 20px;
+    }
+    
+    .admin-form-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    
+    .admin-input {
+      width: 100%;
+      background: var(--color-white-plate);
+      border: 1.5px solid rgba(0,0,0,0.15);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: var(--font-primary);
+      font-size: 16px;
+    }
+    
+    .admin-input:focus {
+      outline: none;
+      border-width: 3px;
+      box-shadow: 0 0 0 2px var(--color-lime-spark);
+    }
+    
+    .admin-form-card {
+      background: var(--color-white-plate);
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      border-radius: var(--radius-cards);
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+    
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    
+    .product-item {
+      background: var(--color-white-plate);
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+      border-radius: 20px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .product-img-preview {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.05);
+      background: var(--color-linen-canvas);
+    }
+    
+    .product-title {
+      font-weight: 800;
+      font-size: 18px;
+    }
+    
+    .product-category {
+      font-size: 14px;
+      color: var(--color-sage-mute);
+    }
+    
+    .delete-btn {
+      margin-top: auto;
+      background: var(--color-maroon-plate);
+      color: var(--color-white-plate);
+      border: none;
+      border-radius: var(--radius-buttons);
+      padding: 8px 16px;
+      font-weight: 700;
+      text-align: center;
+      transition: transform 0.1s;
+    }
+    
+    .delete-btn:hover {
+      transform: translateY(-2px);
+    }
+    
+    .admin-tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .admin-tab {
+      background: transparent;
+      border: 1.5px solid rgba(0,0,0,0.15);
+      border-radius: var(--radius-buttons);
+      padding: 10px 20px;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+    
+    .admin-tab.active {
+      background: var(--color-ink-black);
+      color: var(--color-white-plate);
+    }
+    
+    .admin-tab:hover:not(.active) {
+      background: rgba(0,0,0,0.05);
+    }
+
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+
+    /* dashboard shown after session check */
+    #admin-dashboard { display: block; }
+  </style>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+
+
+  <!-- ===== ADMIN DASHBOARD ===== -->
+  <div id="admin-dashboard">
+
+  <!-- Floating Nav -->
+  <nav class="nav-float">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/dark-logo.png" alt="Nanco Paints Logo">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Live Site</a></li>
+        <li><a href="admin.html" style="font-weight:700;">Admin Dashboard</a></li>
+      </ul>
+      <button class="nav-cta" id="logoutBtn" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section for Admin -->
+  <header class="hero-section" style="padding: 60px 24px 40px; border-bottom: 1.5px solid rgba(0,0,0,0.08); background: var(--color-white-plate);">
+    <div class="hero-inner" style="grid-template-columns: 1fr;">
+      <div>
+        <span class="hero-tag">Admin Panel</span>
+        <h1 class="hero-headline" style="font-size: 56px;">Manage Nanco Platform</h1>
+        <p class="hero-sub">Upload product catalogs, control images, and manage the content of the bento application.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-container">
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchTab('products')">Manage Products</button>
+      <button class="admin-tab" onclick="switchTab('images')">Image Gallery</button>
+      <button class="admin-tab" onclick="switchTab('heromanager')">Hero Manager</button>
+    </div>
+
+    <!-- Products Tab -->
+    <div id="tab-products" class="tab-content active">
+      <div class="admin-form-card">
+        <h2 class="section-title" style="font-size: 32px; margin-bottom: 24px;">Add New Product</h2>
+        <form id="productForm">
+          <div class="admin-form-group">
+            <label for="productName">Product Name</label>
+            <input type="text" id="productName" class="admin-input" placeholder="e.g. Nanco Royal Emulsion" required>
+          </div>
+          
+          <div class="admin-form-group">
+            <label for="productCategory">Category</label>
+            <select id="productCategory" class="admin-input" required>
+              <option value="Interior Paints">Interior Paints</option>
+              <option value="Exterior Paints">Exterior Paints</option>
+              <option value="Wood Finishes">Wood Finishes</option>
+              <option value="Waterproofing">Waterproofing</option>
+              <option value="Primers">Primers</option>
+            </select>
+          </div>
+
+          <div class="admin-form-group">
+            <label for="productPrice">Price (Optional)</label>
+            <input type="number" id="productPrice" class="admin-input" placeholder="₹" min="0">
+          </div>
+          
+          <div class="admin-form-group">
+            <label for="productImage">Product Image File</label>
+            <input type="file" id="productImage" class="admin-input" accept="image/*" required>
+          </div>
+
+          <button type="submit" class="btn-primary" style="background: var(--color-lime-spark); color: #000; border: none; width: 100%;">Save Product</button>
+        </form>
+      </div>
+
+      <div>
+        <h2 class="section-title" style="font-size: 32px;">Active Products</h2>
+        <div class="product-grid" id="productGrid">
+          <!-- Products will be rendered here via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Images Tab -->
+    <div id="tab-images" class="tab-content">
+      <div class="admin-form-card">
+        <h2 class="section-title" style="font-size: 32px; margin-bottom: 24px;">Upload Image</h2>
+        <form id="imageForm">
+          <div class="admin-form-group">
+            <label for="imageTitle">Image Title/Alt Text</label>
+            <input type="text" id="imageTitle" class="admin-input" placeholder="e.g. Living Room Interior Demo" required>
+          </div>
+          
+          <div class="admin-form-group">
+            <label for="imageUrl">Upload Image File</label>
+            <input type="file" id="imageUrl" class="admin-input" accept="image/*" required>
+          </div>
+
+          <button type="submit" class="btn-primary" style="background: var(--color-cobalt-band); color: #fff; border: none; width: 100%;">Upload to Gallery</button>
+        </form>
+      </div>
+
+      <div>
+        <h2 class="section-title" style="font-size: 32px;">Image Gallery</h2>
+        <div class="product-grid" id="imageGrid">
+          <!-- Images will be rendered here via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Manager Tab -->
+    <div id="tab-heromanager" class="tab-content">
+      <style>
+        .hero-manager-grid { display: grid; grid-template-columns: 380px 1fr; gap: 28px; align-items: start; }
+        .hm-controls { display: flex; flex-direction: column; gap: 16px; }
+        .hero-ctrl-group { display: flex; flex-direction: column; gap: 6px; }
+        .hero-ctrl-group label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-sage-mute); }
+        .hero-ctrl-group input[type=text], .hero-ctrl-group textarea, .hero-ctrl-group input[type=file] {
+          width: 100%; padding: 10px 14px; border: 1.5px solid rgba(0,0,0,0.12); border-radius: 10px;
+          font-family: 'Inter', sans-serif; font-size: 14px; background: #fff; color: #000; transition: border-color 0.15s; box-sizing: border-box;
+        }
+        .hero-ctrl-group input[type=text]:focus, .hero-ctrl-group textarea:focus { outline: none; border-color: var(--color-lime-spark); }
+        .hero-ctrl-group textarea { resize: vertical; min-height: 80px; }
+        .color-row { display: flex; gap: 10px; align-items: center; }
+        .color-row input[type=color] { width: 52px; height: 40px; border: 1.5px solid rgba(0,0,0,0.12); border-radius: 8px; cursor: pointer; padding: 2px; background: #fff; }
+        .color-row input[type=text] { flex: 1; }
+        
+        /* Top Preview */
+        .hm-preview-wrapper { width: 100%; margin-bottom: 24px; }
+        .mini-hero { border-radius: 20px; overflow: hidden; position: relative; aspect-ratio: 2 / 1; width: 100%; max-height: 500px; display: flex; align-items: center; padding: 32px 48px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); transition: background 0.3s; }
+        .mini-hero-house { position: absolute; top: 0; right: 0; bottom: 0; width: 90% !important; height: 100% !important; object-fit: cover; object-position: right; pointer-events: none; z-index: 1; }
+        .mini-hero-overlay { position: absolute; top: 0; left: 0; bottom: 0; width: 50%; z-index: 2; pointer-events: none; transition: background 0.3s; }
+        .mini-hero-content { position: relative; z-index: 3; max-width: 55%; margin-left: 20px; }
+        .mini-hero-tag { display: inline-block; background: rgba(255,255,255,0.9); border-radius: 99px; padding: 6px 16px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; color: #000; }
+        .mini-hero-headline { font-size: 48px; font-weight: 800; line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 16px; color: #000; }
+        .mini-hero-sub { font-size: 16px; color: #333; line-height: 1.5; max-width: 380px; }
+        .mini-hero-bucket { position: absolute; right: 60px; bottom: 0; height: 380px; width: 325px; object-fit: contain; z-index: 4; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15)); transform: scale(1.1); }
+
+        .hm-btn { background: var(--color-lime-spark); color: #000; border: none; border-radius: 12px; padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer; transition: transform 0.1s; width: 100%; font-family: 'Inter', sans-serif; }
+        .hm-btn:hover { transform: translateY(-1px); }
+        .hm-btn-secondary { background: #fff; color: #555; border: 1.5px solid rgba(0,0,0,0.15); border-radius: 12px; padding: 14px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: all .15s; width: 100%; }
+        .hm-btn-secondary:hover { background: #f9f9f9; }
+        
+        /* Interactive Live Preview Additions */
+        @keyframes breathe {
+          0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+          70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+        .edit-dot {
+          position: absolute; width: 28px; height: 28px;
+          background: #fff; border-radius: 50%; cursor: pointer; z-index: 10;
+          display: flex; align-items: center; justify-content: center;
+          color: var(--color-cobalt-band); font-size: 12px;
+          animation: breathe 2s infinite; border: 2px solid var(--color-cobalt-band);
+          transition: transform 0.2s;
+        }
+        .edit-dot:hover { transform: scale(1.15); animation: none; }
+        .edit-popover {
+          position: absolute; background: #fff; border-radius: 12px;
+          padding: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+          display: none; z-index: 20; flex-direction: column; gap: 4px;
+          min-width: 140px; border: 1px solid rgba(0,0,0,0.05);
+        }
+        .edit-popover button {
+          background: none; border: none; padding: 10px 12px;
+          text-align: left; font-size: 13px; font-weight: 700; cursor: pointer;
+          border-radius: 8px; transition: background 0.15s;
+          display: flex; align-items: center; gap: 8px; color: #333;
+        }
+        .edit-popover button:hover { background: #f0f2f5; }
+        .edit-popover button.danger { color: #c53030; }
+        .inline-save-btn {
+          position: absolute; bottom: 32px; right: 32px; z-index: 10;
+          background: var(--color-midnight-ink); color: #fff;
+          border: none; border-radius: 50%; width: 56px; height: 56px;
+          display: flex; align-items: center; justify-content: center;
+          cursor: pointer; font-size: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+          transition: transform 0.2s, background 0.2s;
+        }
+        .inline-save-btn:hover { transform: scale(1.05) translateY(-2px); background: #000; }
+        
+        .color-swatch-row { display: flex; gap: 12px; padding: 12px; flex-wrap: wrap; width: 140px; justify-content: center; background:#fff; border-radius:12px; }
+        .color-swatch { width: 32px; height: 32px; border-radius: 50%; cursor: pointer; border: 2.5px solid transparent; transition: transform 0.15s; }
+        .color-swatch:hover { transform: scale(1.2); border-color: rgba(0,0,0,0.3); }
+        
+        .hm-modal-overlay {
+          position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+          display: none; align-items: center; justify-content: center; z-index: 9999;
+        }
+        .hm-modal {
+          background: #fff; border-radius: 20px; padding: 40px;
+          width: 420px; max-width: 90vw; text-align: center;
+          box-shadow: 0 20px 50px rgba(0,0,0,0.2); animation: fadeInUp 0.3s forwards;
+        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+      </style>
+
+      <div class="admin-form-card" style="margin-bottom: 0;">
+        
+        <!-- TOP: Live Preview -->
+        <div class="hm-preview-wrapper">
+          <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:12px;">
+            <h2 class="section-title" style="font-size: 32px; margin: 0;">Live Preview</h2>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <button onclick="clearHeroForm()" class="hm-btn-secondary" style="width:auto; padding:8px 16px; border-radius:8px; font-size:13px;" title="Clear Changes">
+                <i class="fas fa-undo" style="margin-right:6px;"></i> Clear
+              </button>
+              <button onclick="openSaveModal()" class="hm-btn" style="width:auto; padding:8px 16px; border-radius:8px; font-size:13px; background:var(--color-midnight-ink); color:#fff;" title="Save Slide">
+                <i class="fas fa-save" style="margin-right:6px;"></i> Save
+              </button>
+            </div>
+          </div>
+          <div class="mini-hero" id="miniHero">
+            <!-- Background Image Dot & Popover -->
+            <img class="mini-hero-house" id="miniHouseImg" src="assets/house-bg.png" alt="" onerror="this.style.display='none'" onload="this.style.display='block'">
+            <div class="edit-dot" style="top: 24px; right: 24px;" onclick="toggleEditPopover('house-popover')"><i class="fas fa-image"></i></div>
+            <div class="edit-popover" id="house-popover" style="top: 60px; right: 24px; width: 260px; padding: 12px;">
+              <div style="font-size: 12px; color: #2d3748; background: #fffbeb; border: 1px solid #fef3c7; border-radius: 8px; padding: 10px; margin-bottom: 12px; line-height: 1.5; text-align: left;">
+                <div style="font-weight: 700; color: #b45309; display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                  <i class="fas fa-exclamation-triangle"></i> Recommendation:
+                </div>
+                For best results, other than for background-removed image use the <strong>.webp</strong> format for fast loading. We suggest selecting a banner in <strong>21:9 ratio</strong> for a better fit.
+                <div style="margin-top: 8px;">
+                  <a href="https://cloudconvert.com/to-webp" target="_blank" style="color: #b45309; font-weight: 700; text-decoration: underline; display: inline-flex; align-items: center; gap: 4px;">
+                    <i class="fas fa-external-link-alt" style="font-size: 10px;"></i> Convert image here
+                  </a>
+                </div>
+              </div>
+              <button onclick="document.getElementById('he-house-file').click(); toggleEditPopover('house-popover')"><i class="fas fa-upload"></i> Upload Image</button>
+              <button class="danger" onclick="removeImage('house'); toggleEditPopover('house-popover')"><i class="fas fa-trash"></i> Remove Image</button>
+            </div>
+
+            <div class="mini-hero-overlay" id="miniOverlay"></div>
+            
+            <!-- Background Color Dot -->
+            <div class="edit-dot" style="top: 24px; left: 24px;" title="Background Color" onclick="toggleEditPopover('bgcolor-popover')"><i class="fas fa-fill-drip"></i></div>
+            <div class="edit-popover" id="bgcolor-popover" style="top: 60px; left: 24px; padding:0; border:none; background:transparent;">
+               <div class="color-swatch-row">
+                 <div class="color-swatch" style="background:#c8d90f;" onclick="setPreviewColor('he-bg-color', '#c8d90f')"></div>
+                 <div class="color-swatch" style="background:#1a365d;" onclick="setPreviewColor('he-bg-color', '#1a365d')"></div>
+                 <div class="color-swatch" style="background:#f56565;" onclick="setPreviewColor('he-bg-color', '#f56565')"></div>
+                 <div class="color-swatch" style="background:#48bb78;" onclick="setPreviewColor('he-bg-color', '#48bb78')"></div>
+                 <div class="color-swatch" style="background:#fff; border: 2.5px solid #ccc; position: relative; overflow:hidden;" title="Custom Color">
+                   <i class="fas fa-plus" style="position: absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:12px; color:#555; pointer-events:none;"></i>
+                   <input type="color" oninput="setPreviewColor('he-bg-color', this.value)" style="position:absolute; top:-10px; left:-10px; width:50px; height:50px; opacity:0; cursor:pointer; pointer-events:auto;">
+                 </div>
+               </div>
+            </div>
+            
+            <!-- Overlay Color Dot -->
+            <div class="edit-dot" style="bottom: 24px; left: 24px;" title="Overlay Gradient Color" onclick="toggleEditPopover('overlay-popover')"><i class="fas fa-palette"></i></div>
+            <div class="edit-popover" id="overlay-popover" style="bottom: 60px; left: 24px; padding:0; border:none; background:transparent;">
+               <div class="color-swatch-row">
+                 <div class="color-swatch" style="background:#c8d90f;" onclick="setPreviewColor('he-overlay-color', '#c8d90f')"></div>
+                 <div class="color-swatch" style="background:#1a365d;" onclick="setPreviewColor('he-overlay-color', '#1a365d')"></div>
+                 <div class="color-swatch" style="background:#f56565;" onclick="setPreviewColor('he-overlay-color', '#f56565')"></div>
+                 <div class="color-swatch" style="background:#48bb78;" onclick="setPreviewColor('he-overlay-color', '#48bb78')"></div>
+                 <div class="color-swatch" style="background:#fff; border: 2.5px solid #ccc; position: relative; overflow:hidden;" title="Custom Color">
+                   <i class="fas fa-plus" style="position: absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:12px; color:#555; pointer-events:none;"></i>
+                   <input type="color" oninput="setPreviewColor('he-overlay-color', this.value)" style="position:absolute; top:-10px; left:-10px; width:50px; height:50px; opacity:0; cursor:pointer; pointer-events:auto;">
+                 </div>
+               </div>
+            </div>
+
+            <div class="mini-hero-content" style="cursor: text;">
+              
+              <div style="position:relative; display:inline-block; margin-bottom:16px;">
+                <span class="mini-hero-tag editable-text" id="miniTag" contenteditable="true" oninput="document.getElementById('he-tag').value = this.textContent" style="outline:none; border-bottom:1px dashed rgba(0,0,0,0.2); min-width:50px;">ISO 9001-2015 Certified</span>
+                <div class="edit-dot" style="top:-8px; right:-24px; width:20px; height:20px; font-size:10px;" onclick="toggleEditPopover('tagcolor-popover')"><i class="fas fa-palette"></i></div>
+                <div class="edit-popover" id="tagcolor-popover" style="top:-8px; left:calc(100% + 12px); padding:0; border:none; background:transparent;">
+                   <div class="color-swatch-row">
+                     <div class="color-swatch" style="background:#000;" onclick="setPreviewColor('he-tag-color', '#000000')"></div>
+                     <div class="color-swatch" style="background:#fff;" onclick="setPreviewColor('he-tag-color', '#ffffff')"></div>
+                     <div class="color-swatch" style="background:#c8d90f;" onclick="setPreviewColor('he-tag-color', '#c8d90f')"></div>
+                     <div class="color-swatch" style="background:#fff; border: 2.5px solid #ccc; position: relative; overflow:hidden;" title="Custom Color">
+                       <i class="fas fa-plus" style="position: absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:12px; color:#555; pointer-events:none;"></i>
+                       <input type="color" oninput="setPreviewColor('he-tag-color', this.value)" style="position:absolute; top:-10px; left:-10px; width:50px; height:50px; opacity:0; cursor:pointer;">
+                     </div>
+                   </div>
+                </div>
+              </div>
+              
+              <div style="position:relative; display:inline-block; margin-bottom:16px;">
+                <div class="mini-hero-headline editable-text" id="miniHeadline" contenteditable="true" oninput="document.getElementById('he-headline').value = this.textContent" style="outline:none; border-bottom:1px dashed rgba(0,0,0,0.2); min-width:100px; margin-bottom:0;">Paint for Better Lives.</div>
+                <div class="edit-dot" style="top:-10px; right:-24px; width:20px; height:20px; font-size:10px;" onclick="toggleEditPopover('hdcolor-popover')"><i class="fas fa-palette"></i></div>
+                <div class="edit-popover" id="hdcolor-popover" style="top:-10px; left:calc(100% + 12px); padding:0; border:none; background:transparent;">
+                   <div class="color-swatch-row">
+                     <div class="color-swatch" style="background:#000;" onclick="setPreviewColor('he-headline-color', '#000000')"></div>
+                     <div class="color-swatch" style="background:#fff;" onclick="setPreviewColor('he-headline-color', '#ffffff')"></div>
+                     <div class="color-swatch" style="background:#1a365d;" onclick="setPreviewColor('he-headline-color', '#1a365d')"></div>
+                     <div class="color-swatch" style="background:#fff; border: 2.5px solid #ccc; position: relative; overflow:hidden;" title="Custom Color">
+                       <i class="fas fa-plus" style="position: absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:12px; color:#555; pointer-events:none;"></i>
+                       <input type="color" oninput="setPreviewColor('he-headline-color', this.value)" style="position:absolute; top:-10px; left:-10px; width:50px; height:50px; opacity:0; cursor:pointer;">
+                     </div>
+                   </div>
+                </div>
+              </div>
+              
+              <div style="position:relative; display:inline-block;">
+                <div class="mini-hero-sub editable-text" id="miniSub" contenteditable="true" oninput="document.getElementById('he-sub').value = this.textContent" style="outline:none; border-bottom:1px dashed rgba(0,0,0,0.2); min-width:100px; margin-bottom:0;">Nanco Paints brings premium-quality paints to Kerala homes.</div>
+                <div class="edit-dot" style="top:-10px; right:-24px; width:20px; height:20px; font-size:10px;" onclick="toggleEditPopover('subcolor-popover')"><i class="fas fa-palette"></i></div>
+                <div class="edit-popover" id="subcolor-popover" style="top:-10px; left:calc(100% + 12px); padding:0; border:none; background:transparent;">
+                   <div class="color-swatch-row">
+                     <div class="color-swatch" style="background:#333;" onclick="setPreviewColor('he-sub-color', '#333333')"></div>
+                     <div class="color-swatch" style="background:#fff;" onclick="setPreviewColor('he-sub-color', '#ffffff')"></div>
+                     <div class="color-swatch" style="background:#c8d90f;" onclick="setPreviewColor('he-sub-color', '#c8d90f')"></div>
+                     <div class="color-swatch" style="background:#fff; border: 2.5px solid #ccc; position: relative; overflow:hidden;" title="Custom Color">
+                       <i class="fas fa-plus" style="position: absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:12px; color:#555; pointer-events:none;"></i>
+                       <input type="color" oninput="setPreviewColor('he-sub-color', this.value)" style="position:absolute; top:-10px; left:-10px; width:50px; height:50px; opacity:0; cursor:pointer;">
+                     </div>
+                   </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Bucket Image Dot & Popover -->
+            <img class="mini-hero-bucket" id="miniBucketImg" src="assets/HERO-PAINT.png" alt="" onerror="this.style.display='none'" onload="this.style.display='block'">
+            <div class="edit-dot" style="bottom: 190px; right: 200px;" onclick="toggleEditPopover('bucket-popover')"><i class="fas fa-paint-roller"></i></div>
+            <div class="edit-popover" id="bucket-popover" style="bottom: 225px; right: 200px; width: 260px; padding: 12px;">
+              <div style="font-size: 12px; color: #2d3748; background: #fffbeb; border: 1px solid #fef3c7; border-radius: 8px; padding: 10px; margin-bottom: 12px; line-height: 1.5; text-align: left;">
+                <div style="font-weight: 700; color: #b45309; display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                  <i class="fas fa-exclamation-triangle"></i> Recommendation:
+                </div>
+                For best results, use a <strong>background-removed</strong> image in <strong>.webp</strong> format. We suggest using a <strong>6:7 aspect ratio</strong> image for a perfect fit.
+                <div style="margin-top: 8px;">
+                  <a href="https://cloudconvert.com/to-webp" target="_blank" style="color: #b45309; font-weight: 700; text-decoration: underline; display: inline-flex; align-items: center; gap: 4px;">
+                    <i class="fas fa-external-link-alt" style="font-size: 10px;"></i> Convert image here
+                  </a>
+                </div>
+              </div>
+              <button onclick="document.getElementById('he-bucket-file').click(); toggleEditPopover('bucket-popover')"><i class="fas fa-upload"></i> Upload Bucket Image</button>
+              <button class="danger" onclick="removeImage('bucket'); toggleEditPopover('bucket-popover')"><i class="fas fa-trash"></i> Remove Bucket</button>
+            </div>
+
+
+          </div>
+        </div>
+
+        <!-- Save Modal -->
+        <div class="hm-modal-overlay" id="saveModalOverlay">
+          <div class="hm-modal">
+            <div style="font-size:48px; color:var(--color-cobalt-band); margin-bottom:16px;"><i class="fas fa-cloud-upload-alt"></i></div>
+            <h3 style="font-size:26px; font-weight:800; margin-bottom:12px; letter-spacing:-0.5px;">Save Slide Changes</h3>
+            <p style="color:var(--color-sage-mute); font-size:15px; margin-bottom:32px; line-height:1.5;">Do you want to update the existing slide or create a brand new one?</p>
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <button onclick="executeInlineSave('replace')" class="hm-btn" style="background:var(--color-cobalt-band); color:#fff;"><i class="fas fa-sync" style="margin-right:8px;"></i> Update Existing Slide</button>
+              <button onclick="executeInlineSave('new')" class="hm-btn" style="background:var(--color-lime-spark);"><i class="fas fa-plus" style="margin-right:8px;"></i> Save as New Slide</button>
+              <button onclick="closeSaveModal()" class="hm-btn-secondary" style="margin-top:8px;">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide Selector Grid -->
+        <div style="margin-bottom: 32px; background: #fff; border-radius: 12px; padding: 24px; border: 1.5px solid rgba(0,0,0,0.1);">
+          <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:20px;">
+            <div>
+              <h3 style="font-size: 20px; font-weight:800; margin:0 0 4px 0;">Manage Slides</h3>
+              <p style="font-size: 13px; color: var(--color-sage-mute); margin:0;">Select a slide to edit or create a new one.</p>
+            </div>
+          </div>
+          <div class="product-grid" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-top: 0;">
+            
+            <!-- Default Slide -->
+            <div class="product-item" style="cursor: pointer; position: relative; border: 1.5px solid var(--color-lime-spark); box-shadow: 0 8px 24px rgba(0,0,0,0.04); background: var(--color-leaf-wash); transition: all 0.3s;" onclick="clearHeroForm(); document.querySelector('.hm-preview-wrapper').scrollIntoView({behavior: 'smooth'});" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 16px 32px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.04)'">
+              <div style="position:relative; width:100%; height:120px; border-radius:12px; overflow:hidden; border-bottom:3px solid var(--color-lime-spark); background:var(--color-lime-spark);">
+                <img src="assets/house-bg.png" alt="Default Background" style="position:absolute; top:0; right:0; width:90%; height:100%; object-fit:cover; object-position:right; mix-blend-mode: multiply; opacity:0.8;">
+              </div>
+              <div class="product-title" style="font-size:14px; margin-top:12px; color: var(--color-forest-ink);">Original Lime Theme</div>
+              <button id="hm-default-toggle-btn" onclick="toggleDefaultHero(); event.stopPropagation();" class="hm-btn-secondary" style="margin-top:auto; padding:8px; font-size:12px; width:100%; background: #fff; border: 1px solid rgba(0,0,0,0.05); color: var(--color-forest-ink);">
+                <i class="fas fa-eye" style="margin-right:4px;"></i> Hide Default
+              </button>
+            </div>
+
+            <!-- Custom Slides injected here -->
+            <div id="heroGrid" style="display: contents;"></div>
+
+            <!-- Create New Blank Slide -->
+            <div class="product-item" style="order: 999; cursor: pointer; border: 2px dashed rgba(38,101,214,0.3); background: #f4f8ff; box-shadow: 0 8px 24px rgba(38,101,214,0.04); justify-content:center; align-items:center; min-height: 200px; transition: all 0.3s;" onclick="clearHeroForm(); document.querySelector('.hm-preview-wrapper').scrollIntoView({behavior: 'smooth'});" onmouseover="this.style.borderColor='var(--color-cobalt-band)'; this.style.background='#ebf2ff'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 16px 32px rgba(38,101,214,0.1)'" onmouseout="this.style.borderColor='rgba(38,101,214,0.3)'; this.style.background='#f4f8ff'; this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 24px rgba(38,101,214,0.04)'">
+              <div style="display:flex; flex-direction:column; align-items:center; color:var(--color-cobalt-band);">
+                <div style="width:56px; height:56px; background:#fff; border-radius:50%; display:flex; justify-content:center; align-items:center; box-shadow:0 4px 12px rgba(38,101,214,0.1); margin-bottom:12px;">
+                   <i class="fas fa-plus" style="font-size:24px;"></i>
+                </div>
+                <div style="font-weight:700; font-size:15px;">Add New Slide</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="hero-manager-grid" style="display: none;">
+          <!-- LEFT: Form -->
+          <div class="hm-controls">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+              <h3 style="font-size: 20px; margin:0;" id="hm-form-title">Add New Slide</h3>
+              <button onclick="clearHeroForm()" style="background:none; border:none; color:var(--color-cobalt-band); font-size:13px; font-weight:700; cursor:pointer;" id="hm-cancel-btn">Clear</button>
+            </div>
+            
+            <input type="hidden" id="hm-slide-id" value="">
+            <input type="hidden" id="he-tag-color" value="#000000">
+            <input type="hidden" id="he-headline-color" value="#000000">
+            <input type="hidden" id="he-sub-color" value="#333333">
+
+            <div class="hero-ctrl-group">
+              <label>Background Color</label>
+              <div class="color-row">
+                <input type="color" id="he-bg-color" value="#c8d90f" oninput="updateHeroPreview()">
+                <input type="text" id="he-bg-color-hex" value="#c8d90f" placeholder="#c8d90f" oninput="syncColorFromHex('he-bg-color','he-bg-color-hex')">
+              </div>
+            </div>
+
+            <div class="hero-ctrl-group">
+              <label>Overlay Gradient Color</label>
+              <div class="color-row">
+                <input type="color" id="he-overlay-color" value="#c8d90f" oninput="updateHeroPreview()">
+                <input type="text" id="he-overlay-color-hex" value="#c8d90f" placeholder="#c8d90f" oninput="syncColorFromHex('he-overlay-color','he-overlay-color-hex')">
+              </div>
+            </div>
+
+            <div class="hero-ctrl-group">
+              <label>Badge / Tag Text</label>
+              <input type="text" id="he-tag" value="ISO 9001-2015 Certified" oninput="updateHeroPreview()">
+            </div>
+
+            <div class="hero-ctrl-group">
+              <label>Headline</label>
+              <input type="text" id="he-headline" value="Paint for Better Lives." oninput="updateHeroPreview()">
+            </div>
+
+            <div class="hero-ctrl-group">
+              <label>Sub Text</label>
+              <textarea id="he-sub" oninput="updateHeroPreview()">Nanco Paints brings premium-quality, certified paints to homes, offices, and factories across Kerala. Bold colours. Lasting finish.</textarea>
+            </div>
+
+            <div class="hero-ctrl-group">
+              <label>Hero Bucket Image (Paint Can)</label>
+              <input type="file" id="he-bucket-file" accept="image/*" onchange="previewBucketImage(this)">
+              <p style="font-size:11px;color:var(--color-sage-mute);margin-top:4px;">Current: <span id="he-bucket-current">assets/HERO-PAINT.png</span></p>
+            </div>
+
+            <div class="hero-ctrl-group">
+              <label>House Background Image</label>
+              <input type="file" id="he-house-file" accept="image/*" onchange="previewHouseImage(this)">
+              <p style="font-size:11px;color:var(--color-sage-mute);margin-top:4px;">Current: <span id="he-house-current">assets/house-bg.png</span></p>
+            </div>
+
+            <button class="hm-btn" onclick="saveHeroSlide()" id="heroSaveBtn">
+              <i class="fas fa-save" style="margin-right:8px;"></i> Save Slide
+            </button>
+          </div>
+
+          <!-- RIGHT: Slides Grid moved to Slide Selector section -->
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="footer-inner" style="grid-template-columns: 1fr; text-align: center;">
+      <div>
+        <h4 style="color: #fff; margin-bottom: 12px; font-weight: 800; letter-spacing: -1px; font-size: 24px;">Nanco Admin</h4>
+        <p style="color: rgba(255,255,255,0.6); font-size: 14px;">Internal dashboard for managing site assets securely.</p>
+      </div>
+    </div>
+  </footer>
+
+  </div> <!-- end #admin-dashboard -->
+
+  <script>
+    const API_BASE = 'http://127.0.0.1:5000/api';
+    let ADMIN_TOKEN = '';
+    let authHeaders = {};
+
+    // ===== SESSION GUARD =====
+    // Admin must come from login.html with a valid admin session
+    const session = JSON.parse(sessionStorage.getItem('nanco_session') || 'null');
+    if (!session || !session.token || session.role !== 'admin') {
+      window.location.href = 'login.html';
+    } else {
+      ADMIN_TOKEN = session.token;
+      authHeaders = { 'Authorization': 'Bearer ' + ADMIN_TOKEN };
+      // Show logged-in user name in nav if element exists
+      const userNameEl = document.getElementById('adminUserName');
+      if (userNameEl) userNameEl.textContent = session.name || 'Admin';
+      loadData();
+    }
+
+    function logout() {
+      sessionStorage.removeItem('nanco_session');
+      window.location.href = 'login.html';
+    }
+
+    // Tab switching logic
+    function switchTab(tabId) {
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      
+      event.target.classList.add('active');
+      document.getElementById('tab-' + tabId).classList.add('active');
+    }
+
+    let products = [];
+    let images = [];
+    let heroBgs = [];
+
+    async function loadData() {
+      try {
+        const res = await fetch(`${API_BASE}/data`, { cache: 'no-store' });
+        const data = await res.json();
+        if (data.products) products = data.products;
+        if (data.images) images = data.images;
+        if (data.heroBgs) heroBgs = data.heroBgs;
+      } catch(e) {
+        console.error("Error loading data from backend", e);
+      }
+      renderProducts();
+      renderImages();
+      renderHeroBgs();
+    }
+
+    // Helper to upload image via our backend
+    async function uploadImage(file) {
+      const formData = new FormData();
+      formData.append('image', file);
+      
+      const res = await fetch(`${API_BASE}/upload`, {
+        method: 'POST',
+        headers: authHeaders,
+        body: formData
+      });
+      
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      return data.publicUrl;
+    }
+
+    // Render functions
+    function renderProducts() {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+      
+      products.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'product-item';
+        item.innerHTML = `
+          <img src="${p.image_url}" alt="${p.name}" class="product-img-preview" onerror="this.src='assets/pattern.jpg'">
+          <div class="product-title">${p.name}</div>
+          <div class="product-category">${p.category} • ₹${p.price || 'N/A'}</div>
+          <button class="delete-btn" onclick="deleteProduct(${p.id})">Delete Product</button>
+        `;
+        grid.appendChild(item);
+      });
+    }
+
+    function renderImages() {
+      const grid = document.getElementById('imageGrid');
+      grid.innerHTML = '';
+      
+      images.forEach(img => {
+        const item = document.createElement('div');
+        item.className = 'product-item';
+        item.innerHTML = `
+          <img src="${img.url}" alt="${img.title}" class="product-img-preview" onerror="this.src='assets/pattern.jpg'">
+          <div class="product-title" style="font-size: 16px;">${img.title}</div>
+          <button class="delete-btn" onclick="deleteImage(${img.id})" style="background: var(--color-midnight-ink);">Remove Image</button>
+        `;
+        grid.appendChild(item);
+      });
+    }
+
+    function renderHeroBgs() {
+      const grid = document.getElementById('heroGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      
+      heroBgs.forEach(bg => {
+        const item = document.createElement('div');
+        item.className = 'product-item';
+        item.style.cursor = 'pointer';
+        item.style.border = `1.5px solid ${bg.bg_color || 'rgba(0,0,0,0.1)'}`;
+        item.style.boxShadow = '0 8px 24px rgba(0,0,0,0.04)';
+        item.style.backgroundColor = '#fff';
+        item.style.transition = 'all 0.3s';
+        item.onmouseover = () => { item.style.transform = 'translateY(-4px)'; item.style.boxShadow = '0 16px 32px rgba(0,0,0,0.08)'; };
+        item.onmouseout = () => { item.style.transform = 'translateY(0)'; item.style.boxShadow = '0 8px 24px rgba(0,0,0,0.04)'; };
+        item.onclick = () => { loadSlideIntoEditor(bg.id); document.querySelector('.hm-preview-wrapper').scrollIntoView({behavior: 'smooth'}); };
+
+        const headline = bg.headline || 'Paint for Better Lives.';
+        item.innerHTML = `
+          <img src="${bg.url}" alt="Hero Background" style="width:100%; height:120px; object-fit:cover; object-position:right; border-radius:12px; border-bottom:3px solid ${bg.bg_color || '#c8d90f'};" onerror="this.src='assets/pattern.jpg'">
+          <div class="product-title" style="font-size:14px; margin-top:12px; color: ${bg.headline_color || '#000'};">${headline}</div>
+          <button class="hm-btn-secondary" onclick="event.stopPropagation(); deleteHeroBg(${bg.id})" style="margin-top:auto; background:#fee2e2; color:#c53030; border:none; padding:8px; font-size:12px; width:100%; transition: background 0.2s;" onmouseover="this.style.background='#fca5a5'" onmouseout="this.style.background='#fee2e2'"><i class="fas fa-trash" style="margin-right:4px;"></i>Remove Slide</button>
+        `;
+        grid.appendChild(item);
+      });
+    }
+
+    // Form Submissions
+    document.getElementById('productForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = 'Uploading...';
+      submitBtn.disabled = true;
+
+      try {
+        const fileInput = document.getElementById('productImage');
+        if (fileInput.files.length === 0) throw new Error("Please select an image");
+        
+        const imageUrl = await uploadImage(fileInput.files[0]);
+        
+        const newProduct = {
+          name: document.getElementById('productName').value,
+          category: document.getElementById('productCategory').value,
+          price: document.getElementById('productPrice').value,
+          image_url: imageUrl
+        };
+        
+        const res = await fetch(`${API_BASE}/products`, {
+          method: 'POST',
+          headers: { ...authHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify(newProduct)
+        });
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+        
+        if (data && data.length > 0) {
+          products.unshift(data[0]);
+          renderProducts();
+        }
+        
+        e.target.reset();
+        alert('Product added successfully!');
+      } catch (err) {
+        alert('Error: ' + err.message);
+      } finally {
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+
+    document.getElementById('imageForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = 'Uploading...';
+      submitBtn.disabled = true;
+
+      try {
+        const fileInput = document.getElementById('imageUrl');
+        if (fileInput.files.length === 0) throw new Error("Please select an image");
+        
+        const publicUrl = await uploadImage(fileInput.files[0]);
+        
+        const newImage = {
+          title: document.getElementById('imageTitle').value,
+          url: publicUrl
+        };
+        
+        const res = await fetch(`${API_BASE}/images`, {
+          method: 'POST',
+          headers: { ...authHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify(newImage)
+        });
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+        
+        if (data && data.length > 0) {
+          images.unshift(data[0]);
+          renderImages();
+        }
+        
+        e.target.reset();
+        alert('Image uploaded to gallery!');
+      } catch (err) {
+        alert('Error: ' + err.message);
+      } finally {
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+
+    // Deletion
+    window.deleteProduct = async function(id) {
+      if(confirm('Are you sure you want to delete this product?')) {
+        const res = await fetch(`${API_BASE}/products/${id}`, { method: 'DELETE', headers: authHeaders });
+        const data = await res.json();
+        if (data.success) {
+          products = products.filter(p => p.id !== id);
+          renderProducts();
+        } else {
+          alert("Failed to delete product: " + data.error);
+        }
+      }
+    };
+    
+    window.deleteImage = async function(id) {
+      if(confirm('Are you sure you want to remove this image?')) {
+        const res = await fetch(`${API_BASE}/images/${id}`, { method: 'DELETE', headers: authHeaders });
+        const data = await res.json();
+        if (data.success) {
+          images = images.filter(i => i.id !== id);
+          renderImages();
+        } else {
+          alert("Failed to delete image: " + data.error);
+        }
+      }
+    };
+
+    window.deleteHeroBg = async function(id) {
+      if(confirm('Are you sure you want to remove this background image?')) {
+        const res = await fetch(`${API_BASE}/hero/${id}`, { method: 'DELETE', headers: authHeaders });
+        const data = await res.json();
+        if (data.success) {
+          heroBgs = heroBgs.filter(bg => bg.id !== id);
+          renderHeroBgs();
+        } else {
+          alert("Failed to delete background: " + data.error);
+        }
+      }
+    };
+
+    // ===== HERO MANAGER =====
+    let defaultHeroHidden = false;
+
+    // Load Default Hero Settings
+    async function loadGlobalHeroSettings() {
+      try {
+        const res = await fetch(`${API_BASE}/hero-settings`, { cache: 'no-store' });
+        const data = await res.json();
+        if (!data.error) {
+          defaultHeroHidden = data.hide_default_hero === true;
+          updateDefaultToggleUI();
+        }
+      } catch (e) {
+        console.error('Error loading global hero settings', e);
+      }
+    }
+
+    function updateDefaultToggleUI() {
+      const btn = document.getElementById('hm-default-toggle-btn');
+      if (!btn) return;
+      if (defaultHeroHidden) {
+        btn.innerHTML = '<i class="fas fa-eye-slash" style="margin-right:6px;"></i> Show Default';
+        btn.style.background = '#fee2e2';
+        btn.style.color = '#c53030';
+      } else {
+        btn.innerHTML = '<i class="fas fa-eye" style="margin-right:6px;"></i> Hide Default';
+        btn.style.background = '#fff';
+        btn.style.color = '#555';
+      }
+    }
+
+    window.toggleDefaultHero = async function() {
+      defaultHeroHidden = !defaultHeroHidden;
+      updateDefaultToggleUI();
+      try {
+        await fetch(`${API_BASE}/hero-settings`, {
+          method: 'POST',
+          headers: { ...authHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ hide_default_hero: defaultHeroHidden })
+        });
+      } catch (e) {
+        console.error('Error toggling default hero', e);
+      }
+    };
+
+    // Load a specific slide's settings into the editor form
+    window.loadSlideIntoEditor = function(id) {
+      const bg = heroBgs.find(b => b.id === id);
+      if (!bg) return;
+      
+      document.getElementById('hm-slide-id').value = id;
+      document.getElementById('hm-form-title').textContent = 'Edit Slide';
+      document.getElementById('hm-cancel-btn').style.display = 'block';
+
+      const setColor = (pickerId, hexId, val) => {
+        const p = document.getElementById(pickerId); if (p) p.value = val || '#c8d90f';
+        const h = document.getElementById(hexId); if (h) h.value = val || '#c8d90f';
+      };
+      setColor('he-bg-color', 'he-bg-color-hex', bg.bg_color);
+      setColor('he-overlay-color', 'he-overlay-color-hex', bg.overlay_color);
+
+      const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
+      set('he-tag', bg.tag_text);
+      set('he-headline', bg.headline);
+      set('he-sub', bg.sub_text);
+
+      set('he-tag-color', bg.tag_color || '#000000');
+      set('he-headline-color', bg.headline_color || '#000000');
+      set('he-sub-color', bg.sub_color || '#333333');
+
+      const setSpan = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val || ''; };
+      setSpan('he-bucket-current', bg.bucket_image_url || 'assets/HERO-PAINT.png');
+      setSpan('he-house-current', bg.url || 'assets/house-bg.png');
+
+      const bucketEl = document.getElementById('miniBucketImg');
+      const houseEl = document.getElementById('miniHouseImg');
+      if (bucketEl) bucketEl.src = bg.bucket_image_url || 'assets/HERO-PAINT.png';
+      if (houseEl) houseEl.src = bg.url;
+
+      // Reset file inputs
+      document.getElementById('he-bucket-file').value = '';
+      document.getElementById('he-house-file').value = '';
+
+      updateHeroPreview();
+      document.querySelector('.hm-controls').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    window.clearHeroForm = function() {
+      document.getElementById('hm-slide-id').value = '';
+      document.getElementById('hm-form-title').textContent = 'Add New Slide';
+      document.getElementById('hm-cancel-btn').style.display = 'none';
+
+      const setColor = (pickerId, hexId, val) => {
+        const p = document.getElementById(pickerId); if (p) p.value = val;
+        const h = document.getElementById(hexId); if (h) h.value = val;
+      };
+      setColor('he-bg-color', 'he-bg-color-hex', '#c8d90f');
+      setColor('he-overlay-color', 'he-overlay-color-hex', '#c8d90f');
+
+      const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };
+      set('he-tag', 'ISO 9001-2015 Certified');
+      set('he-headline', 'Paint for Better Lives.');
+      set('he-sub', 'Nanco Paints brings premium-quality, certified paints to homes, offices, and factories across Kerala. Bold colours. Lasting finish.');
+
+      set('he-tag-color', '#000000');
+      set('he-headline-color', '#000000');
+      set('he-sub-color', '#333333');
+      
+      document.getElementById('he-bucket-current').textContent = 'assets/HERO-PAINT.png';
+      document.getElementById('he-house-current').textContent = 'assets/house-bg.png';
+      
+      document.getElementById('he-bucket-file').value = '';
+      document.getElementById('he-house-file').value = '';
+      
+      document.getElementById('miniBucketImg').src = 'assets/HERO-PAINT.png';
+      document.getElementById('miniHouseImg').src = 'assets/house-bg.png';
+
+      updateHeroPreview();
+    };
+
+    // Sync color picker → hex text field and update preview
+    window.syncColorFromHex = function(pickerId, hexId) {
+      const hex = document.getElementById(hexId).value.trim();
+      if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
+        document.getElementById(pickerId).value = hex;
+        updateHeroPreview();
+      }
+    };
+
+    // Update mini-preview in real time
+    window.updateHeroPreview = function() {
+      const bgColor = document.getElementById('he-bg-color')?.value || '#c8d90f';
+      const overlayColor = document.getElementById('he-overlay-color')?.value || '#c8d90f';
+      const tag = document.getElementById('he-tag')?.value || '';
+      const headline = document.getElementById('he-headline')?.value || '';
+      const sub = document.getElementById('he-sub')?.value || '';
+
+      const bgHex = document.getElementById('he-bg-color-hex'); if (bgHex) bgHex.value = bgColor;
+      const ovHex = document.getElementById('he-overlay-color-hex'); if (ovHex) ovHex.value = overlayColor;
+
+      const mini = document.getElementById('miniHero');
+      const overlay = document.getElementById('miniOverlay');
+      if (mini) mini.style.background = bgColor;
+      if (overlay) overlay.style.background = `linear-gradient(to right, ${overlayColor} 40%, transparent 100%)`;
+      const miniTag = document.getElementById('miniTag');
+      if (miniTag) {
+        miniTag.textContent = tag;
+        miniTag.style.color = document.getElementById('he-tag-color')?.value || '#000000';
+      }
+      const miniHeadline = document.getElementById('miniHeadline');
+      if (miniHeadline) {
+        miniHeadline.textContent = headline;
+        miniHeadline.style.color = document.getElementById('he-headline-color')?.value || '#000000';
+      }
+      const miniSub = document.getElementById('miniSub');
+      if (miniSub) {
+        miniSub.textContent = sub;
+        miniSub.style.color = document.getElementById('he-sub-color')?.value || '#333333';
+      }
+    };
+
+    window.previewBucketImage = function(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => { const img = document.getElementById('miniBucketImg'); if (img) img.src = e.target.result; };
+        reader.readAsDataURL(input.files[0]);
+      }
+    };
+
+    window.previewHouseImage = function(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => { const img = document.getElementById('miniHouseImg'); if (img) img.src = e.target.result; };
+        reader.readAsDataURL(input.files[0]);
+      }
+    };
+
+    // --- Interactive Popover & Save Modal Logic ---
+    window.setPreviewColor = function(inputId, color) {
+        const input = document.getElementById(inputId);
+        if (input) {
+            input.value = color;
+            // update hex field if needed
+            const hexId = inputId + '-hex';
+            const hexField = document.getElementById(hexId);
+            if(hexField) hexField.value = color;
+            
+            updateHeroPreview();
+        }
+    };
+
+    window.toggleEditPopover = function(id) {
+      document.querySelectorAll('.edit-popover').forEach(p => {
+        if (p.id !== id) p.style.display = 'none';
+      });
+      const el = document.getElementById(id);
+      if (el) el.style.display = el.style.display === 'flex' ? 'none' : 'flex';
+    };
+    
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.edit-dot') && !e.target.closest('.edit-popover') && !e.target.closest('input[type="color"]')) {
+        document.querySelectorAll('.edit-popover').forEach(p => p.style.display = 'none');
+      }
+    });
+
+    window.removeImage = function(type) {
+      if (type === 'house') {
+        document.getElementById('he-house-current').textContent = '';
+        document.getElementById('he-house-file').value = '';
+        document.getElementById('miniHouseImg').src = '';
+      } else if (type === 'bucket') {
+        document.getElementById('he-bucket-current').textContent = '';
+        document.getElementById('he-bucket-file').value = '';
+        document.getElementById('miniBucketImg').src = '';
+      }
+    };
+
+    window.openSaveModal = function() {
+      const slideId = document.getElementById('hm-slide-id').value;
+      if (!slideId) {
+        // If it's a completely new slide, no need to ask replace vs new
+        saveHeroSlide();
+      } else {
+        document.getElementById('saveModalOverlay').style.display = 'flex';
+      }
+    };
+    
+    window.closeSaveModal = function() {
+      document.getElementById('saveModalOverlay').style.display = 'none';
+    };
+
+    window.executeInlineSave = function(mode) {
+      closeSaveModal();
+      if (mode === 'new') {
+        document.getElementById('hm-slide-id').value = ''; // Force create new
+      }
+      saveHeroSlide();
+    };
+
+    // Save changes for the currently selected slide or add new
+    window.saveHeroSlide = async function() {
+      const slideId = document.getElementById('hm-slide-id').value;
+      const btn = document.getElementById('heroSaveBtn');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Saving...';
+      btn.disabled = true;
+
+      try {
+        let bucketUrl = document.getElementById('he-bucket-current').textContent;
+        let houseUrl = document.getElementById('he-house-current').textContent;
+
+        const bucketFile = document.getElementById('he-bucket-file').files[0];
+        if (bucketFile) { bucketUrl = await uploadImage(bucketFile); document.getElementById('he-bucket-current').textContent = bucketUrl; }
+
+        const houseFile = document.getElementById('he-house-file').files[0];
+        if (houseFile) { houseUrl = await uploadImage(houseFile); document.getElementById('he-house-current').textContent = houseUrl; }
+
+        const payload = {
+          bg_color: document.getElementById('he-bg-color').value,
+          overlay_color: document.getElementById('he-overlay-color').value,
+          tag_text: document.getElementById('he-tag').value,
+          headline: document.getElementById('he-headline').value,
+          sub_text: document.getElementById('he-sub').value,
+          tag_color: document.getElementById('he-tag-color').value,
+          headline_color: document.getElementById('he-headline-color').value,
+          sub_color: document.getElementById('he-sub-color').value,
+          bucket_image_url: bucketUrl,
+          url: houseUrl
+        };
+
+        let res, data;
+        if (slideId) {
+            // Update existing
+            res = await fetch(`${API_BASE}/hero/${slideId}`, {
+                method: 'PUT',
+                headers: { ...authHeaders, 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+        } else {
+            // Create new
+            res = await fetch(`${API_BASE}/hero`, {
+                method: 'POST',
+                headers: { ...authHeaders, 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+        }
+        
+        data = await res.json();
+        if (data.error) throw new Error(data.error);
+
+        if (slideId) {
+            // Update local cache
+            const idx = heroBgs.findIndex(b => b.id == slideId);
+            if (idx !== -1) heroBgs[idx] = { ...heroBgs[idx], ...payload };
+        } else {
+            if (data && data.length > 0) heroBgs.push(data[0]);
+            clearHeroForm();
+        }
+        
+        renderHeroBgs();
+
+        btn.innerHTML = '<i class="fas fa-check" style="margin-right:8px;"></i> Saved!';
+        btn.style.background = '#48bb78';
+        setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.disabled = false; }, 2500);
+      } catch (err) {
+        alert('Error saving: ' + err.message);
+        btn.innerHTML = orig;
+        btn.disabled = false;
+      }
+    };
+    
+    // Fetch global settings on load
+    loadGlobalHeroSettings();
+
+    // Initial preview render
+    updateHeroPreview();
+
+    // Initial load
+    loadData();
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Nanco Paints</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+
+  <!-- FLOATING NAV -->
+  <nav class="nav-float" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html" id="nav-home-logo">
+        <img src="assets/light-logo.png" alt="Nanco Paints">
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" id="nav-home">Home</a></li>
+        <li><a href="products.html" id="nav-products">Products</a></li>
+        <li><a href="services.html" id="nav-services">Services</a></li>
+        <li><a href="calculators.html" id="nav-calculators">Calculators</a></li>
+        <li><a href="colors.html" id="nav-colors">Color Studio</a></li>
+        <li><a href="about_us.html" id="nav-about" style="font-weight: 800; color: var(--color-cobalt-band);">About Us</a></li>
+      </ul>
+      <div class="nav-right" style="display:flex;align-items:center;gap:12px;">
+        <a class="nav-cta" href="login/login.php" id="nav-login-btn">Login</a>
+      </div>
+      <button class="nav-toggle" id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAV OVERLAY -->
+  <div class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Mobile menu">
+    <a href="index.html" id="mnav-home">Home</a>
+    <a href="products.html" id="mnav-products">Products</a>
+    <a href="services.html" id="mnav-services">Services</a>
+    <a href="calculators.html" id="mnav-calculators">Calculators</a>
+    <a href="colors.html" id="mnav-colors">Color Studio</a>
+    <a href="about_us.html" id="mnav-about" style="color:var(--color-cobalt-band);font-weight:800;">About Us</a>
+    <a href="login/login.php" id="mnav-login" style="background:var(--color-lime-spark);font-weight:700;">Login</a>
+  </div>
+
+  <main>
+    <section class="band-cobalt" style="padding: 140px 24px 80px; text-align: center; background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('assets/outlet.png') no-repeat center center / cover;">
+      <div class="section-inner">
+        <span class="section-label" style="background:var(--color-white-plate); color:var(--color-ink-black); border-color:var(--color-ink-black);"><i class="fas fa-info-circle" style="margin-right:6px;"></i> Our Story</span>
+        <h1 class="section-title" style="font-size: clamp(48px, 6vw, 80px); color:var(--color-white-plate); letter-spacing:-2px;">About Nanco Paints</h1>
+        <p class="section-sub" style="color: rgba(255,255,255,0.8); text-align: center; margin-left: auto; margin-right: auto;">Paints for Better Satisfaction. ISO 9001-2015 Certified in Kerala, India.</p>
+      </div>
+    </section>
+
+    <div style="max-width: var(--page-max-width); margin: 64px auto; padding: 0 24px;">
+      <div class="bento-grid">
+        <div class="bento-card span2" style="background: var(--color-white-plate); padding: 48px; border: 1px solid rgba(0,0,0,0.08); border-radius: var(--radius-cards);">
+          <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 24px; color: var(--color-ink-black);">Who We Are</h2>
+          <p style="font-size: 16px; color: var(--color-sage-mute); line-height: 1.6; margin-bottom: 24px;">Nanco Paints is Kerala's premier ISO certified paint manufacturing company. Established with a passion for quality and durability, we specialize in high-performance coatings, emulsions, and waterproofing solutions. Our products are formulated to withstand the harsh coastal monsoons and intense sun, ensuring your homes remain vibrant and protected year after year.</p>
+          <p style="font-size: 16px; color: var(--color-sage-mute); line-height: 1.6;">We believe in empowering local paint workers and providing unparalleled support to our factory outlets across the state.</p>
+        </div>
+        <div class="bento-card card-lime" style="padding: 48px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+          <i class="fas fa-certificate" style="font-size: 48px; color: var(--color-ink-black); margin-bottom: 24px;"></i>
+          <h3 style="font-size: 24px; font-weight: 800; color: var(--color-ink-black); margin-bottom: 8px;">ISO Certified</h3>
+          <p style="font-size: 14px; color: var(--color-ink-black);">9001-2015 Quality Management Standards</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-section" aria-label="Footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand-name">
+          <img src="assets/dark-logo.png" alt="Nanco Paints">
+        </div>
+        <p class="footer-tagline" id="footer-tagline" style="color:var(--color-white-plate);">Paints for Better Satisfaction.<br>ISO 9001-2015 Certified. Kerala, India.</p>
+      </div>
+      <div class="footer-col" style="color:var(--color-white-plate);">
+        <h5 id="footer-nav-title" style="margin-bottom:16px;">Navigation</h5>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;">
+          <li><a href="index.html" style="color:#fff;text-decoration:none;">Home</a></li>
+          <li><a href="services.html" style="color:#fff;text-decoration:none;">Services</a></li>
+          <li><a href="products.html" style="color:#fff;text-decoration:none;">Products</a></li>
+          <li><a href="about_us.html" style="color:#fff;text-decoration:none;">About Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col" style="color:var(--color-white-plate);">
+        <h5 id="footer-res-title" style="margin-bottom:16px;">Resources</h5>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;">
+          <li><a href="calculators.html" style="color:#fff;text-decoration:none;">Paint Calculator</a></li>
+          <li><a href="paint_visualizer.html" style="color:#fff;text-decoration:none;">Color Studio</a></li>
+          <li><a href="login/login.php" style="color:#fff;text-decoration:none;">Worker Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const btn = document.getElementById('mobile-menu-btn');
+    const nav = document.getElementById('mobile-nav');
+    if (btn && nav) {
+      btn.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!btn.contains(e.target) && !nav.contains(e.target)) {
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded', false);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

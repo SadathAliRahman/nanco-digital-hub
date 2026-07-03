@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Calculators | Nanco Paints</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .calc-container {
+      max-width: var(--page-max-width);
+      margin: 0 auto;
+      padding: 48px 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    @media(min-width: 900px) {
+      .calc-container { grid-template-columns: 1.8fr 1fr; }
+    }
+    
+    .calc-nav {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .calc-nav-btn {
+      background: var(--color-white-plate);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: var(--radius-buttons);
+      padding: 14px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-ink-black);
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .calc-nav-btn:hover {
+      background: var(--color-linen-canvas);
+    }
+    .calc-nav-btn.active {
+      background: var(--color-lime-spark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 0 var(--color-ink-black);
+    }
+
+    .calc-card {
+      background: var(--color-white-plate);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: var(--radius-cards);
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    }
+    .calc-card h2 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .range-wrap { margin-bottom: 24px; }
+    .range-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      background: transparent;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 24px;
+      width: 24px;
+      border-radius: 50%;
+      background: var(--color-lime-spark);
+      cursor: pointer;
+      margin-top: -8px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 8px;
+      cursor: pointer;
+      background: var(--color-white-plate);
+      border-radius: 99px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .pill-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--color-white-plate);
+      padding: 16px 24px;
+      border-radius: 24px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+    
+    .toggle-switch {
+      width: 56px;
+      height: 32px;
+      background: var(--color-white-plate);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 99px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .toggle-switch.active { background: var(--color-lime-spark); }
+    .toggle-thumb {
+      width: 24px;
+      height: 24px;
+      background: var(--color-ink-black);
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.3s;
+    }
+    .toggle-switch.active .toggle-thumb { transform: translateX(24px); }
+
+    .counter-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--color-white-plate);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 24px;
+      padding: 16px 24px;
+      margin-bottom: 16px;
+    }
+    .counter-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--color-linen-canvas);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 99px;
+      padding: 4px;
+    }
+    .counter-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--color-white-plate);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .counter-val { font-weight: 800; min-width: 24px; text-align: center; }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media(min-width: 600px) { .choice-grid { grid-template-columns: 1fr 1fr; } }
+    .choice-grid-3 { grid-template-columns: 1fr; }
+    @media(min-width: 600px) { .choice-grid-3 { grid-template-columns: 1fr 1fr 1fr; } }
+    .choice-grid-4 { grid-template-columns: 1fr 1fr; }
+    @media(min-width: 600px) { .choice-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; } }
+    
+    .choice-btn {
+      background: var(--color-white-plate);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 24px;
+      padding: 24px;
+      text-align: left;
+      transition: all 0.15s;
+      cursor: pointer;
+      position: relative;
+    }
+    .choice-btn:hover { transform: translateY(-2px); }
+    .choice-btn.active {
+      background: var(--color-leaf-wash);
+      box-shadow: 0 4px 0 var(--color-ink-black);
+      transform: translateY(-4px);
+    }
+    .choice-title {
+      font-weight: 800;
+      font-size: 20px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .choice-desc { font-size: 14px; color: var(--color-midnight-ink); font-weight: 500;}
+
+    .result-panel {
+      background: var(--color-mustard-pop);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: var(--radius-cards);
+      padding: 32px;
+      position: sticky;
+      top: 100px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .result-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--color-ink-black);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .result-value-wrap {
+      background: var(--color-white-plate);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 24px;
+      padding: 32px 24px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .result-value {
+      font-size: 64px;
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: var(--color-ink-black);
+      line-height: 1;
+      margin-top: 8px;
+    }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      font-weight: 700;
+      border-bottom: 2px dashed rgba(0,0,0,0.2);
+    }
+    .result-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .btn-action {
+      background: var(--color-ink-black);
+      color: var(--color-white-plate);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: var(--radius-buttons);
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .btn-action:hover { transform: translateY(-2px); }
+    .btn-action-ghost {
+      background: var(--color-white-plate);
+      color: var(--color-ink-black);
+    }
+
+    .hidden { display: none !important; }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-card {
+      background: var(--color-white-plate);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: var(--radius-cards);
+      padding: 40px;
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .manual-input {
+      border: none;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+      background: transparent;
+      font-size: 24px;
+      font-weight: 800;
+      width: 100px;
+      text-align: right;
+      outline: none;
+      padding: 4px;
+    }
+  </style>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+
+  <!-- FLOATING NAV -->
+  <nav class="nav-float" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html" id="nav-home-logo">
+        <img src="assets/light-logo.png" alt="Nanco Paints">
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" id="nav-home">Home</a></li>
+        <li><a href="products.html" id="nav-products">Products</a></li>
+        <li><a href="services.html" id="nav-services">Services</a></li>
+        <li><a href="calculators.html" id="nav-calculators" style="font-weight: 800; color: var(--color-cobalt-band);">Calculators</a></li>
+        <li><a href="colors.html" id="nav-colors">Color Studio</a></li>
+        <li><a href="about_us.html" id="nav-about">About Us</a></li>
+      </ul>
+      <div class="nav-right" style="display:flex;align-items:center;gap:12px;">
+        <a class="nav-cta" href="login/login.php" id="nav-login-btn">Login</a>
+      </div>
+      <button class="nav-toggle" id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAV OVERLAY -->
+  <div class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Mobile menu">
+    <a href="index.html" id="mnav-home">Home</a>
+    <a href="products.html" id="mnav-products">Products</a>
+    <a href="services.html" id="mnav-services">Services</a>
+    <a href="calculators.html" id="mnav-calculators" style="color:var(--color-cobalt-band);font-weight:800;">Calculators</a>
+    <a href="colors.html" id="mnav-colors">Color Studio</a>
+    <a href="about_us.html" id="mnav-about">About Us</a>
+    <a href="login/login.php" id="mnav-login" style="background:var(--color-lime-spark);font-weight:700;">Login</a>
+  </div>
+
+  <main>
+    <section class="band-cobalt" style="padding: 100px 24px 60px; text-align: center; background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('assets/calcbg.jpg') no-repeat center center / cover;">
+      <div class="section-inner">
+        <span class="section-label" style="background:var(--color-lime-spark); color:var(--color-ink-black); border-color:var(--color-ink-black);"><i class="fas fa-calculator" style="margin-right:6px;"></i> Tools</span>
+        <h1 class="section-title" style="font-size: clamp(48px, 6vw, 80px); color:var(--color-white-plate); letter-spacing:-2px;">Smart Calculators</h1>
+      </div>
+    </section>
+
+    <div class="calc-container">
+      
+      <!-- Left Column -->
+      <div>
+        <div class="calc-nav">
+          <button class="calc-nav-btn active" id="nav-budget" onclick="setTab('budget')">
+            <i class="fas fa-paint-roller"></i> Paint Budget
+          </button>
+          <button class="calc-nav-btn" id="nav-quotation" onclick="setTab('quotation')">
+            <i class="fas fa-file-invoice-dollar"></i> Quotation
+          </button>
+          <button class="calc-nav-btn" id="nav-waterproofing" onclick="setTab('waterproofing')">
+            <i class="fas fa-droplet"></i> Waterproofing
+          </button>
+        </div>
+
+        <!-- TAB: BUDGET -->
+        <div id="tab-budget">
+          <div class="calc-card">
+            <h2>Room Dimensions</h2>
+            <div class="range-wrap">
+              <div class="range-header"><span>Length</span> <span id="lbl-length">12 ft</span></div>
+              <input type="range" min="1" max="50" value="12" oninput="updateBudget('length', this.value)">
+            </div>
+            <div class="range-wrap">
+              <div class="range-header"><span>Width</span> <span id="lbl-width">10 ft</span></div>
+              <input type="range" min="1" max="50" value="10" oninput="updateBudget('width', this.value)">
+            </div>
+            <div class="range-wrap">
+              <div class="range-header"><span>Height</span> <span id="lbl-height">10 ft</span></div>
+              <input type="range" min="1" max="20" value="10" oninput="updateBudget('height', this.value)">
+            </div>
+
+            <div class="pill-toggle" onclick="toggleCeiling()">
+              <div>Include Ceiling</div>
+              <div class="toggle-switch active" id="btn-ceiling"><div class="toggle-thumb" id="thumb-ceiling"></div></div>
+            </div>
+
+            <div class="counter-row">
+              <div style="font-weight:700;">Doors <span style="display:block;font-size:12px;font-weight:500;color:var(--color-sage-mute)">Subtracts 21 sq.ft</span></div>
+              <div class="counter-wrap">
+                <button class="counter-btn" onclick="changeDoors(-1)">-</button>
+                <span class="counter-val" id="lbl-doors">1</span>
+                <button class="counter-btn" onclick="changeDoors(1)">+</button>
+              </div>
+            </div>
+            <div class="counter-row">
+              <div style="font-weight:700;">Windows <span style="display:block;font-size:12px;font-weight:500;color:var(--color-sage-mute)">Subtracts 15 sq.ft</span></div>
+              <div class="counter-wrap">
+                <button class="counter-btn" onclick="changeWindows(-1)">-</button>
+                <span class="counter-val" id="lbl-windows">1</span>
+                <button class="counter-btn" onclick="changeWindows(1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-card">
+            <h2>Surface Condition</h2>
+            <div class="choice-grid">
+              <div class="choice-btn active" id="btn-cond-repaint" onclick="setCondition('repaint')">
+                <div class="choice-title">Repainting <i class="fas fa-check-circle" id="icon-cond-repaint"></i></div>
+                <div class="choice-desc">Already painted. Requires less paint.</div>
+              </div>
+              <div class="choice-btn" id="btn-cond-new" onclick="setCondition('new')">
+                <div class="choice-title">New Wall <i class="fas fa-check-circle hidden" id="icon-cond-new"></i></div>
+                <div class="choice-desc">Bare plaster. Needs primer & extra coats.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: QUOTATION -->
+        <div id="tab-quotation" class="hidden">
+          <div class="calc-card">
+            <h2>Area Inheritance</h2>
+            <div class="choice-grid">
+              <div class="choice-btn active" id="btn-area-calc" onclick="setAreaSource(true)">
+                <div class="choice-title">Use Calculated</div>
+                <div class="choice-desc" style="font-size:24px;font-weight:800;color:var(--color-ink-black);margin-top:8px;"><span class="out-budget-area">0</span> sq.ft</div>
+              </div>
+              <div class="choice-btn" id="btn-area-manual" onclick="setAreaSource(false)">
+                <div class="choice-title">Enter Manually</div>
+                <div style="margin-top:8px; display:flex; align-items:flex-end; gap:8px;">
+                  <input type="number" id="input-manual-area" value="500" disabled oninput="updateManualArea(this.value)" class="manual-input">
+                  <span style="font-weight:700;">sq.ft</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-card">
+            <h2>Paint Quality Tier</h2>
+            <div class="choice-grid choice-grid-3">
+              <div class="choice-btn" id="card-tier-economy" onclick="setTier('economy')">
+                <div class="choice-title" style="font-size:18px;">Economy</div>
+                <div style="font-weight:800; font-size:20px; margin-bottom:8px;">₹180<span style="font-size:12px;font-weight:500;">/L</span></div>
+                <div class="choice-desc">Standard finish.</div>
+              </div>
+              <div class="choice-btn active" id="card-tier-premium" onclick="setTier('premium')">
+                <div class="choice-title" style="font-size:18px;">Premium</div>
+                <div style="font-weight:800; font-size:20px; margin-bottom:8px;">₹350<span style="font-size:12px;font-weight:500;">/L</span></div>
+                <div class="choice-desc">Rich matte, anti-fungal.</div>
+              </div>
+              <div class="choice-btn" id="card-tier-luxury" onclick="setTier('luxury')">
+                <div class="choice-title" style="font-size:18px;">Luxury</div>
+                <div style="font-weight:800; font-size:20px; margin-bottom:8px;">₹650<span style="font-size:12px;font-weight:500;">/L</span></div>
+                <div class="choice-desc">Teflon, ultra-smooth.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-card">
+            <div class="pill-toggle" onclick="toggleLabor()" style="margin-bottom:0;">
+              <div>Include Professional Labor <span style="display:block;font-size:12px;font-weight:500;color:var(--color-sage-mute)">₹18/sq.ft</span></div>
+              <div class="toggle-switch active" id="btn-labor"><div class="toggle-thumb" id="thumb-labor"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: WATERPROOFING -->
+        <div id="tab-waterproofing" class="hidden">
+          <div class="calc-card">
+            <h2>Problem Area</h2>
+            <div class="choice-grid choice-grid-4">
+              <div class="choice-btn active" id="wp-area-terrace" onclick="setWpArea('terrace')" style="padding:16px;text-align:center;">
+                <div class="choice-title" style="font-size:16px;justify-content:center;">Terrace</div>
+              </div>
+              <div class="choice-btn" id="wp-area-bathroom" onclick="setWpArea('bathroom')" style="padding:16px;text-align:center;">
+                <div class="choice-title" style="font-size:16px;justify-content:center;">Bathroom</div>
+              </div>
+              <div class="choice-btn" id="wp-area-exterior" onclick="setWpArea('exterior')" style="padding:16px;text-align:center;">
+                <div class="choice-title" style="font-size:16px;justify-content:center;">Exterior</div>
+              </div>
+              <div class="choice-btn" id="wp-area-basement" onclick="setWpArea('basement')" style="padding:16px;text-align:center;">
+                <div class="choice-title" style="font-size:16px;justify-content:center;">Basement</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-card">
+            <h2>Severity Level</h2>
+            <div class="choice-grid">
+              <div class="choice-btn active" id="wp-sev-prev" onclick="setWpSeverity('preventative')">
+                <div class="choice-title">Preventative</div>
+                <div class="choice-desc">Protective coat.</div>
+              </div>
+              <div class="choice-btn" id="wp-sev-active" onclick="setWpSeverity('active')">
+                <div class="choice-title">Active Leaks</div>
+                <div class="choice-desc">Heavy duty coating.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-card">
+            <h2>Dimensions</h2>
+            <div class="range-wrap">
+              <div class="range-header"><span>Length</span> <span id="lbl-wp-length">15 ft</span></div>
+              <input type="range" min="1" max="100" value="15" oninput="updateWp('length', this.value)">
+            </div>
+            <div class="range-wrap">
+              <div class="range-header"><span>Width</span> <span id="lbl-wp-width">20 ft</span></div>
+              <input type="range" min="1" max="100" value="20" oninput="updateWp('width', this.value)">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Results -->
+      <div>
+        <div class="result-panel" id="receipt-panel">
+          
+          <div class="view-budget">
+            <div class="result-title"><i class="fas fa-paint-roller"></i> Paint Volume Estimate</div>
+            <div class="result-value-wrap">
+              <div style="font-weight:700;font-size:14px;color:var(--color-sage-mute);">Required Quantity</div>
+              <div class="result-value"><span class="out-budget-liters"></span>L</div>
+            </div>
+            <div class="result-row"><span>Paintable Area</span> <span><span class="out-budget-area"></span> sq.ft</span></div>
+            <div class="result-row" style="border-bottom:none;"><span>Coverage</span> <span><span class="out-budget-coverage"></span> sq.ft/L</span></div>
+          </div>
+
+          <div class="view-quotation hidden">
+            <div class="result-title"><i class="fas fa-file-invoice-dollar"></i> Project Estimate</div>
+            <div class="result-value-wrap" style="background:var(--color-white-plate);">
+              <div style="font-weight:700;font-size:14px;color:var(--color-ink-black);">Grand Total</div>
+              <div class="result-value out-quote-grand" style="font-size:48px;"></div>
+            </div>
+            <div class="result-row"><span>Total Area</span> <span><span class="out-quote-area"></span> sq.ft</span></div>
+            <div class="result-row"><span>Material Cost</span> <span class="out-quote-mat"></span></div>
+            <div class="result-row out-quote-labor-row"><span>Labor Cost</span> <span class="out-quote-labor"></span></div>
+          </div>
+
+          <div class="view-waterproofing hidden">
+            <div class="result-title"><i class="fas fa-droplet"></i> Treatment Cost</div>
+            <div class="result-value-wrap" style="background:var(--color-white-plate);">
+              <div style="font-weight:700;font-size:14px;color:var(--color-ink-black);">Est. Total</div>
+              <div class="result-value out-wp-total" style="font-size:48px;"></div>
+            </div>
+            <div class="result-row"><span>Area</span> <span><span class="out-wp-area"></span> sq.ft</span></div>
+            <div class="result-row" style="flex-direction:column;gap:8px;border-bottom:none;">
+              <span>Recommended Product</span>
+              <span class="out-wp-product" style="font-weight:800;color:var(--color-cobalt-band);"></span>
+            </div>
+          </div>
+
+          <div style="margin-top:32px; display:flex; flex-direction:column; gap:12px;">
+            <button class="btn-action" onclick="toggleModal('modal-lead', true)"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
+            <button class="btn-action btn-action-ghost" onclick="toggleModal('modal-lead', true)">Book Free Site Visit</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-section" aria-label="Footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand-name">
+          <img src="assets/dark-logo.png" alt="Nanco Paints">
+        </div>
+        <p class="footer-tagline" id="footer-tagline" style="color:var(--color-white-plate);">Paints for Better Satisfaction.<br>ISO 9001-2015 Certified. Kerala, India.</p>
+      </div>
+      <div class="footer-col" style="color:var(--color-white-plate);">
+        <h5 id="footer-nav-title" style="margin-bottom:16px;">Navigation</h5>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;">
+          <li><a href="index.html" style="color:#fff;text-decoration:none;">Home</a></li>
+          <li><a href="services.html" style="color:#fff;text-decoration:none;">Services</a></li>
+          <li><a href="products.html" style="color:#fff;text-decoration:none;">Products</a></li>
+          <li><a href="about_us.html" style="color:#fff;text-decoration:none;">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div id="modal-lead" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button class="modal-close" onclick="toggleModal('modal-lead', false)"><i class="fas fa-times"></i></button>
+      <h2 style="font-size:28px;font-weight:800;margin-bottom:8px;">Get Your Estimate</h2>
+      <p style="margin-bottom:24px;color:var(--color-sage-mute);">We'll send a detailed breakdown directly to your WhatsApp.</p>
+      <form onsubmit="event.preventDefault(); alert('Sent!'); toggleModal('modal-lead', false);" style="display:flex;flex-direction:column;gap:16px;">
+        <input type="text" required placeholder="Full Name" style="padding:16px; border:2px solid var(--color-ink-black); border-radius:12px; font-weight:700; font-family:inherit; font-size:16px;">
+        <input type="tel" required placeholder="WhatsApp Number" style="padding:16px; border:2px solid var(--color-ink-black); border-radius:12px; font-weight:700; font-family:inherit; font-size:16px;">
+        <button type="submit" class="btn-action" style="background:var(--color-lime-spark); color:var(--color-ink-black);">Send Estimate</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Mobile nav toggle
+    const btn = document.getElementById('mobile-menu-btn');
+    const nav = document.getElementById('mobile-nav');
+    if (btn && nav) {
+      btn.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!btn.contains(e.target) && !nav.contains(e.target)) {
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded', false);
+        }
+      });
+    }
+
+    const COVERAGE_NEW_WALL = 70;
+    const COVERAGE_REPAINT = 120;
+    const DOOR_AREA = 21;
+    const WINDOW_AREA = 15;
+    const PAINT_TIERS = {
+        economy: { name: 'Economy', price: 180 },
+        premium: { name: 'Premium', price: 350 },
+        luxury: { name: 'Luxury', price: 650 },
+    };
+    const LABOR_RATE = 18;
+    const WP_RATES = {
+        terrace: { name: 'Terrace/Roof', prev: 45, active: 85, productPrev: 'AquaStop Roof Protect', productActive: 'AquaStop Crack-Fill Pro' },
+        bathroom: { name: 'Bathroom', prev: 65, active: 130, productPrev: 'BathSeal Standard', productActive: 'BathSeal Epoxy Max' },
+        exterior: { name: 'Exterior Walls', prev: 35, active: 75, productPrev: 'WeatherShield Base', productActive: 'WeatherShield Armor' },
+        basement: { name: 'Basement', prev: 110, active: 190, productPrev: 'DampBlock Sub-level', productActive: 'DampBlock Injection Resins' }
+    };
+
+    const state = {
+        activeTab: 'budget',
+        budget: { length: 12, width: 10, height: 10, includeCeiling: true, doors: 1, windows: 1, condition: 'repaint' },
+        quotation: { useCalculatedArea: true, manualArea: 500, tier: 'premium', includeLabor: true },
+        wp: { area: 'terrace', severity: 'preventative', length: 15, width: 20 }
+    };
+
+    const calc = {
+        budget: { totalArea: 0, liters: 0, coverage: 0 },
+        quote: { area: 0, liters: 0, materialCost: 0, laborCost: 0, grandTotal: 0 },
+        wp: { areaSqFt: 0, totalCost: 0, product: '', rate: 0 }
+    };
+
+    function formatINR(value) {
+        return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(value || 0);
+    }
+
+    function updateCalculations() {
+        const wallArea = 2 * (state.budget.length + state.budget.width) * state.budget.height;
+        const ceilingArea = state.budget.includeCeiling ? (state.budget.length * state.budget.width) : 0;
+        const deductions = (state.budget.doors * DOOR_AREA) + (state.budget.windows * WINDOW_AREA);
+        calc.budget.totalArea = Math.max(0, wallArea + ceilingArea - deductions);
+        calc.budget.coverage = state.budget.condition === 'new' ? COVERAGE_NEW_WALL : COVERAGE_REPAINT;
+        calc.budget.liters = calc.budget.totalArea > 0 ? (calc.budget.totalArea / calc.budget.coverage).toFixed(1) : "0.0";
+
+        calc.quote.area = state.quotation.useCalculatedArea ? calc.budget.totalArea : state.quotation.manualArea;
+        const qLiters = calc.quote.area > 0 ? (calc.quote.area / calc.budget.coverage) : 0;
+        calc.quote.liters = qLiters.toFixed(1);
+        calc.quote.materialCost = qLiters * PAINT_TIERS[state.quotation.tier].price;
+        calc.quote.laborCost = state.quotation.includeLabor ? (calc.quote.area * LABOR_RATE) : 0;
+        calc.quote.grandTotal = calc.quote.materialCost + calc.quote.laborCost;
+
+        calc.wp.areaSqFt = state.wp.length * state.wp.width;
+        const rateData = WP_RATES[state.wp.area];
+        calc.wp.rate = state.wp.severity === 'preventative' ? rateData.prev : rateData.active;
+        calc.wp.product = state.wp.severity === 'preventative' ? rateData.productPrev : rateData.productActive;
+        calc.wp.totalCost = calc.wp.areaSqFt * calc.wp.rate;
+    }
+
+    function render() {
+        document.querySelectorAll('.calc-nav-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('nav-' + state.activeTab).classList.add('active');
+
+        document.getElementById('tab-budget').classList.add('hidden');
+        document.getElementById('tab-quotation').classList.add('hidden');
+        document.getElementById('tab-waterproofing').classList.add('hidden');
+        document.getElementById('tab-' + state.activeTab).classList.remove('hidden');
+
+        document.querySelectorAll('.view-budget').forEach(el => state.activeTab === 'budget' ? el.classList.remove('hidden') : el.classList.add('hidden'));
+        document.querySelectorAll('.view-quotation').forEach(el => state.activeTab === 'quotation' ? el.classList.remove('hidden') : el.classList.add('hidden'));
+        document.querySelectorAll('.view-waterproofing').forEach(el => state.activeTab === 'waterproofing' ? el.classList.remove('hidden') : el.classList.add('hidden'));
+
+        document.getElementById('lbl-length').innerText = state.budget.length + ' ft';
+        document.getElementById('lbl-width').innerText = state.budget.width + ' ft';
+        document.getElementById('lbl-height').innerText = state.budget.height + ' ft';
+        document.getElementById('lbl-doors').innerText = state.budget.doors;
+        document.getElementById('lbl-windows').innerText = state.budget.windows;
+        
+        document.querySelectorAll('.out-budget-area').forEach(el => el.innerText = calc.budget.totalArea);
+        document.querySelectorAll('.out-budget-liters').forEach(el => el.innerText = calc.budget.liters);
+        document.querySelectorAll('.out-budget-coverage').forEach(el => el.innerText = calc.budget.coverage);
+
+        const btnCeiling = document.getElementById('btn-ceiling');
+        if(state.budget.includeCeiling) btnCeiling.classList.add('active');
+        else btnCeiling.classList.remove('active');
+
+        document.getElementById('btn-cond-repaint').classList.toggle('active', state.budget.condition === 'repaint');
+        document.getElementById('btn-cond-new').classList.toggle('active', state.budget.condition === 'new');
+        document.getElementById('icon-cond-repaint').classList.toggle('hidden', state.budget.condition !== 'repaint');
+        document.getElementById('icon-cond-new').classList.toggle('hidden', state.budget.condition !== 'new');
+
+        document.querySelectorAll('.out-quote-area').forEach(el => el.innerText = calc.quote.area);
+        document.querySelectorAll('.out-quote-mat').forEach(el => el.innerText = formatINR(calc.quote.materialCost));
+        document.querySelectorAll('.out-quote-labor').forEach(el => el.innerText = formatINR(calc.quote.laborCost));
+        document.querySelectorAll('.out-quote-grand').forEach(el => el.innerText = formatINR(calc.quote.grandTotal));
+        document.querySelectorAll('.out-quote-labor-row').forEach(el => state.quotation.includeLabor ? el.classList.remove('hidden') : el.classList.add('hidden'));
+
+        document.getElementById('btn-area-calc').classList.toggle('active', state.quotation.useCalculatedArea);
+        document.getElementById('btn-area-manual').classList.toggle('active', !state.quotation.useCalculatedArea);
+        document.getElementById('input-manual-area').disabled = state.quotation.useCalculatedArea;
+
+        ['economy', 'premium', 'luxury'].forEach(t => {
+            document.getElementById(`card-tier-${t}`).classList.toggle('active', state.quotation.tier === t);
+        });
+
+        const btnLabor = document.getElementById('btn-labor');
+        if(state.quotation.includeLabor) btnLabor.classList.add('active');
+        else btnLabor.classList.remove('active');
+
+        document.getElementById('lbl-wp-length').innerText = state.wp.length + ' ft';
+        document.getElementById('lbl-wp-width').innerText = state.wp.width + ' ft';
+        document.querySelectorAll('.out-wp-area').forEach(el => el.innerText = calc.wp.areaSqFt);
+        document.querySelectorAll('.out-wp-product').forEach(el => el.innerText = calc.wp.product);
+        document.querySelectorAll('.out-wp-total').forEach(el => el.innerText = formatINR(calc.wp.totalCost));
+
+        Object.keys(WP_RATES).forEach(a => {
+            document.getElementById(`wp-area-${a}`).classList.toggle('active', state.wp.area === a);
+        });
+
+        document.getElementById('wp-sev-prev').classList.toggle('active', state.wp.severity === 'preventative');
+        document.getElementById('wp-sev-active').classList.toggle('active', state.wp.severity === 'active');
+
+        // Panel background color based on tab
+        const panel = document.getElementById('receipt-panel');
+        if(state.activeTab === 'budget') panel.style.background = 'var(--color-mustard-pop)';
+        else if(state.activeTab === 'quotation') panel.style.background = 'var(--color-cobalt-band)';
+        else panel.style.background = 'var(--color-forest-ink)';
+        
+        if (state.activeTab === 'quotation' || state.activeTab === 'waterproofing') {
+          panel.style.color = '#fff';
+          panel.querySelector('.result-title').style.color = '#fff';
+          panel.querySelector('.result-value').style.color = 'var(--color-ink-black)';
+        } else {
+          panel.style.color = 'var(--color-ink-black)';
+          panel.querySelector('.result-title').style.color = 'var(--color-ink-black)';
+          panel.querySelector('.result-value').style.color = 'var(--color-ink-black)';
+        }
+    }
+
+    function setTab(tabId) { state.activeTab = tabId; render(); }
+    function updateBudget(key, val) { state.budget[key] = parseInt(val); updateCalculations(); render(); }
+    function toggleCeiling() { state.budget.includeCeiling = !state.budget.includeCeiling; updateCalculations(); render(); }
+    function changeDoors(delta) { state.budget.doors = Math.max(0, state.budget.doors + delta); updateCalculations(); render(); }
+    function changeWindows(delta) { state.budget.windows = Math.max(0, state.budget.windows + delta); updateCalculations(); render(); }
+    function setCondition(cond) { state.budget.condition = cond; updateCalculations(); render(); }
+    function setAreaSource(useCalc) { state.quotation.useCalculatedArea = useCalc; updateCalculations(); render(); }
+    function updateManualArea(val) { state.quotation.manualArea = parseInt(val) || 0; updateCalculations(); render(); }
+    function setTier(t) { state.quotation.tier = t; updateCalculations(); render(); }
+    function toggleLabor() { state.quotation.includeLabor = !state.quotation.includeLabor; updateCalculations(); render(); }
+    function setWpArea(a) { state.wp.area = a; updateCalculations(); render(); }
+    function setWpSeverity(s) { state.wp.severity = s; updateCalculations(); render(); }
+    function updateWp(key, val) { state.wp[key] = parseInt(val); updateCalculations(); render(); }
+
+    function toggleModal(modalId, show) {
+        const el = document.getElementById(modalId);
+        if(show) el.classList.remove('hidden');
+        else el.classList.add('hidden');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        updateCalculations();
+        render();
+    });
+  </script>
+</body>
+</html>

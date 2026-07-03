@@ -1,0 +1,21 @@
+{
+  "name": "Nanco Paints",
+  "short_name": "Nanco",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#061492",
+  "description": "Nanco Paints - Paints for Better Satisfaction. ISO 9001-2015 Certified in Kerala, India.",
+  "icons": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
