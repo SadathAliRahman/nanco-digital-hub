@@ -56,6 +56,12 @@
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
+        @media (max-width: 767px) {
+            .bento-card {
+                border-radius: 16px;
+            }
+        }
+        
         .bento-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 40px rgba(0,0,0,0.08);
@@ -71,7 +77,7 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.06);
         }
-
+        
         .icon-wrapper {
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -81,191 +87,394 @@
         }
     </style>
 </head>
-<body class="min-h-screen text-black flex flex-col items-center pb-20 pt-4 px-4 md:px-8">
+<body class="h-[100dvh] md:min-h-screen md:h-auto text-black flex flex-col items-center p-3 md:pb-20 md:pt-4 md:px-8 overflow-hidden md:overflow-visible">
 
-    <!-- Floating Navigation Bar -->
-    <div class="w-full max-w-4xl mb-6">
-        <div class="bg-gray-900 text-white rounded-full px-6 py-3 flex flex-row justify-between items-center shadow-bento border border-white/10">
-            <div class="flex items-center">
-                <span class="font-extrabold text-lg tracking-tight drop-shadow-md">Digital Visiting Card</span>
+    <!-- DESKTOP VIEW (Hidden on Mobile) -->
+    <!-- This exactly matches the original layout requested by the user -->
+    <div class="hidden md:flex flex-col w-full max-w-4xl">
+        
+        <!-- Floating Navigation Bar -->
+        <div class="w-full mb-6">
+            <div class="bg-gray-900 text-white rounded-full px-6 py-3 flex flex-row justify-between items-center shadow-bento border border-white/10">
+                <div class="flex items-center">
+                    <span class="font-extrabold text-lg tracking-tight drop-shadow-md">Digital Visiting Card</span>
+                </div>
+                <a href="https://nanco-paints.vercel.app/" target="_blank" class="bento-pill bg-lime-spark text-black px-5 py-2 text-sm font-bold hover:bg-white transition-colors shadow-sm">
+                    Website
+                </a>
             </div>
-            <a href="https://nanco-five.vercel.app/" target="_blank" class="bento-pill bg-lime-spark text-black px-5 py-2 text-sm font-bold hover:bg-white transition-colors shadow-sm">
-                Website
+        </div>
+
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <!-- Hero / Branch Info -->
+            <div class="bento-card bg-gray-900 p-8 md:col-span-2 flex flex-col items-center text-center relative overflow-hidden">
+                <!-- Background Image with Dark Overlay -->
+                <div class="absolute inset-0 z-0 bg-black">
+                    <img src="../assets/visualizer%20bg.jpg" alt="Background" class="w-full h-full object-cover opacity-40">
+                </div>
+                
+                <img src="../card/light-logo.png" alt="Nanco Logo" class="h-12 md:h-16 object-contain mb-4 relative z-10 brightness-0 invert drop-shadow-md">
+                <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-2 relative z-10 text-white drop-shadow-lg">NANCO FACTORY OUTLET-HO</h1>
+                <p class="text-gray-200 text-sm md:text-base font-medium max-w-md mb-4 relative z-10 drop-shadow-md">
+                    Tirur Kuttipuram Road, Codakel<br>Near Petrol Pump, PO Thirunavaya, 676301
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-2 mb-2 relative z-10">
+                    <span class="bg-black/40 text-white px-4 py-1.5 rounded-full text-xs font-bold backdrop-blur-md border border-white/10">GST: 32DBYPC0519Q1Z8</span>
+                    <a href="tel:9744145756" class="bg-lime-spark text-black px-4 py-1.5 rounded-full text-xs font-bold hover:bg-white transition-colors shadow-lg">
+                        <i class="fa-solid fa-phone mr-1"></i> 9744145756
+                    </a>
+                </div>
+            </div>
+
+            <!-- AI Voice Translator Link (Highlight) -->
+            <a href="../card/index.html" class="bento-card bg-lime-spark p-6 md:col-span-2 flex items-center justify-between group cursor-pointer shadow-md">
+                <div>
+                    <div class="text-xs font-bold uppercase tracking-widest mb-1 opacity-70">AI Tool</div>
+                    <h3 class="text-xl font-extrabold">Nanco Voice Translator</h3>
+                    <p class="text-sm font-medium mt-1 opacity-80">Live speech-to-text translation lab.</p>
+                </div>
+                <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-language text-2xl text-black"></i>
+                </div>
             </a>
+
+            <!-- Install All PWA App Link -->
+            <a href="https://nanco-paints.vercel.app/" target="_blank" class="bento-card bg-gradient-to-r from-blue-600 to-indigo-800 text-white p-6 md:col-span-2 flex items-center justify-between group cursor-pointer relative overflow-hidden shadow-lg border border-black/5">
+                <!-- Background accent graphic -->
+                <i class="fa-solid fa-cloud-arrow-down absolute -right-4 -bottom-6 text-9xl opacity-10 transform group-hover:-translate-y-2 group-hover:scale-110 transition-all duration-500"></i>
+                
+                <div class="relative z-10">
+                    <div class="text-xs font-bold uppercase tracking-widest mb-1 text-blue-200">App Center</div>
+                    <h3 class="text-xl font-extrabold drop-shadow-sm">Install All Tools</h3>
+                    <p class="text-sm font-medium mt-1 text-blue-100/90">Download the Nanco Hub PWA for native access.</p>
+                </div>
+                <div class="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm border border-white/20 group-hover:scale-110 group-hover:bg-white/20 transition-all relative z-10">
+                    <i class="fa-solid fa-download text-xl text-white"></i>
+                </div>
+            </a>
+
+            <!-- Staff Card -->
+            <div class="bento-card bg-gray-900 p-6 flex flex-col justify-between relative overflow-hidden text-white">
+                <!-- Background Image with Dark Overlay -->
+                <div class="absolute inset-0 z-0 bg-black">
+                    <img src="../assets/callbg.jpg" alt="Background" class="w-full h-full object-cover opacity-50">
+                </div>
+
+                <div class="flex items-center gap-4 mb-6 relative z-10 drop-shadow-md">
+                    <div class="w-16 h-16 bg-white/10 rounded-full p-1 shadow-sm shrink-0 backdrop-blur-md border border-white/20">
+                        <img src="staff/uploads/1781792643_6a33ff83ef217.jpeg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="w-full h-full rounded-full object-cover">
+                        <div class="w-full h-full rounded-full bg-gray-800 hidden items-center justify-center text-white text-xl font-bold">M</div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-extrabold text-white drop-shadow-lg">Muhamed</h3>
+                        <p class="text-sm font-medium text-gray-200">Manager • Thirunavaya</p>
+                    </div>
+                </div>
+                
+                <div class="flex gap-2 relative z-10">
+                    <a href="tel:9744145756" class="flex-1 bg-white/20 rounded-2xl py-3 flex items-center justify-center gap-2 font-bold text-sm text-white hover:bg-white/30 backdrop-blur-md border border-white/10 transition-colors shadow-lg">
+                        <i class="fa-solid fa-phone"></i> Call
+                    </a>
+                    <a href="https://wa.me/8111804398" target="_blank" class="flex-1 bg-lime-spark rounded-2xl py-3 flex items-center justify-center gap-2 font-bold text-sm text-black hover:bg-white transition-colors shadow-lg">
+                        <i class="fa-brands fa-whatsapp text-green-700 text-lg"></i> Chat
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links Bento Grid -->
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Cobalt Band with Grid Pattern -->
+                <a href="https://trkmfg.com/admin/cart/" target="_blank" class="bento-card bg-cobalt-band text-white p-5 flex flex-col items-end justify-start text-right group cursor-pointer aspect-square relative overflow-hidden shadow-lg border border-black/5" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px;">
+                    <i class="fa-solid fa-store absolute -bottom-2 left-0 md:left-2 text-[7rem] md:text-[8rem] opacity-40 transform -rotate-12 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500"></i>
+                    <span class="font-extrabold text-base md:text-lg drop-shadow-md relative z-10 leading-tight">Online<br>Store</span>
+                </a>
+                
+                <!-- Mustard Pop with Diagonal Stripes -->
+                <a href="https://trkmfg.com/color/login/offer_view.php" target="_blank" class="bento-card bg-mustard-pop text-black p-5 flex flex-col items-end justify-start text-right group cursor-pointer aspect-square relative overflow-hidden shadow-lg border border-black/5" style="background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 8px);">
+                    <i class="fa-solid fa-tags absolute -bottom-2 left-0 md:left-2 text-[7rem] md:text-[8rem] opacity-30 transform -rotate-12 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500"></i>
+                    <span class="font-extrabold text-base md:text-lg drop-shadow-sm relative z-10 leading-tight">Special<br>Offers</span>
+                </a>
+                
+                <!-- Maroon Plate with Polka Dots -->
+                <a href="https://maps.app.goo.gl/jFPQ5KvFjgc5iy5z5" target="_blank" class="bento-card bg-maroon-plate text-white p-5 flex flex-col items-end justify-start text-right group cursor-pointer aspect-square relative overflow-hidden shadow-lg border border-black/5" style="background-image: radial-gradient(rgba(255,255,255,0.15) 2px, transparent 2px); background-size: 16px 16px;">
+                    <i class="fa-solid fa-location-dot absolute -bottom-2 left-2 md:left-4 text-[7rem] md:text-[8rem] opacity-40 transform -rotate-12 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500"></i>
+                    <span class="font-extrabold text-base md:text-lg drop-shadow-md relative z-10 leading-tight">Store<br>Location</span>
+                </a>
+
+                <!-- Forest Ink with Reverse Diagonal Stripes -->
+                <a href="https://trkmfg.com/nanco/login/all_product.php" target="_blank" class="bento-card bg-forest-ink text-white p-5 flex flex-col items-end justify-start text-right group cursor-pointer aspect-square relative overflow-hidden shadow-lg border border-black/5" style="background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,0.06) 0, rgba(255,255,255,0.06) 2px, transparent 2px, transparent 8px);">
+                    <i class="fa-solid fa-play absolute -bottom-2 left-0 md:left-2 text-[7rem] md:text-[8rem] opacity-40 transform -rotate-12 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500"></i>
+                    <span class="font-extrabold text-base md:text-lg text-balance drop-shadow-md relative z-10 leading-tight">App<br>Video</span>
+                </a>
+            </div>
+
+            <!-- Direct Customer Chat Widget -->
+            <div class="bento-card bg-white p-6 md:col-span-2 flex flex-col md:flex-row items-center gap-4">
+                <div class="w-12 h-12 bg-green-50 text-green-500 rounded-2xl flex items-center justify-center text-2xl shrink-0">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <div class="flex-1 text-center md:text-left w-full">
+                    <h4 class="font-bold">Customer Chat</h4>
+                    <p class="text-xs text-gray-500 mb-2 md:mb-0">Enter a customer's number to instantly message them.</p>
+                </div>
+                <div class="flex w-full md:w-auto">
+                    <input type="tel" id="customer_mobile_desktop" placeholder="WhatsApp Number" class="bg-gray-100 rounded-l-2xl px-4 py-3 text-sm font-medium w-full md:w-48 outline-none focus:ring-2 focus:ring-lime-spark">
+                    <button onclick="openWhatsapp('desktop')" class="bg-black text-white px-5 py-3 rounded-r-2xl font-bold text-sm hover:bg-gray-800 transition-colors">
+                        Send
+                    </button>
+                </div>
+            </div>
+
+            <!-- Additional Links List -->
+            <div class="bento-card bg-lavender-mist p-6 md:col-span-2 border border-black/5">
+                <h3 class="font-extrabold text-lg mb-4 text-black">Resources</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <a href="https://nanco-paints.vercel.app/colors.html" target="_blank" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 transition-colors group">
+                        <div class="w-10 h-10 bg-leaf-wash rounded-full flex items-center justify-center text-forest-ink icon-wrapper"><i class="fa-solid fa-palette"></i></div>
+                        <span class="font-semibold text-sm">Color Studio</span>
+                    </a>
+                    <a href="https://nanco-paints.vercel.app/products.html" target="_blank" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 transition-colors group">
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-700 icon-wrapper"><i class="fa-solid fa-paint-roller"></i></div>
+                        <span class="font-semibold text-sm">Products</span>
+                    </a>
+                    <a href="bank_details.php?id=9" target="_blank" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 transition-colors group">
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-700 icon-wrapper"><i class="fa-solid fa-building-columns"></i></div>
+                        <span class="font-semibold text-sm">Bank Details</span>
+                    </a>
+                    <a href="https://trkmfg.com/nanco/complaint.php" target="_blank" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 transition-colors group">
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-700 icon-wrapper"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <span class="font-semibold text-sm">Complaint</span>
+                    </a>
+                    <a href="https://trkmfg.com/nanco/staff_rating.php" target="_blank" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 transition-colors group">
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-700 icon-wrapper"><i class="fa-solid fa-star"></i></div>
+                        <span class="font-semibold text-sm">Staff Rating</span>
+                    </a>
+                    <a href="https://chat.whatsapp.com/E2bJkGaMHL31SEFvOdfPUx?s=qt&amp;p=a&amp;mlu=2&amp;amv=3" target="_blank" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 transition-colors group">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-700 icon-wrapper"><i class="fa-solid fa-users"></i></div>
+                        <span class="font-semibold text-sm">Painters Group</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer Socials -->
+            <div class="md:col-span-2 flex justify-center gap-4 mt-4">
+                <a href="https://www.facebook.com/share/1FBpDUJU29/" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl text-blue-600 shadow-sm hover:scale-110 hover:-rotate-6 transition-transform">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/nancopaints" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl text-pink-600 shadow-sm hover:scale-110 hover:-rotate-6 transition-transform">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/@nancopaints" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl text-red-600 shadow-sm hover:scale-110 hover:-rotate-6 transition-transform">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+            </div>
+
         </div>
     </div>
 
-    <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- MOBILE VIEW (Hidden on Desktop) -->
+    <!-- Extremely compact non-scrolling mobile layout -->
+    <div class="flex flex-col w-full max-w-4xl flex-1 md:hidden h-full">
 
-        <!-- Hero / Branch Info -->
-        <div class="bento-card bg-gray-900 p-8 md:col-span-2 flex flex-col items-center text-center relative overflow-hidden">
-            <!-- Background Image with Dark Overlay -->
-            <div class="absolute inset-0 z-0 bg-black">
-                <img src="../assets/visualizer%20bg.jpg" alt="Background" class="w-full h-full object-cover opacity-40">
-            </div>
-            
-            <img src="../card/light-logo.png" alt="Nanco Logo" class="h-12 md:h-16 object-contain mb-4 relative z-10 brightness-0 invert drop-shadow-md">
-            <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-2 relative z-10 text-white drop-shadow-lg">NANCO FACTORY OUTLET-HO</h1>
-            <p class="text-gray-200 text-sm md:text-base font-medium max-w-md mb-4 relative z-10 drop-shadow-md">
-                Tirur Kuttipuram Road, Codakel<br>Near Petrol Pump, PO Thirunavaya, 676301
-            </p>
-            
-            <div class="flex flex-wrap justify-center gap-2 mb-2 relative z-10">
-                <span class="bg-black/40 text-white px-4 py-1.5 rounded-full text-xs font-bold backdrop-blur-md border border-white/10">GST: 32DBYPC0519Q1Z8</span>
-                <a href="tel:9744145756" class="bg-lime-spark text-black px-4 py-1.5 rounded-full text-xs font-bold hover:bg-white transition-colors shadow-lg">
-                    <i class="fa-solid fa-phone mr-1"></i> 9744145756
+        <!-- Floating Navigation Bar -->
+        <div class="w-full mb-3 shrink-0">
+            <div class="bg-gray-900 text-white rounded-full px-5 py-2.5 flex flex-row justify-between items-center shadow-bento border border-white/10">
+                <div class="flex items-center">
+                    <span class="font-extrabold text-sm sm:text-base tracking-tight drop-shadow-md">Digital Visiting Card</span>
+                </div>
+                <a href="https://nanco-paints.vercel.app/" target="_blank" class="bento-pill bg-lime-spark text-black px-4 py-1.5 text-xs font-bold hover:bg-white transition-colors shadow-sm">
+                    Website
                 </a>
             </div>
         </div>
 
-        <!-- AI Voice Translator Link (Highlight) -->
-        <a href="../card/index.html" class="bento-card bg-lime-spark p-6 md:col-span-2 flex items-center justify-between group cursor-pointer shadow-md">
-            <div>
-                <div class="text-xs font-bold uppercase tracking-widest mb-1 opacity-70">AI Tool</div>
-                <h3 class="text-xl font-extrabold">Nanco Voice Translator</h3>
-                <p class="text-sm font-medium mt-1 opacity-80">Live speech-to-text translation lab.</p>
-            </div>
-            <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                <i class="fa-solid fa-language text-2xl text-black"></i>
-            </div>
-        </a>
+        <div class="w-full flex-1 flex flex-col justify-between gap-2 overflow-hidden pb-2">
 
-        <!-- Install All PWA App Link -->
-        <a href="https://nanco-five.vercel.app/" target="_blank" class="bento-card bg-gradient-to-r from-blue-600 to-indigo-800 text-white p-6 md:col-span-2 flex items-center justify-between group cursor-pointer relative overflow-hidden shadow-lg border border-black/5">
-            <!-- Background accent graphic -->
-            <i class="fa-solid fa-cloud-arrow-down absolute -right-4 -bottom-6 text-9xl opacity-10 transform group-hover:-translate-y-2 group-hover:scale-110 transition-all duration-500"></i>
-            
-            <div class="relative z-10">
-                <div class="text-xs font-bold uppercase tracking-widest mb-1 text-blue-200">App Center</div>
-                <h3 class="text-xl font-extrabold drop-shadow-sm">Install All Tools</h3>
-                <p class="text-sm font-medium mt-1 text-blue-100/90">Download the Nanco Hub PWA for native access.</p>
-            </div>
-            <div class="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm border border-white/20 group-hover:scale-110 group-hover:bg-white/20 transition-all relative z-10">
-                <i class="fa-solid fa-download text-xl text-white"></i>
-            </div>
-        </a>
-
-        <!-- Staff Card -->
-        <div class="bento-card bg-gray-900 p-6 flex flex-col justify-between relative overflow-hidden text-white">
-            <!-- Background Image with Dark Overlay -->
-            <div class="absolute inset-0 z-0 bg-black">
-                <img src="../assets/callbg.jpg" alt="Background" class="w-full h-full object-cover opacity-50">
-            </div>
-
-            <div class="flex items-center gap-4 mb-6 relative z-10 drop-shadow-md">
-                <div class="w-16 h-16 bg-white/10 rounded-full p-1 shadow-sm shrink-0 backdrop-blur-md border border-white/20">
-                    <img src="staff/uploads/1781792643_6a33ff83ef217.jpeg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="w-full h-full rounded-full object-cover">
-                    <div class="w-full h-full rounded-full bg-gray-800 hidden items-center justify-center text-white text-xl font-bold">M</div>
+            <!-- Hero / Branch Info -->
+            <div class="bento-card bg-gray-900 p-3 sm:p-4 flex flex-col items-center justify-center text-center relative overflow-hidden gap-1.5 sm:gap-2" style="flex: 1.2;">
+                <!-- Background Image with Dark Overlay -->
+                <div class="absolute inset-0 z-0 bg-black">
+                    <img src="../assets/visualizer%20bg.jpg" alt="Background" class="w-full h-full object-cover opacity-40">
                 </div>
-                <div>
-                    <h3 class="text-lg font-extrabold text-white drop-shadow-lg">Muhamed</h3>
-                    <p class="text-sm font-medium text-gray-200">Manager • Thirunavaya</p>
+                
+                <img src="../card/light-logo.png" alt="Nanco Logo" class="h-6 sm:h-8 object-contain relative z-10 brightness-0 invert drop-shadow-md shrink-0">
+                
+                <div class="w-full min-w-0 relative z-10 flex flex-col items-center">
+                    <h1 class="text-[13px] sm:text-sm font-extrabold tracking-tight mb-0.5 text-white drop-shadow-lg text-balance w-full">NANCO FACTORY OUTLET-HO</h1>
+                    <p class="text-gray-200 text-[9px] sm:text-[10px] font-medium max-w-md mb-1.5 drop-shadow-md leading-tight text-balance w-full">
+                        Tirur Kuttipuram Road, Codakel, Near Petrol Pump, PO Thirunavaya, 676301
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-1.5 justify-center mt-0.5">
+                        <span class="bg-black/40 text-white px-2.5 py-1 rounded-full text-[9px] font-bold backdrop-blur-md border border-white/10">GST: 32DBYPC0519Q1Z8</span>
+                        <a href="tel:9744145756" class="bg-lime-spark text-black px-2.5 py-1 rounded-full text-[9px] font-bold hover:bg-white transition-colors shadow-lg">
+                            <i class="fa-solid fa-phone mr-1"></i> 9744145756
+                        </a>
+                    </div>
                 </div>
             </div>
-            
-            <div class="flex gap-2 relative z-10">
-                <a href="tel:9744145756" class="flex-1 bg-white/20 rounded-2xl py-3 flex items-center justify-center gap-2 font-bold text-sm text-white hover:bg-white/30 backdrop-blur-md border border-white/10 transition-colors shadow-lg">
-                    <i class="fa-solid fa-phone"></i> Call
+
+            <!-- Tools Grid (Side by side on mobile) -->
+            <div class="grid grid-cols-2 gap-2" style="flex: 1;">
+                <!-- AI Voice Translator Link (Highlight) -->
+                <a href="../card/index.html" class="bento-card bg-lime-spark p-3 flex items-center justify-between group cursor-pointer shadow-md h-full">
+                    <div class="min-w-0 flex-1">
+                        <div class="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mb-1 opacity-70">AI Tool</div>
+                        <h3 class="text-xs sm:text-sm font-extrabold leading-tight truncate">Voice Translator</h3>
+                        <p class="text-[9px] sm:text-[10px] font-medium mt-1 opacity-80 truncate">Speech translation lab.</p>
+                    </div>
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform shrink-0 ml-2">
+                        <i class="fa-solid fa-language text-sm sm:text-base text-black"></i>
+                    </div>
                 </a>
-                <a href="https://wa.me/8111804398" target="_blank" class="flex-1 bg-lime-spark rounded-2xl py-3 flex items-center justify-center gap-2 font-bold text-sm text-black hover:bg-white transition-colors shadow-lg">
-                    <i class="fa-brands fa-whatsapp text-green-700 text-lg"></i> Chat
+
+                <!-- Install All PWA App Link -->
+                <a href="https://nanco-paints.vercel.app/" target="_blank" class="bento-card bg-gradient-to-r from-blue-600 to-indigo-800 text-white p-3 flex items-center justify-between group cursor-pointer relative overflow-hidden shadow-lg border border-black/5 h-full">
+                    <!-- Background accent graphic -->
+                    <i class="fa-solid fa-cloud-arrow-down absolute -right-2 -bottom-3 text-5xl opacity-10 transform group-hover:-translate-y-2 group-hover:scale-110 transition-all duration-500"></i>
+                    
+                    <div class="relative z-10 min-w-0 flex-1">
+                        <div class="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mb-1 text-blue-200">App Center</div>
+                        <h3 class="text-xs sm:text-sm font-extrabold leading-tight drop-shadow-sm truncate">Install Tools</h3>
+                        <p class="text-[9px] sm:text-[10px] font-medium mt-1 text-blue-100/90 truncate">Download Nanco Hub.</p>
+                    </div>
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm border border-white/20 group-hover:scale-110 group-hover:bg-white/20 transition-all relative z-10 shrink-0 ml-2">
+                        <i class="fa-solid fa-download text-sm sm:text-base text-white"></i>
+                    </div>
                 </a>
             </div>
-        </div>
 
-        <!-- Quick Links Bento Grid -->
-        <div class="grid grid-cols-2 gap-4">
-            <!-- Cobalt Band with Grid Pattern -->
-            <a href="https://trkmfg.com/admin/cart/" target="_blank" class="bento-card bg-cobalt-band text-white p-5 flex flex-col items-end justify-start text-right group cursor-pointer aspect-square relative overflow-hidden shadow-lg border border-black/5" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px;">
-                <i class="fa-solid fa-store absolute -bottom-2 left-0 md:left-2 text-[7rem] md:text-[8rem] opacity-40 transform -rotate-12 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500"></i>
-                <span class="font-extrabold text-base md:text-lg drop-shadow-md relative z-10 leading-tight">Online<br>Store</span>
-            </a>
-            
-            <!-- Mustard Pop with Diagonal Stripes -->
-            <a href="https://trkmfg.com/color/login/offer_view.php" target="_blank" class="bento-card bg-mustard-pop text-black p-5 flex flex-col items-end justify-start text-right group cursor-pointer aspect-square relative overflow-hidden shadow-lg border border-black/5" style="background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 8px);">
-                <i class="fa-solid fa-tags absolute -bottom-2 left-0 md:left-2 text-[7rem] md:text-[8rem] opacity-30 transform -rotate-12 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500"></i>
-                <span class="font-extrabold text-base md:text-lg drop-shadow-sm relative z-10 leading-tight">Special<br>Offers</span>
-            </a>
-            
-            <!-- Maroon Plate with Polka Dots -->
-            <a href="https://maps.app.goo.gl/jFPQ5KvFjgc5iy5z5" target="_blank" class="bento-card bg-maroon-plate text-white p-5 flex flex-col items-end justify-start text-right group cursor-pointer aspect-square relative overflow-hidden shadow-lg border border-black/5" style="background-image: radial-gradient(rgba(255,255,255,0.15) 2px, transparent 2px); background-size: 16px 16px;">
-                <i class="fa-solid fa-location-dot absolute -bottom-2 left-2 md:left-4 text-[7rem] md:text-[8rem] opacity-40 transform -rotate-12 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500"></i>
-                <span class="font-extrabold text-base md:text-lg drop-shadow-md relative z-10 leading-tight">Store<br>Location</span>
-            </a>
+            <!-- Staff & Quick Links Container -->
+            <div class="grid grid-cols-2 gap-2" style="flex: 1.5;">
+                <!-- Staff Card -->
+                <div class="bento-card bg-gray-900 p-3 flex flex-col justify-center gap-2 relative overflow-hidden text-white h-full">
+                    <!-- Background Image with Dark Overlay -->
+                    <div class="absolute inset-0 z-0 bg-black">
+                        <img src="../assets/callbg.jpg" alt="Background" class="w-full h-full object-cover opacity-50">
+                    </div>
 
-            <!-- Forest Ink with Reverse Diagonal Stripes -->
-            <a href="https://trkmfg.com/nanco/login/all_product.php" target="_blank" class="bento-card bg-forest-ink text-white p-5 flex flex-col items-end justify-start text-right group cursor-pointer aspect-square relative overflow-hidden shadow-lg border border-black/5" style="background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,0.06) 0, rgba(255,255,255,0.06) 2px, transparent 2px, transparent 8px);">
-                <i class="fa-solid fa-play absolute -bottom-2 left-0 md:left-2 text-[7rem] md:text-[8rem] opacity-40 transform -rotate-12 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500"></i>
-                <span class="font-extrabold text-base md:text-lg text-balance drop-shadow-md relative z-10 leading-tight">App<br>Video</span>
-            </a>
-        </div>
+                    <div class="flex flex-row items-center gap-2 relative z-10 drop-shadow-md text-left">
+                        <div class="w-10 h-10 bg-white/10 rounded-full p-0.5 shadow-sm shrink-0 backdrop-blur-md border border-white/20">
+                            <img src="staff/uploads/1781792643_6a33ff83ef217.jpeg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="w-full h-full rounded-full object-cover">
+                            <div class="w-full h-full rounded-full bg-gray-800 hidden items-center justify-center text-white text-xs font-bold">M</div>
+                        </div>
+                        <div class="min-w-0">
+                            <h3 class="text-xs sm:text-sm font-extrabold text-white drop-shadow-lg leading-tight truncate">Muhamed</h3>
+                            <p class="text-[9px] sm:text-[10px] font-medium text-gray-200 truncate">Manager</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-1.5 relative z-10 w-full mt-1">
+                        <a href="tel:9744145756" class="flex-1 bg-white/20 rounded-lg py-1.5 flex items-center justify-center gap-1 font-bold text-[10px] sm:text-xs text-white hover:bg-white/30 backdrop-blur-md border border-white/10 transition-colors shadow-lg">
+                            <i class="fa-solid fa-phone"></i> Call
+                        </a>
+                        <a href="https://wa.me/8111804398" target="_blank" class="flex-1 bg-lime-spark rounded-lg py-1.5 flex items-center justify-center gap-1 font-bold text-[10px] sm:text-xs text-black hover:bg-white transition-colors shadow-lg">
+                            <i class="fa-brands fa-whatsapp text-green-700 text-sm"></i> Chat
+                        </a>
+                    </div>
+                </div>
 
-        <!-- Direct Customer Chat Widget -->
-        <div class="bento-card bg-white p-6 md:col-span-2 flex flex-col md:flex-row items-center gap-4">
-            <div class="w-12 h-12 bg-green-50 text-green-500 rounded-2xl flex items-center justify-center text-2xl shrink-0">
-                <i class="fa-brands fa-whatsapp"></i>
+                <!-- Quick Links Bento Grid -->
+                <div class="grid grid-cols-2 grid-rows-2 gap-2 h-full">
+                    <!-- Cobalt Band with Grid Pattern -->
+                    <a href="https://trkmfg.com/admin/cart/" target="_blank" class="bento-card bg-cobalt-band text-white p-2 flex flex-col items-center justify-center gap-1 group cursor-pointer relative overflow-hidden shadow-lg border border-black/5" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px;">
+                        <span class="font-extrabold text-[10px] sm:text-xs drop-shadow-md relative z-10 leading-tight text-center">Online<br>Store</span>
+                    </a>
+                    
+                    <!-- Mustard Pop with Diagonal Stripes -->
+                    <a href="https://trkmfg.com/color/login/offer_view.php" target="_blank" class="bento-card bg-mustard-pop text-black p-2 flex flex-col items-center justify-center gap-1 group cursor-pointer relative overflow-hidden shadow-lg border border-black/5" style="background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 8px);">
+                        <span class="font-extrabold text-[10px] sm:text-xs drop-shadow-sm relative z-10 leading-tight text-center">Special<br>Offers</span>
+                    </a>
+                    
+                    <!-- Maroon Plate with Polka Dots -->
+                    <a href="https://maps.app.goo.gl/jFPQ5KvFjgc5iy5z5" target="_blank" class="bento-card bg-maroon-plate text-white p-2 flex flex-col items-center justify-center gap-1 group cursor-pointer relative overflow-hidden shadow-lg border border-black/5" style="background-image: radial-gradient(rgba(255,255,255,0.15) 2px, transparent 2px); background-size: 16px 16px;">
+                        <span class="font-extrabold text-[10px] sm:text-xs drop-shadow-md relative z-10 leading-tight text-center">Location</span>
+                    </a>
+
+                    <!-- Forest Ink with Reverse Diagonal Stripes -->
+                    <a href="https://trkmfg.com/nanco/login/all_product.php" target="_blank" class="bento-card bg-forest-ink text-white p-2 flex flex-col items-center justify-center gap-1 group cursor-pointer relative overflow-hidden shadow-lg border border-black/5" style="background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,0.06) 0, rgba(255,255,255,0.06) 2px, transparent 2px, transparent 8px);">
+                        <span class="font-extrabold text-[10px] sm:text-xs text-balance drop-shadow-md relative z-10 leading-tight text-center">App<br>Video</span>
+                    </a>
+                </div>
             </div>
-            <div class="flex-1 text-center md:text-left w-full">
-                <h4 class="font-bold">Customer Chat</h4>
-                <p class="text-xs text-gray-500 mb-2 md:mb-0">Enter a customer's number to instantly message them.</p>
-            </div>
-            <div class="flex w-full md:w-auto">
-                <input type="tel" id="customer_mobile" placeholder="WhatsApp Number" class="bg-gray-100 rounded-l-2xl px-4 py-3 text-sm font-medium w-full md:w-48 outline-none focus:ring-2 focus:ring-lime-spark">
-                <button onclick="openWhatsapp()" class="bg-black text-white px-5 py-3 rounded-r-2xl font-bold text-sm hover:bg-gray-800 transition-colors">
-                    Send
-                </button>
-            </div>
-        </div>
 
-        <!-- Additional Links List -->
-        <div class="bento-card bg-lavender-mist p-6 md:col-span-2 border border-black/5">
-            <h3 class="font-extrabold text-lg mb-4 text-black">Resources</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <a href="https://nanco-five.vercel.app/colors.html" target="_blank" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 transition-colors group">
-                    <div class="w-10 h-10 bg-leaf-wash rounded-full flex items-center justify-center text-forest-ink icon-wrapper"><i class="fa-solid fa-palette"></i></div>
-                    <span class="font-semibold text-sm">Color Studio</span>
+            <!-- Direct Customer Chat Widget -->
+            <div class="bento-card bg-white p-3 flex flex-row items-center gap-3 shrink-0" style="flex: 0.8;">
+                <div class="w-9 h-9 bg-green-50 text-green-500 rounded-xl flex items-center justify-center text-lg shrink-0">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <div class="flex-1 text-left w-full min-w-0">
+                    <h4 class="font-bold text-[11px] sm:text-xs leading-tight truncate">Customer Chat</h4>
+                    <p class="text-[9px] sm:text-[10px] text-gray-500 hidden sm:block truncate mt-0.5">Enter number to message</p>
+                </div>
+                <div class="flex shrink-0">
+                    <input type="tel" id="customer_mobile_mobile" placeholder="WhatsApp" class="bg-gray-100 rounded-l-xl px-3 py-1.5 text-[10px] sm:text-[11px] font-medium w-28 sm:w-36 outline-none focus:ring-2 focus:ring-lime-spark">
+                    <button onclick="openWhatsapp('mobile')" class="bg-black text-white px-3 py-1.5 rounded-r-xl font-bold text-[10px] sm:text-[11px] hover:bg-gray-800 transition-colors">
+                        Send
+                    </button>
+                </div>
+            </div>
+
+            <!-- Additional Links List -->
+            <div class="bento-card bg-lavender-mist p-3 border border-black/5 flex flex-col justify-center" style="flex: 1.2;">
+                <h3 class="font-extrabold text-[11px] sm:text-xs mb-2 text-black text-center leading-tight">Resources</h3>
+                <div class="grid grid-cols-3 gap-2">
+                    <a href="https://nanco-paints.vercel.app/colors.html" target="_blank" class="flex flex-row items-center gap-1.5 p-1.5 rounded-xl hover:bg-gray-50/50 transition-colors group text-left">
+                        <div class="w-7 h-7 bg-leaf-wash rounded-full flex items-center justify-center text-forest-ink icon-wrapper text-[10px] shrink-0"><i class="fa-solid fa-palette"></i></div>
+                        <span class="font-semibold text-[9px] sm:text-[10px] leading-tight truncate">Color Studio</span>
+                    </a>
+                    <a href="https://nanco-paints.vercel.app/products.html" target="_blank" class="flex flex-row items-center gap-1.5 p-1.5 rounded-xl hover:bg-gray-50/50 transition-colors group text-left">
+                        <div class="w-7 h-7 bg-gray-100 rounded-full flex items-center justify-center text-gray-700 icon-wrapper text-[10px] shrink-0"><i class="fa-solid fa-paint-roller"></i></div>
+                        <span class="font-semibold text-[9px] sm:text-[10px] leading-tight truncate">Products</span>
+                    </a>
+                    <a href="bank_details.php?id=9" target="_blank" class="flex flex-row items-center gap-1.5 p-1.5 rounded-xl hover:bg-gray-50/50 transition-colors group text-left">
+                        <div class="w-7 h-7 bg-gray-100 rounded-full flex items-center justify-center text-gray-700 icon-wrapper text-[10px] shrink-0"><i class="fa-solid fa-building-columns"></i></div>
+                        <span class="font-semibold text-[9px] sm:text-[10px] leading-tight truncate">Bank Details</span>
+                    </a>
+                    <a href="https://trkmfg.com/nanco/complaint.php" target="_blank" class="flex flex-row items-center gap-1.5 p-1.5 rounded-xl hover:bg-gray-50/50 transition-colors group text-left">
+                        <div class="w-7 h-7 bg-gray-100 rounded-full flex items-center justify-center text-gray-700 icon-wrapper text-[10px] shrink-0"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <span class="font-semibold text-[9px] sm:text-[10px] leading-tight truncate">Complaint</span>
+                    </a>
+                    <a href="https://trkmfg.com/nanco/staff_rating.php" target="_blank" class="flex flex-row items-center gap-1.5 p-1.5 rounded-xl hover:bg-gray-50/50 transition-colors group text-left">
+                        <div class="w-7 h-7 bg-gray-100 rounded-full flex items-center justify-center text-gray-700 icon-wrapper text-[10px] shrink-0"><i class="fa-solid fa-star"></i></div>
+                        <span class="font-semibold text-[9px] sm:text-[10px] leading-tight truncate">Staff Rating</span>
+                    </a>
+                    <a href="https://chat.whatsapp.com/E2bJkGaMHL31SEFvOdfPUx?s=qt&amp;p=a&amp;mlu=2&amp;amv=3" target="_blank" class="flex flex-row items-center gap-1.5 p-1.5 rounded-xl hover:bg-gray-50/50 transition-colors group text-left">
+                        <div class="w-7 h-7 bg-green-100 rounded-full flex items-center justify-center text-green-700 icon-wrapper text-[10px] shrink-0"><i class="fa-solid fa-users"></i></div>
+                        <span class="font-semibold text-[9px] sm:text-[10px] leading-tight truncate">Painters Group</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer Socials -->
+            <div class="flex justify-center gap-4 mt-1 shrink-0 pb-1">
+                <a href="https://www.facebook.com/share/1FBpDUJU29/" target="_blank" class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[11px] sm:text-xs text-blue-600 shadow-sm hover:scale-110 hover:-rotate-6 transition-transform">
+                    <i class="fa-brands fa-facebook-f"></i>
                 </a>
-                <a href="https://nanco-five.vercel.app/products.html" target="_blank" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 transition-colors group">
-                    <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-700 icon-wrapper"><i class="fa-solid fa-paint-roller"></i></div>
-                    <span class="font-semibold text-sm">Products</span>
+                <a href="https://www.instagram.com/nancopaints" target="_blank" class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[11px] sm:text-xs text-pink-600 shadow-sm hover:scale-110 hover:-rotate-6 transition-transform">
+                    <i class="fa-brands fa-instagram"></i>
                 </a>
-                <a href="bank_details.php?id=9" target="_blank" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 transition-colors group">
-                    <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-700 icon-wrapper"><i class="fa-solid fa-building-columns"></i></div>
-                    <span class="font-semibold text-sm">Bank Details</span>
-                </a>
-                <a href="https://trkmfg.com/nanco/complaint.php" target="_blank" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 transition-colors group">
-                    <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-700 icon-wrapper"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                    <span class="font-semibold text-sm">Complaint</span>
-                </a>
-                <a href="https://trkmfg.com/nanco/staff_rating.php" target="_blank" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 transition-colors group">
-                    <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-700 icon-wrapper"><i class="fa-solid fa-star"></i></div>
-                    <span class="font-semibold text-sm">Staff Rating</span>
-                </a>
-                <a href="https://chat.whatsapp.com/E2bJkGaMHL31SEFvOdfPUx?s=qt&amp;p=a&amp;mlu=2&amp;amv=3" target="_blank" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 transition-colors group">
-                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-700 icon-wrapper"><i class="fa-solid fa-users"></i></div>
-                    <span class="font-semibold text-sm">Painters Group</span>
+                <a href="https://www.youtube.com/@nancopaints" target="_blank" class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[11px] sm:text-xs text-red-600 shadow-sm hover:scale-110 hover:-rotate-6 transition-transform">
+                    <i class="fa-brands fa-youtube"></i>
                 </a>
             </div>
-        </div>
 
-        <!-- Footer Socials -->
-        <div class="md:col-span-2 flex justify-center gap-4 mt-4">
-            <a href="https://www.facebook.com/share/1FBpDUJU29/" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl text-blue-600 shadow-sm hover:scale-110 hover:-rotate-6 transition-transform">
-                <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/nancopaints" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl text-pink-600 shadow-sm hover:scale-110 hover:-rotate-6 transition-transform">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.youtube.com/@nancopaints" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl text-red-600 shadow-sm hover:scale-110 hover:-rotate-6 transition-transform">
-                <i class="fa-brands fa-youtube"></i>
-            </a>
         </div>
-
     </div>
 
     <script>
-        function openWhatsapp() {
-            let mobile = document.getElementById('customer_mobile').value.trim();
+        function openWhatsapp(deviceType) {
+            let inputId = deviceType === 'desktop' ? 'customer_mobile_desktop' : 'customer_mobile_mobile';
+            let mobileInput = document.getElementById(inputId);
+            
+            // Fallback if not found
+            if (!mobileInput) {
+               mobileInput = document.getElementById('customer_mobile');
+            }
+            
+            let mobile = mobileInput ? mobileInput.value.trim() : '';
             if (mobile === '') {
                 alert('Please enter a WhatsApp number');
                 return;
